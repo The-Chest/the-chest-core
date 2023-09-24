@@ -1,12 +1,12 @@
 ﻿using NUnit.Framework;
-using TheChest.Core.Tests.Slots.Factories;
+using TheChest.Core.Tests.Generics.Factories;
 
 namespace TheChest.Tests.Slots.Generics
 {
     public abstract partial class ISlotTests<T>
-        where T: new()
+        where T: new() //TODO: remove new
     {
-        private SlotFactory<T> slotFactory;
+        private ISlotFactory<T> slotFactory;
 
         [SetUp]
         public void Setup()
