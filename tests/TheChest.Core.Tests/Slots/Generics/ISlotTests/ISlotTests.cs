@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using TheChest.Core.Tests.Generics.Factories;
+using TheChest.Core.Tests.Slots.Factories.Interfaces;
 
 namespace TheChest.Tests.Slots.Generics
 {

@@ -1,6 +1,6 @@
 ﻿using TheChest.Core.Slots.Interfaces;
 
-namespace TheChest.Core.Tests.Generics.Factories
+namespace TheChest.Core.Tests.Slots.Factories.Interfaces
 {
     public interface ISlotFactory<T>
     {
