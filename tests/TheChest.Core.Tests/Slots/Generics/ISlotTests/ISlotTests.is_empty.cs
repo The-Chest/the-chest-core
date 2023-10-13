@@ -1,6 +1,4 @@
-﻿using NUnit.Framework;
-
-namespace TheChest.Tests.Slots.Generics
+﻿namespace TheChest.Tests.Slots.Generics
 {
     public abstract partial class ISlotTests<T>
     {

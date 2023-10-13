@@ -6,7 +6,12 @@ namespace TheChest.Tests.Slots.Generics
     public abstract partial class ISlotTests<T>
         where T: new() //TODO: remove new
     {
-        private ISlotFactory<T> slotFactory;
+        protected readonly ISlotFactory<T> slotFactory;
+
+        protected ISlotTests(ISlotFactory<T> slotFactory)
+        {
+            this.slotFactory = slotFactory;
+        }
 
         [SetUp]
         public void Setup()
