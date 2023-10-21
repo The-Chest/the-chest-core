@@ -3,5 +3,6 @@
     public interface ISlotIemFactory<T>
     {
         T CreateItem();
+        T[] CreateItems(int amount);
     }
 }
