@@ -6,7 +6,7 @@ namespace TheChest.Core.Tests.Containers.Factories.Interfaces
     {
         IContainer<T> EmptyContainer(int size = 20);
         IContainer<T> FullContainer(int size, T item = default!);
-        IContainer<T> ShuffleItemsContainer(int size, T item = default!);
-        IContainer<T> ShuffleItemsContainer(int size, params T[] items);
+        IContainer<T> ShuffledItemContainer(int size, T item = default!);
+        IContainer<T> ShuffledItemsContainer(int size, params T[] items);
     }
 }

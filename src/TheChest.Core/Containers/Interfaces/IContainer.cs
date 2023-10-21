@@ -8,8 +8,6 @@ namespace TheChest.Core.Containers.Interfaces
     /// <typeparam name="T">An item type</typeparam>
     public interface IContainer<out T>
     {
-        const int DEFAULT_SLOT_COUNT = 20;
-
         /// <summary>
         /// Slots in the Inventory
         /// </summary>

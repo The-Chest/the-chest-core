@@ -14,7 +14,7 @@
         public void IsFull_OneEmptySlot_ReturnsFalse()
         {
             var randomSize = random.Next(MIN_SIZE_TEST, MAX_SIZE_TEST);
-            var container = this.containerFactory.ShuffleItemsContainer(
+            var container = this.containerFactory.ShuffledItemsContainer(
                 randomSize, 
                 this.itemFactory.CreateItems(randomSize - 1)
            );
@@ -26,7 +26,7 @@
         public void IsFull_OneFullSlot_ReturnsFalse()
         {
             var randomSize = random.Next(MIN_SIZE_TEST, MAX_SIZE_TEST);
-            var container = this.containerFactory.ShuffleItemsContainer(
+            var container = this.containerFactory.ShuffledItemContainer(
                 randomSize,
                 this.itemFactory.CreateItem()
             );

@@ -2,20 +2,21 @@
 using TheChest.Core.Slots.Interfaces;
 using TheChest.Core.Tests.Slots.Factories.Interfaces;
 
-using System.Reflection;
-
 namespace TheChest.Core.Tests.Slots.Factories.Base
 {
-    public abstract class BaseSlotFactory<T, Y> : ISlotFactory<Y> where T : BaseSlot<Y>
+    public class BaseStackSlotFactory<T, Y> : IStackSlotFactory<Y> where T : BaseStackSlot<Y>
     {
-        public ISlot<Y> EmptySlot()
+        public IStackSlot<Y> EmptySlot()
         {
-            var type = typeof(T);
-            //TODO: use Activator.CreateInstanceFrom
             throw new NotImplementedException();
         }
 
-        public ISlot<Y> FullSlot(Y item)
+        public IStackSlot<Y> FullSlot(Y item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IStackSlot<Y> WithItem(Y item, int amount = 1, int maxAmount = 10)
         {
             throw new NotImplementedException();
         }

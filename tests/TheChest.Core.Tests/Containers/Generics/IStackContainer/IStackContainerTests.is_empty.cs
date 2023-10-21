@@ -1,6 +1,6 @@
-﻿namespace TheChest.Core.Tests.Slots.Factories.Generics.IContainerTests
+﻿namespace TheChest.Core.Tests.Slots.Factories.Generics.IStackContainerTests
 {
-    public abstract partial class IContainerTests<T>
+    public abstract partial class IStackContainerTests<T>
     {
         [Test]
         public void IsEmpty_EmptySlots_ReturnsTrue()
@@ -13,7 +13,9 @@
         public void IsEmpty_SomeEmptySlots_ReturnsFalse()
         {
             var randomSize = random.Next(MIN_SIZE_TEST, MAX_SIZE_TEST);
-            var container = this.containerFactory.ShuffledItemContainer(randomSize, itemFactory.CreateItem());
+            var randomStackSize = random.Next(MIN_STACK_SIZE_TEST, MAX_STACK_SIZE_TEST);
+
+            var container = this.containerFactory.ShuffledItemContainer(randomSize, randomStackSize, this.itemFactory.CreateItem());
             Assert.That(container.IsEmpty, Is.False);
         }
 
@@ -21,7 +23,10 @@
         public void IsEmpty_AllSlotsFull_ReturnsFalse()
         {
             var randomSize = random.Next(MIN_SIZE_TEST, MAX_SIZE_TEST);
-            var container = this.containerFactory.FullContainer(randomSize, itemFactory.CreateItem());
+            var randomStackSize = random.Next(MIN_STACK_SIZE_TEST, MAX_STACK_SIZE_TEST);
+
+            var container = this.containerFactory.FullContainer(randomSize, randomStackSize, this.itemFactory.CreateItem());
+
             Assert.That(container.IsEmpty, Is.False);
         }
     }
