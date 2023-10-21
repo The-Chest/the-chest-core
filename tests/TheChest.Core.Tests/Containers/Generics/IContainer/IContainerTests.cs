@@ -6,15 +6,15 @@ namespace TheChest.Core.Tests.Slots.Factories.Generics.IContainerTests
     public abstract partial class IContainerTests<T>
     {
         protected Random random;
-        protected readonly IContainerFactory<T> containerFaker;
-        protected readonly ISlotIemFactory<T> itemFactory;
+        protected readonly IContainerFactory<T> containerFactory;
+        protected readonly ISlotItemFactory<T> itemFactory;
 
         protected const int MIN_SIZE_TEST = 10;
         protected const int MAX_SIZE_TEST = 20;
 
-        protected IContainerTests(IContainerFactory<T> containerFaker, ISlotIemFactory<T> itemFactory)
+        protected IContainerTests(IContainerFactory<T> containerFactory, ISlotItemFactory<T> itemFactory)
         {
-            this.containerFaker = containerFaker;
+            this.containerFactory = containerFactory;
             this.itemFactory = itemFactory;
         }
 

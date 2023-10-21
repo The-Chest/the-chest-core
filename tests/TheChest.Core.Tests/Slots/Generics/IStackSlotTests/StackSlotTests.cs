@@ -5,10 +5,10 @@ namespace TheChest.Tests.Slots.Generics
     public abstract partial class StackSlotTests<T>
     {
         protected readonly IStackSlotFactory<T> slotFactory;
-        protected readonly ISlotIemFactory<T> itemFactory;
+        protected readonly ISlotItemFactory<T> itemFactory;
         protected Random random;
 
-        protected StackSlotTests(IStackSlotFactory<T> slotFactory, ISlotIemFactory<T> itemFactory)
+        protected StackSlotTests(IStackSlotFactory<T> slotFactory, ISlotItemFactory<T> itemFactory)
         {
             this.slotFactory = slotFactory;
             this.itemFactory = itemFactory;
