@@ -12,7 +12,7 @@
         [Test]
         public void IsFull_CurentItemNotNull_ReturnsTrue()
         {
-            var slot = this.slotFactory.FullSlot(new T());
+            var slot = this.slotFactory.FullSlot(this.itemFactory.CreateItem());
             Assert.That(slot.IsFull, Is.True);
         }
 
