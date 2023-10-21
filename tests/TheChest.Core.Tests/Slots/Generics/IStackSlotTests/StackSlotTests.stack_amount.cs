@@ -6,7 +6,7 @@
         public void StackAmount_SmallerThanZero_ThrowsException()
         {
             Assert.That(
-                () => this.slotFactory.WithItem(new T(), -1) ,
+                () => this.slotFactory.WithItem(this.itemFactory.CreateItem(), -1) ,
                 Throws.Exception
                     .With.TypeOf(typeof(ArgumentOutOfRangeException))
                     .And.Message.StartsWith("The amount property cannot be smaller than zero")
@@ -18,7 +18,7 @@
         {
             var maxAmount = random.Next(10,20);
             Assert.That(
-                () => this.slotFactory.WithItem(new T(), maxAmount, maxAmount + 1),
+                () => this.slotFactory.WithItem(this.itemFactory.CreateItem(), maxAmount, maxAmount + 1),
                 Throws.Exception
                     .With.TypeOf(typeof(ArgumentOutOfRangeException))
                     .And.Message.StartsWith("The amount property cannot be bigger than maxAmount")
