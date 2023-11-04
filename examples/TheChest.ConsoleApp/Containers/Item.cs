@@ -12,5 +12,12 @@
             this.Name = name;
             this.Description = description;
         }
+
+        public Item()
+        {
+            this.Id = "";
+            this.Name = "";
+            this.Description = "";
+        }
     }
 }
