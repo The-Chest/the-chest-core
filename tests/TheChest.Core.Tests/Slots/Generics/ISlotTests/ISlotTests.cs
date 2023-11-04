@@ -12,10 +12,5 @@ namespace TheChest.Tests.Slots.Generics
             this.slotFactory = slotFactory;
             this.itemFactory = itemFactory;
         }
-
-        [SetUp]
-        public void Setup()
-        {
-        }
     }
 }

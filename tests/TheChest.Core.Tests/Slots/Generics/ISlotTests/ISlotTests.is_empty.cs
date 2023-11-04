@@ -12,14 +12,16 @@
         [Test]
         public void IsEmpty_CurentItemNotNull_ReturnsFalse()
         {
-            var slot = this.slotFactory.FullSlot(this.itemFactory.CreateItem());
+            var item = this.itemFactory.CreateItem();
+            var slot = this.slotFactory.FullSlot(item);
             Assert.That(slot.IsEmpty, Is.False);
         }
 
         [Test]
         public void IsEmpty_SlotIsFull_ReturnsFalse()
         {
-            var slot = this.slotFactory.FullSlot(this.itemFactory.CreateItem());
+            var item = this.itemFactory.CreateItem();
+            var slot = this.slotFactory.FullSlot(item);
 
             Assert.That(slot.IsEmpty, Is.False);
             Assert.That(slot.IsEmpty, Is.Not.EqualTo(slot.IsFull));

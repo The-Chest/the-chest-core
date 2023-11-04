@@ -3,21 +3,26 @@ using TheChest.Core.Slots.Interfaces;
 using TheChest.Core.Tests.Slots.Factories.Interfaces;
 
 using System.Reflection;
+using System.Globalization;
 
 namespace TheChest.Core.Tests.Slots.Factories.Base
 {
-    public abstract class BaseSlotFactory<T, Y> : ISlotFactory<Y> where T : BaseSlot<Y>
+    public class BaseSlotFactory<T, Y> : ISlotFactory<Y> where T : BaseSlot<Y>
     {
         public ISlot<Y> EmptySlot()
         {
-            var type = typeof(T);
             //TODO: use Activator.CreateInstanceFrom
-            throw new NotImplementedException();
+            var type = typeof(T);
+            var slot = Activator.CreateInstance(type, default(Y));
+            return (ISlot<Y>)slot;
         }
 
         public ISlot<Y> FullSlot(Y item)
         {
-            throw new NotImplementedException();
+            var type = typeof(T);
+            var constructor = type.GetConstructor(new Type[1]{ typeof(Y?) });
+            var slot = constructor!.Invoke(new object[1] { item });
+            return (ISlot<Y>)slot;
         }
     }
 }
