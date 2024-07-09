@@ -26,7 +26,7 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
             throw new NotImplementedException();
         }
 
-        public virtual T GetOne()
+        public virtual T? GetOne()
         {
             if (IsEmpty)
                 return default;
