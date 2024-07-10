@@ -1,4 +1,5 @@
 ﻿using TheChest.Core.Inventories.Slots.Base;
+using TheChest.Core.Inventories.Slots.Enums;
 using TheChest.Core.Slots.Base;
 
 namespace TheChest.Core.Inventories.Slots.Interfaces
