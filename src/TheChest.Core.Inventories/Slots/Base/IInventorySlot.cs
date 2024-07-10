@@ -28,4 +28,13 @@ namespace TheChest.Core.Inventories.Slots.Base
         /// <returns>Returns an item of the slot, if <see cref="ISlot{T}.IsEmpty"/> returns null</returns>
         T GetOne();
     }
+
+    public delegate void InventorySlotEvent<T>(IInventorySlot<T> slot, InventorySlotEventType eventType, T item);
+
+    public enum InventorySlotEventType
+    {
+        Changed,
+        Replaced,
+        Removed
+    }
 }

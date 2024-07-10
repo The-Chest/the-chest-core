@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-using System.Security.AccessControl;
-using TheChest.Core.Containers.Base;
+﻿using TheChest.Core.Containers.Base;
 using TheChest.Core.Containers.Interfaces;
 using TheChest.Core.Slots.Interfaces;
 using TheChest.Core.Tests.Containers.Factories.Interfaces;
@@ -59,20 +57,17 @@ namespace TheChest.Core.Tests.Containers.Factories.Base
         public IContainer<Y> EmptyContainer(int size = 20)
         {
             var containerType = GetContainerType();
+            var slotType = GetSlotTypeFromConstructor();
 
-            var constructor = containerType.GetConstructors()
-                .FirstOrDefault((ctor) =>
-                    {
-                        var parameters = ctor.GetParameters();
-                        return
-                            parameters.Length == 1 &&
-                            parameters[0].ParameterType == typeof(int);
-                    })
-                ?? throw new ArgumentException($"Container type '{containerType.FullName}' does not have a suitable constructor."); ;
+            Array slots = Array.CreateInstance(slotType, size);
+            for (int i = 0; i < size; i++)
+            {
+                slots.SetValue(this.slotFactory.EmptySlot(), i);
+            }
 
             var container = Activator.CreateInstance(
                 type: containerType,
-                args: new object[1] { size }
+                args: new object[1] { slots }
             );
             return (IContainer<Y>)container!;
         }
