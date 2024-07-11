@@ -1,6 +1,6 @@
 ﻿namespace TheChest.Tests.Slots.Generics
 {
-    public abstract partial class StackSlotTests<T>
+    public abstract partial class IStackSlotTests<T>
     {
         [Test]
         public void IsEmpty_StackAmountZero_ReturnsTrue()

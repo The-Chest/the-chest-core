@@ -2,13 +2,13 @@
 
 namespace TheChest.Tests.Slots.Generics
 {
-    public abstract partial class StackSlotTests<T>
+    public abstract partial class IStackSlotTests<T>
     {
         protected readonly IStackSlotFactory<T> slotFactory;
         protected readonly ISlotItemFactory<T> itemFactory;
         protected Random random;
 
-        protected StackSlotTests(IStackSlotFactory<T> slotFactory, ISlotItemFactory<T> itemFactory)
+        protected IStackSlotTests(IStackSlotFactory<T> slotFactory, ISlotItemFactory<T> itemFactory)
         {
             this.slotFactory = slotFactory;
             this.itemFactory = itemFactory;
