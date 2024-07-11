@@ -1,14 +1,18 @@
-﻿using TheChest.ConsoleApp.Containers;
-using TheChest.ConsoleApp.Tests.Fixtures;
-using TheChest.Core.Tests.Containers.Factories.Interfaces;
-using TheChest.Core.Tests.Slots.Factories.Generics.IContainerTests;
-using TheChest.Core.Tests.Slots.Factories.Interfaces;
+﻿using TheChest.Core.Tests.Slots.Factories.Generics;
 
 namespace TheChest.ConsoleApp.Tests.Containers
 {
-    [TestFixtureSource(typeof(TheChestSlotFixture), nameof(TheChestSlotFixture.ContainerFixtureArgs))]
+    [TestFixtureSource(nameof(ContainerFixtureArgs))]
     public class ContainerTests : IContainerTests<Item>
     {
+        static object[] ContainerFixtureArgs = {
+            new object[] {
+                new BaseContainerFactory<Container, Item>(
+                    new BaseSlotFactory<Slot, Item>()
+                ),
+                new BaseSlotItemFactory<Item>(),
+            }
+        };
         public ContainerTests(IContainerFactory<Item> containerFactory, ISlotItemFactory<Item> itemFactory) 
             : base(containerFactory, itemFactory)
         {
