@@ -1,6 +1,6 @@
 ﻿using TheChest.Core.Slots.Base;
 using TheChest.Core.Slots.Interfaces;
-using TheChest.Core.Tests.Slots.Factories.Interfaces;
+
 namespace TheChest.Core.Tests.Slots.Factories.Base
 {
     public class BaseSlotFactory<T, Y> : ISlotFactory<Y> where T : BaseSlot<Y>

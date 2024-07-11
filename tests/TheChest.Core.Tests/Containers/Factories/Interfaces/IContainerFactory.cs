@@ -2,10 +2,6 @@
 
 namespace TheChest.Core.Tests.Containers.Factories.Interfaces
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
     public interface IContainerFactory<T>
     {
         IContainer<T> EmptyContainer(int size = 20);

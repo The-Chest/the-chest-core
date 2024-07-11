@@ -3,17 +3,17 @@
 namespace TheChest.ConsoleApp.Tests.Containers
 {
     [TestFixtureSource(nameof(FixtureArgs))]
-    public class ContainerTests : IContainerTests<Item>
+    public class StackContainerTests : IStackContainerTests<Item>
     {
         static readonly object[] FixtureArgs = {
             new object[] {
-                new BaseContainerFactory<Container, Item>(
-                    new BaseSlotFactory<Slot, Item>()
+                new BaseStackContainerFactory<StackContainer, Item>(
+                    new BaseStackSlotFactory<StackSlot, Item>()
                 ),
                 new BaseSlotItemFactory<Item>(),
             }
         };
-        public ContainerTests(IContainerFactory<Item> containerFactory, ISlotItemFactory<Item> itemFactory) 
+        public StackContainerTests(IStackContainerFactory<Item> containerFactory, ISlotItemFactory<Item> itemFactory)
             : base(containerFactory, itemFactory)
         {
         }

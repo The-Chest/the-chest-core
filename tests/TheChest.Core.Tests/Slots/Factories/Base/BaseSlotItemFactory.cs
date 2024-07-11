@@ -1,6 +1,4 @@
-﻿using TheChest.Core.Tests.Slots.Factories.Interfaces;
-
-namespace TheChest.Core.Tests.Slots.Factories.Base
+﻿namespace TheChest.Core.Tests.Slots.Factories.Base
 {
     public class BaseSlotItemFactory<T> : ISlotItemFactory<T>
     {

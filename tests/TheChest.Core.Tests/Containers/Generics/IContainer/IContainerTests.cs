@@ -1,7 +1,4 @@
-﻿using TheChest.Core.Tests.Containers.Factories.Interfaces;
-using TheChest.Core.Tests.Slots.Factories.Interfaces;
-
-namespace TheChest.Core.Tests.Slots.Factories.Generics
+﻿namespace TheChest.Core.Tests.Slots.Factories.Generics
 {
     public abstract partial class IContainerTests<T>
     {
