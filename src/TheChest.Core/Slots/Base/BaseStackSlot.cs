@@ -78,7 +78,7 @@ namespace TheChest.Core.Slots.Base
         /// <param name="items">The items used to be added to</param>
         /// <param name="maxStack">The maximum permited amount of <paramref name="items"/> to be added</param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        protected BaseStackSlot(T[] items, int maxStack)
+        protected BaseStackSlot(T[] items, int maxStack) : base(items.FirstOrDefault())
         {
             MaxStackAmount = maxStack;
             StackAmount = items?.Length ?? 0;
