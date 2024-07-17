@@ -7,7 +7,6 @@ namespace TheChest.Core.Tests.Slots.Factories.Base
     {
         public ISlot<Y> EmptySlot()
         {
-            //TODO: use Activator.CreateInstanceFrom
             var type = typeof(T);
             var slot = Activator.CreateInstance(type, default(Y));
             return (ISlot<Y>)slot;
