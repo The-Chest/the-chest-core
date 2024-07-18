@@ -17,7 +17,7 @@
             var container = this.containerFactory.ShuffledItemsContainer(
                 randomSize, 
                 this.itemFactory.CreateItems(randomSize - 1)
-           );
+            );
 
             Assert.That(container.IsFull, Is.False);
         }
