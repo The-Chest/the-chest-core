@@ -1,38 +1,33 @@
-﻿using System.Collections;
-using TheChest.Core.Slots.Interfaces;
+﻿using TheChest.Core.Slots.Interfaces;
 
 namespace TheChest.Core.Slots.Base
 {
-    public class BaseStackSlot<T> : IStackSlot<T>
+    public abstract class BaseStackSlot<T> : IStackSlot<ICollection<T>>
     {
         private const string ITEMAMOUNT_BIGGER_THAN_MAXAMOUNT = "The item amount property cannot bigger than maxAmount";
         private const string MAXAMOUNT_SMALLER_THAN_ZERO = "The max amount property cannot be smaller than zero";
         private const string AMOUNT_BIGGER_THAN_MAXAMOUNT = "The amount property cannot be bigger than maxAmount";
 
-        protected IReadOnlyCollection<T> item;
-        public IReadOnlyCollection<T> Content
+        protected IReadOnlyCollection<T> content;
+        public virtual ICollection<T> Content
         {
             get
             {
-                return this.item;
+                return this.content.ToArray();
             }
             protected set
             {
                 if(value == null)
-                {
                     throw new ArgumentNullException(nameof(value));
-                }
 
                 if (value.Count > maxStackAmount)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value), MAXAMOUNT_SMALLER_THAN_ZERO);
-                }
+                    throw new ArgumentOutOfRangeException(nameof(value), ITEMAMOUNT_BIGGER_THAN_MAXAMOUNT);
 
-                this.item = value;
+                this.content = value.ToArray();
             }
         }
 
-        public int StackAmount => this.Content.Count;
+        public virtual int StackAmount => this.Content.Count;
 
         protected int maxStackAmount;
         public virtual int MaxStackAmount
@@ -53,30 +48,22 @@ namespace TheChest.Core.Slots.Base
             }
         }
 
-        public bool IsFull => throw new NotImplementedException();
+        public virtual bool IsFull => this.content.Count == this.maxStackAmount;
 
-        public bool IsEmpty => throw new NotImplementedException();
+        public virtual bool IsEmpty => this.content.Count == 0;
 
-        public int Count => throw new NotImplementedException();
+        public virtual int Count => this.content.Count;
 
-        public BaseStackSlot(T[] items, int maxStackAmount = 1)
+        public BaseStackSlot(T[] items)
+        {
+            this.maxStackAmount = items.Length;
+            this.Content = items;
+        }
+
+        public BaseStackSlot(T[] items, int maxStackAmount)
         {
             this.maxStackAmount = maxStackAmount;
-            if(this.Content.Count > maxStackAmount)
-            {
-                throw new ArgumentOutOfRangeException(nameof(value), MAXAMOUNT_SMALLER_THAN_ZERO);
-            }
-            this.Content = Array.AsReadOnly(items);
-        }
-
-        public IEnumerator<T> GetEnumerator()
-        {
-            return this.Content.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            yield return this.Content;
+            this.Content = items;
         }
     }
 }

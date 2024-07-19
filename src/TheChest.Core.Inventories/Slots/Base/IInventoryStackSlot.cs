@@ -7,7 +7,7 @@ namespace TheChest.Core.Inventories.Slots.Base
     /// Interface with methods for a basic Inventory Stackable Slot 
     /// </summary>
     /// <typeparam name="T">Item the Slot Accept</typeparam>
-    public interface IInventoryStackSlot<T> : ILazyStackSlot<T>, IInventorySlot<T>
+    public interface IInventoryStackSlot<T> : IStackSlot<T>, IInventorySlot<T>
     {
         /// <summary>
         /// Add an amount of items inside the current slot

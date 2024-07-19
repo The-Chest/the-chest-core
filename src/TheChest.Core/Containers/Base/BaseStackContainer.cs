@@ -5,13 +5,13 @@ namespace TheChest.Core.Containers.Base
 {
     public abstract class BaseStackContainer<T> : BaseContainer<T>, IStackContainer<T>
     {
-        protected virtual ILazyStackSlot<T>[] slots => base.Slots as ILazyStackSlot<T>[];
+        protected virtual IStackSlot<T>[] slots => base.Slots as IStackSlot<T>[];
 
         public override bool IsFull => slots?.All(x => x.IsFull) ?? false;
 
         public override bool IsEmpty => slots?.All(x => x.IsEmpty) ?? true;
 
-        protected BaseStackContainer(ILazyStackSlot<T>[] slots) : base(slots)
+        protected BaseStackContainer(IStackSlot<T>[] slots) : base(slots)
         {
         }
 

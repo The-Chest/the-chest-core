@@ -3,10 +3,10 @@
 namespace TheChest.Core.Slots.Base
 {
     /// <summary>
-    /// Generic Slot with with <see cref="ILazyStackSlot{T}"/> implementation
+    /// Generic Slot with with <see cref="IStackSlot{T}"/> implementation
     /// </summary>
     /// <typeparam name="T">The item the slot accepts</typeparam>
-    public abstract class BaseLazyStackSlot<T> : BaseSlot<T>, ILazyStackSlot<T>
+    public abstract class BaseLazyStackSlot<T> : BaseSlot<T>, IStackSlot<T>
     {
         private const string AMOUNT_SMALLER_THAN_ZERO = "The amount property cannot be smaller than zero";
         private const string MAXAMOUNT_SMALLER_THAN_ZERO = "The max amount property cannot be smaller than zero";

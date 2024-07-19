@@ -8,11 +8,11 @@ namespace TheChest.Core.Slots.Base
     /// <typeparam name="T">The item the slot accepts</typeparam>
     public abstract class BaseSlot<T> : ISlot<T>
     {
-        public virtual T Item { get; protected set; }
+        public virtual T Content { get; protected set; }
 
         public virtual bool IsFull => !IsEmpty;
 
-        public virtual bool IsEmpty => Item == null;
+        public virtual bool IsEmpty => Content == null;
 
         /// <summary>
         /// Creates a basic slot with an item
@@ -20,7 +20,7 @@ namespace TheChest.Core.Slots.Base
         /// <param name="currentItem">item that belongs to this slot (null if empty)</param>
         protected BaseSlot(T currentItem = default)
         {
-            Item = currentItem;
+            Content = currentItem;
         }
     }
 }
