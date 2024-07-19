@@ -14,23 +14,23 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
             if (IsEmpty)
                 return default;
 
-            T item = CurrentItem;
+            T item = Item;
 
             StackAmount--;
 
             if (StackAmount == 0)
-                CurrentItem = default;
+                Item = default;
 
             return item;
         }
 
         public virtual bool Add(T item)
         {
-            var eq = CurrentItem?.Equals(item) ?? false;
+            var eq = Item?.Equals(item) ?? false;
 
             if (IsEmpty || eq && !IsFull)
             {
-                CurrentItem = item;
+                Item = item;
                 StackAmount++;
                 return true;
             }
@@ -48,10 +48,10 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
             for (int i = 0; i < amount; i++)
             {
                 StackAmount--;
-                items[i] = CurrentItem;
+                items[i] = Item;
             }
 
-            if (StackAmount == 0) CurrentItem = default;
+            if (StackAmount == 0) Item = default;
 
             return items;
         }
@@ -66,14 +66,14 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
             if (amount < 1)
                 return 0;
 
-            var eq = CurrentItem?.Equals(item) ?? false;
+            var eq = Item?.Equals(item) ?? false;
 
             if (!IsEmpty && !eq || IsFull)
                 return amount;
 
             int res = 0;
 
-            CurrentItem = item;
+            Item = item;
 
             if (amount + StackAmount > MaxStackAmount)
             {
@@ -93,14 +93,14 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
             if (items == null || items.Length == 0)
                 return 0;
 
-            var eq = CurrentItem?.Equals(items[0]) ?? false;
+            var eq = Item?.Equals(items[0]) ?? false;
 
             if (!IsEmpty && !eq || IsFull)
                 return items.Length;
 
             int res = 0;
 
-            CurrentItem = items[0];
+            Item = items[0];
 
             if (items.Length + StackAmount > MaxStackAmount)
             {
@@ -121,7 +121,7 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
 
             if (amount < 1) return items;
 
-            var eq = CurrentItem?.Equals(item) ?? false;
+            var eq = Item?.Equals(item) ?? false;
 
             if (eq)
             {
@@ -131,14 +131,14 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
 
                 for (int i = 0; i < resultAmount; i++)
                 {
-                    items[i] = CurrentItem;
+                    items[i] = Item;
                 }
             }
             else
             {
                 items = GetAll();
 
-                CurrentItem = item;
+                Item = item;
                 StackAmount = amount;
             }
 
@@ -152,7 +152,7 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
 
             T[] retItems;
 
-            var eq = CurrentItem?.Equals(items[0]) ?? false;
+            var eq = Item?.Equals(items[0]) ?? false;
 
             if (eq)
             {
@@ -162,14 +162,14 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
 
                 for (int i = 0; i < resultAmount; i++)
                 {
-                    retItems[i] = CurrentItem;
+                    retItems[i] = Item;
                 }
             }
             else
             {
                 retItems = GetAll();
 
-                CurrentItem = items[0];
+                Item = items[0];
                 StackAmount = items.Length;
             }
 

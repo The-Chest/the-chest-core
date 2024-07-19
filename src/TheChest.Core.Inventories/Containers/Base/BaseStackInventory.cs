@@ -36,7 +36,7 @@ namespace TheChest.Core.Inventories.Containers.Base
 
             for (int i = 0; i < Slots.Length; i++)
             {
-                if (Slots[i].IsEmpty || !Slots[i].IsFull && Slots[i].CurrentItem.Equals(item))
+                if (Slots[i].IsEmpty || !Slots[i].IsFull && Slots[i].Item.Equals(item))
                 {
                     var result = slots[i].Add(item, amount);
                     amount = result;
@@ -60,7 +60,7 @@ namespace TheChest.Core.Inventories.Containers.Base
 
             for (int i = 0; i < Slots.Length; i++)
             {
-                if (Slots[i].IsEmpty || !Slots[i].IsFull && Slots[i].CurrentItem.Equals(item))
+                if (Slots[i].IsEmpty || !Slots[i].IsFull && Slots[i].Item.Equals(item))
                 {
                     var result = slots[i].Add(itemArr);
                     itemArr = Enumerable.Repeat(item, result).ToArray();
@@ -81,7 +81,7 @@ namespace TheChest.Core.Inventories.Containers.Base
             if (index < 0 || index >= Slots.Length)
                 return Enumerable.Repeat(item, amount).ToArray();
 
-            if (Slots[index].IsEmpty || !Slots[index].IsFull && Slots[index].CurrentItem.Equals(item))
+            if (Slots[index].IsEmpty || !Slots[index].IsFull && Slots[index].Item.Equals(item))
             {
                 var result = slots[index].Add(item, amount);
                 return Enumerable.Repeat(item, result).ToArray();
@@ -103,7 +103,7 @@ namespace TheChest.Core.Inventories.Containers.Base
                 return new T[0];
 
             var item = items.FirstOrDefault();
-            var eq = Slots[index].CurrentItem?.Equals(item) ?? false;
+            var eq = Slots[index].Item?.Equals(item) ?? false;
 
             if (Slots[index].IsEmpty || !Slots[index].IsFull && eq)
             {

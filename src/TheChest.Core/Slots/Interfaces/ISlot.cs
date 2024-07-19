@@ -9,7 +9,7 @@
         /// <summary>
         /// The current item inside the slot
         /// </summary>
-        T CurrentItem { get; }
+        T Item { get; }
 
         /// <summary>
         /// Verify if the slot is full

@@ -52,7 +52,7 @@ namespace TheChest.Core.Slots.Base
 
         public override bool IsFull => StackAmount == MaxStackAmount && !IsEmpty;
 
-        public override bool IsEmpty => CurrentItem == null || StackAmount == 0;
+        public override bool IsEmpty => Item == null || StackAmount == 0;
 
         /// <summary>
         /// Creates a basic Stack Slot with an amount and max amount
