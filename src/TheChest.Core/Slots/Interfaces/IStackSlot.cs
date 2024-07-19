@@ -1,6 +1,6 @@
 ﻿namespace TheChest.Core.Slots.Interfaces
 {
-    public interface IStackSlot<T> : ISlot<ICollection<T>>, ICollection<T>
+    public interface IStackSlot<T> : ISlot<IReadOnlyCollection<T>>, IReadOnlyCollection<T>
     {
         /// <summary>
         /// Defines the amount of items this slot is holding

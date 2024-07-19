@@ -12,10 +12,10 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
     {
         public virtual bool Add(T item)
         {
-            var eq = Item?.Equals(item) ?? false;
+            var eq = Content?.Equals(item) ?? false;
             if (IsEmpty || eq && !IsFull)
             {
-                Item = item;
+                Content = item;
                 return true;
             }
 
@@ -32,8 +32,8 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
             if (IsEmpty)
                 return default;
 
-            T item = Item;
-            Item = default;
+            T item = Content;
+            Content = default;
 
             return item;
         }

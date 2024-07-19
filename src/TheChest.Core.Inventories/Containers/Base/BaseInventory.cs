@@ -72,7 +72,7 @@ namespace TheChest.Core.Inventories.Containers.Base
         {
             for (int i = 0; i < Slots.Length; i++)
             {
-                if (!Slots[i].IsEmpty && Slots[i].Item.Equals(item))
+                if (!Slots[i].IsEmpty && Slots[i].Content.Equals(item))
                 {
                     return slots[i].GetOne();
                 }
@@ -95,7 +95,7 @@ namespace TheChest.Core.Inventories.Containers.Base
                 if (currentAmount == 0)
                     break;
 
-                if (!Slots[i].IsEmpty && Slots[i].Item.Equals(item))
+                if (!Slots[i].IsEmpty && Slots[i].Content.Equals(item))
                 {
                     var obj = slots[i].GetOne();
                     itemArr[index] = obj;
@@ -111,7 +111,7 @@ namespace TheChest.Core.Inventories.Containers.Base
             int amount = 0;
             for (int i = 0; i < Slots.Length; i++)
             {
-                if (!Slots[i].IsEmpty && Slots[i].Item.Equals(item))
+                if (!Slots[i].IsEmpty && Slots[i].Content.Equals(item))
                 {
                     amount++;
                 }
@@ -125,7 +125,7 @@ namespace TheChest.Core.Inventories.Containers.Base
 
             for (int i = 0; i < Slots.Length; i++)
             {
-                if (!Slots[i].IsEmpty && Slots[i].Item.Equals(item))
+                if (!Slots[i].IsEmpty && Slots[i].Content.Equals(item))
                 {
                     var res = slots[i].GetOne();
                     list.Add(res);
@@ -147,7 +147,7 @@ namespace TheChest.Core.Inventories.Containers.Base
 
             for (int i = 0; i < Size; i++)
             {
-                if (Slots[i].IsEmpty || !Slots[i].IsFull && Slots[i].Item.Equals(item))
+                if (Slots[i].IsEmpty || !Slots[i].IsFull && Slots[i].Content.Equals(item))
                 {
                     slots[i].Add(item);
                     return true;
@@ -165,7 +165,7 @@ namespace TheChest.Core.Inventories.Containers.Base
             var index = 0;
             for (int i = 0; i < Slots.Length; i++)
             {
-                if (Slots[i].IsEmpty || !Slots[i].IsFull && Slots[i].Item.Equals(item))
+                if (Slots[i].IsEmpty || !Slots[i].IsFull && Slots[i].Content.Equals(item))
                 {
                     var result = slots[i].Add(item);
                     if (result)
@@ -188,7 +188,7 @@ namespace TheChest.Core.Inventories.Containers.Base
             for (int i = 0; i < Slots.Length; i++)
             {
                 var item = items[index];
-                if (Slots[i].IsEmpty || !Slots[i].IsFull && Slots[i].Item.Equals(item))
+                if (Slots[i].IsEmpty || !Slots[i].IsFull && Slots[i].Content.Equals(item))
                 {
                     var result = slots[i].Add(item);
                     if (result)
