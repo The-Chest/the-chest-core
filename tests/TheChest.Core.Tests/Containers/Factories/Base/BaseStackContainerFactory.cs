@@ -36,7 +36,7 @@ namespace TheChest.Core.Tests.Containers.Factories.Base
                         return
                             parameters.Length == 1 &&
                             parameters[0].ParameterType.IsArray &&
-                            typeof(IStackSlot<Y>).IsAssignableFrom(parameters[0].ParameterType.GetElementType());
+                            typeof(ILazyStackSlot<Y>).IsAssignableFrom(parameters[0].ParameterType.GetElementType());
                     })
                     ?? throw new ArgumentException($"Container type '{containerType.FullName}' does not have a suitable constructor.");
 
@@ -44,7 +44,7 @@ namespace TheChest.Core.Tests.Containers.Factories.Base
                 ?? throw new ArgumentException($"Container type '{containerType.FullName}' does not have a constructor with IStackSlot<{typeof(Y).Name}>[].");
 
             var slotType = slotParameter.ParameterType.GetElementType();
-            if (!typeof(IStackSlot<Y>).IsAssignableFrom(slotType))
+            if (!typeof(ILazyStackSlot<Y>).IsAssignableFrom(slotType))
             {
                 throw new ArgumentException($"Type '{slotType!.FullName}' does not implement IStackSlot<{typeof(Y).Name}>.");
             }

@@ -3,10 +3,10 @@
 namespace TheChest.Core.Slots.Base
 {
     /// <summary>
-    /// Generic Slot with with <see cref="IStackSlot{T}"/> implementation
+    /// Generic Slot with with <see cref="ILazyStackSlot{T}"/> implementation
     /// </summary>
     /// <typeparam name="T">The item the slot accepts</typeparam>
-    public abstract class BaseStackSlot<T> : BaseSlot<T>, IStackSlot<T>
+    public abstract class BaseLazyStackSlot<T> : BaseSlot<T>, ILazyStackSlot<T>
     {
         private const string AMOUNT_SMALLER_THAN_ZERO = "The amount property cannot be smaller than zero";
         private const string MAXAMOUNT_SMALLER_THAN_ZERO = "The max amount property cannot be smaller than zero";
@@ -61,7 +61,7 @@ namespace TheChest.Core.Slots.Base
         /// <param name="amount">The amount of <paramref name="currentItem"/> to be added</param>
         /// <param name="maxStackAmount">The maximum permited amount of <paramref name="currentItem"/> to be added</param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        protected BaseStackSlot(T currentItem = default, int amount = 1, int maxStackAmount = 1) : base(currentItem)
+        protected BaseLazyStackSlot(T currentItem = default, int amount = 1, int maxStackAmount = 1) : base(currentItem)
         {
             if (currentItem == null)
             {
@@ -78,7 +78,7 @@ namespace TheChest.Core.Slots.Base
         /// <param name="items">The items used to be added to</param>
         /// <param name="maxStack">The maximum permited amount of <paramref name="items"/> to be added</param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        protected BaseStackSlot(T[] items, int maxStack) : base(items.FirstOrDefault())
+        protected BaseLazyStackSlot(T[] items, int maxStack) : base(items.FirstOrDefault())
         {
             MaxStackAmount = maxStack;
             StackAmount = items?.Length ?? 0;

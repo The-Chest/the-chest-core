@@ -7,7 +7,7 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
     /// Generic Slot with with <see cref="IInventoryStackSlot{T}"/> implementation
     /// </summary>
     /// <typeparam name="T">The item the slot accepts</typeparam>
-    public abstract class BaseInventoryStackSlot<T> : BaseStackSlot<T>, IInventoryStackSlot<T>
+    public abstract class BaseInventoryStackSlot<T> : BaseLazyStackSlot<T>, IInventoryStackSlot<T>
     {
         public virtual T GetOne()
         {
