@@ -1,6 +1,5 @@
 ﻿using TheChest.Core.Slots.Base;
 using TheChest.Core.Slots.Interfaces;
-using TheChest.Core.Tests.Slots.Factories.Interfaces;
 
 namespace TheChest.Core.Tests.Slots.Factories.Base
 {
@@ -8,17 +7,31 @@ namespace TheChest.Core.Tests.Slots.Factories.Base
     {
         public IStackSlot<Y> EmptySlot()
         {
-            throw new NotImplementedException();
+            var type = typeof(T);
+            var slot = Activator.CreateInstance(type, Array.Empty<Y>(), 1);
+            return (IStackSlot<Y>)slot;
         }
 
         public IStackSlot<Y> FullSlot(Y item)
         {
-            throw new NotImplementedException();
+            var type = typeof(T);
+
+            var size = new Random().Next(1, 10);
+            var items = new Y[size];
+            Array.Fill(items, item);
+
+            var slot = Activator.CreateInstance(type, items, size);
+            return (IStackSlot<Y>)slot;
         }
 
         public IStackSlot<Y> WithItem(Y item, int amount = 1, int maxAmount = 10)
         {
-            throw new NotImplementedException();
+            var type = typeof(T);
+            var items = new Y[amount];
+            Array.Fill(items, item);
+
+            var slot = Activator.CreateInstance(type, items, maxAmount);
+            return (IStackSlot<Y>)slot;
         }
     }
 }

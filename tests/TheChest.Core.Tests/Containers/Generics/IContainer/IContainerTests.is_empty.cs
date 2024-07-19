@@ -1,4 +1,4 @@
-﻿namespace TheChest.Core.Tests.Slots.Factories.Generics.IContainerTests
+﻿namespace TheChest.Core.Tests.Slots.Factories.Generics
 {
     public abstract partial class IContainerTests<T>
     {
@@ -13,7 +13,8 @@
         public void IsEmpty_SomeEmptySlots_ReturnsFalse()
         {
             var randomSize = random.Next(MIN_SIZE_TEST, MAX_SIZE_TEST);
-            var container = this.containerFactory.ShuffledItemContainer(randomSize, itemFactory.CreateItem());
+            var item = this.itemFactory.CreateItem();
+            var container = this.containerFactory.ShuffledItemContainer(randomSize, item);
             Assert.That(container.IsEmpty, Is.False);
         }
 
@@ -21,7 +22,8 @@
         public void IsEmpty_AllSlotsFull_ReturnsFalse()
         {
             var randomSize = random.Next(MIN_SIZE_TEST, MAX_SIZE_TEST);
-            var container = this.containerFactory.FullContainer(randomSize, itemFactory.CreateItem());
+            var item = this.itemFactory.CreateItem();
+            var container = this.containerFactory.FullContainer(randomSize, item);
             Assert.That(container.IsEmpty, Is.False);
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace TheChest.Core.Tests.Slots.Factories.Generics.IContainerTests
+﻿namespace TheChest.Core.Tests.Slots.Factories.Generics
 {
     public abstract partial class IContainerTests<T>
     {
@@ -17,7 +17,7 @@
             var container = this.containerFactory.ShuffledItemsContainer(
                 randomSize, 
                 this.itemFactory.CreateItems(randomSize - 1)
-           );
+            );
 
             Assert.That(container.IsFull, Is.False);
         }
