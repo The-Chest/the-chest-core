@@ -9,16 +9,15 @@ namespace TheChest.Core.Containers.Base
 
         public IStackSlot<T> this[int index] => this.Slots[index];
 
-        public virtual bool IsFull => Slots?.All(x => x.IsFull) ?? false;
+        public virtual bool IsFull  => this.Slots.All(x => x.IsFull);
 
-        public virtual bool IsEmpty => Slots?.All(x => x.IsEmpty) ?? true;
+        public virtual bool IsEmpty => this.Slots.All(x => x.IsEmpty);
 
-        public int Size => throw new NotImplementedException();
-
+        public int Size => this.Slots.Length;
 
         protected BaseStackContainer(IStackSlot<T>[] slots)
         {
-            this.Slots = slots;
+            this.Slots = slots ?? throw new ArgumentNullException(nameof(slots));
         }
     }
 }
