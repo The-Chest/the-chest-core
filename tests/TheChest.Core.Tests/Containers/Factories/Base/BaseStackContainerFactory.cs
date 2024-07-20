@@ -1,11 +1,11 @@
-﻿using TheChest.Core.Containers.Base;
+﻿using TheChest.Core.Containers;
 using TheChest.Core.Containers.Interfaces;
 using TheChest.Core.Slots.Interfaces;
 
 namespace TheChest.Core.Tests.Containers.Factories.Base
 {
     public class BaseStackContainerFactory<T, Y> : IStackContainerFactory<Y>
-        where T : BaseStackContainer<Y>
+        where T : StackContainer<Y>
     {
         private readonly IStackSlotFactory<Y> slotFactory;
 

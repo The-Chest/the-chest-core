@@ -1,13 +1,13 @@
 ﻿using TheChest.Core.Containers.Interfaces;
 using TheChest.Core.Slots.Interfaces;
 
-namespace TheChest.Core.Containers.Base
+namespace TheChest.Core.Containers
 {
     /// <summary>
     /// Generic container with <see cref="IContainer{T}"/> implementation
     /// </summary>
     /// <typeparam name="T">An item type</typeparam>
-    public abstract class BaseContainer<T> : IContainer<T>
+    public class Container<T> : IContainer<T>
     {
         public virtual ISlot<T>[] Slots
         {
@@ -27,7 +27,7 @@ namespace TheChest.Core.Containers.Base
         /// Creates a Container with slots
         /// </summary>
         /// <param name="slots">An array of slots</param>
-        protected BaseContainer(ISlot<T>[] slots)
+        public Container(ISlot<T>[] slots)
         {
             Slots = slots ?? throw new ArgumentNullException(nameof(slots));
         }

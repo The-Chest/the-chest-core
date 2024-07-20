@@ -1,4 +1,4 @@
-﻿using TheChest.Core.Containers.Base;
+﻿using TheChest.Core.Containers;
 using TheChest.Core.Inventories.Containers.Interfaces;
 using TheChest.Core.Inventories.Slots.Base;
 using TheChest.Core.Slots.Base;
@@ -9,7 +9,7 @@ namespace TheChest.Core.Inventories.Containers.Base
     /// Generic Inventory with <see cref="IInventory{T}"/> implementation
     /// </summary>
     /// <typeparam name="T">An item type</typeparam>
-    public abstract class BaseInventory<T> : BaseContainer<T>, IInventory<T>
+    public abstract class BaseInventory<T> : Container<T>, IInventory<T>
     {
         private IInventorySlot<T>[] slots => Slots as IInventorySlot<T>[];
 
