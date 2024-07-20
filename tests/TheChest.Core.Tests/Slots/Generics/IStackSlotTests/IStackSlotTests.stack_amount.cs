@@ -10,7 +10,7 @@
                 () => this.slotFactory.WithItem(this.itemFactory.CreateItem(), maxAmount + 1, maxAmount),
                 Throws.InnerException
                     .With.TypeOf<ArgumentOutOfRangeException>()
-                    .And.Message.StartsWith("The amount property cannot be bigger than maxAmount")
+                    .And.Message.StartsWith("The item amount property cannot bigger than maxAmount")
             );
         }
     }

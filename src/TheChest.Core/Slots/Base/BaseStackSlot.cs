@@ -2,7 +2,11 @@
 
 namespace TheChest.Core.Slots.Base
 {
-    public abstract class BaseStackSlot<T> : IStackSlot<ICollection<T>>
+    /// <summary>
+    /// Slot with with <see cref="IStackSlot{T}"/> implementation with a collection of items
+    /// </summary>
+    /// <typeparam name="T">The item collection inside the slot accepts</typeparam>
+    public abstract class BaseStackSlot<T> : IStackSlot<T>
     {
         private const string ITEMAMOUNT_BIGGER_THAN_MAXAMOUNT = "The item amount property cannot bigger than maxAmount";
         private const string MAXAMOUNT_SMALLER_THAN_ZERO = "The max amount property cannot be smaller than zero";
@@ -54,14 +58,14 @@ namespace TheChest.Core.Slots.Base
 
         public virtual int Count => this.content.Count;
 
-        public BaseStackSlot(T[] items)
+        protected BaseStackSlot(T[] items)
         {
             this.maxStackAmount = items.Length;
             this.Content = items;
         }
 
-        public BaseStackSlot(T[] items, int maxStackAmount)
-        {
+        protected BaseStackSlot(T[] items, int maxStackAmount)
+        {           
             this.maxStackAmount = maxStackAmount;
             this.Content = items;
         }

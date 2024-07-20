@@ -3,7 +3,7 @@ using TheChest.Core.Slots.Interfaces;
 
 namespace TheChest.Core.Tests.Slots.Factories.Base
 {
-    public class BaseStackSlotFactory<T, Y> : IStackSlotFactory<Y> where T : BaseLazyStackSlot<Y>
+    public class BaseStackSlotFactory<T, Y> : IStackSlotFactory<Y> where T : BaseStackSlot<Y>
     {
         public IStackSlot<Y> EmptySlot()
         {

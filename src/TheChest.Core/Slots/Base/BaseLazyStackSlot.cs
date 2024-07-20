@@ -3,10 +3,10 @@
 namespace TheChest.Core.Slots.Base
 {
     /// <summary>
-    /// Generic Slot with with <see cref="IStackSlot{T}"/> implementation
+    /// Slot with with <see cref="IStackSlot{T}"/> implementation which have only one item repeatedly 
     /// </summary>
     /// <typeparam name="T">The item the slot accepts</typeparam>
-    public abstract class BaseLazyStackSlot<T> : BaseSlot<T>, IStackSlot<T>
+    public abstract class BaseLazyStackSlot<T> : IStackSlot<T>
     {
         private const string AMOUNT_SMALLER_THAN_ZERO = "The amount property cannot be smaller than zero";
         private const string MAXAMOUNT_SMALLER_THAN_ZERO = "The max amount property cannot be smaller than zero";
@@ -24,7 +24,7 @@ namespace TheChest.Core.Slots.Base
                 if (value < 0)
                     throw new ArgumentOutOfRangeException(nameof(value), AMOUNT_SMALLER_THAN_ZERO);
 
-                if (value > MaxStackAmount)
+                if (value > maxStackAmount)
                     throw new ArgumentOutOfRangeException(nameof(value), AMOUNT_BIGGER_THAN_MAXAMOUNT);
 
                 stackAmount = value;
@@ -50,9 +50,12 @@ namespace TheChest.Core.Slots.Base
             }
         }
 
-        public override bool IsFull => StackAmount == MaxStackAmount && !IsEmpty;
+        public virtual bool IsFull => StackAmount == MaxStackAmount && !IsEmpty;
 
-        public override bool IsEmpty => Content == null || StackAmount == 0;
+        public virtual bool IsEmpty => Content.Count == 0 || StackAmount == 0;
+
+        protected readonly ICollection<T> content;
+        public virtual ICollection<T> Content => content;
 
         /// <summary>
         /// Creates a basic Stack Slot with an amount and max amount
@@ -61,27 +64,15 @@ namespace TheChest.Core.Slots.Base
         /// <param name="amount">The amount of <paramref name="currentItem"/> to be added</param>
         /// <param name="maxStackAmount">The maximum permited amount of <paramref name="currentItem"/> to be added</param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        protected BaseLazyStackSlot(T currentItem = default, int amount = 1, int maxStackAmount = 1) : base(currentItem)
+        protected BaseLazyStackSlot(T currentItem, int amount = 1, int maxStackAmount = 1)
         {
             if (currentItem == null)
-            {
                 amount = 0;
-            }
+
+            this.content = Enumerable.Repeat(currentItem, amount).ToArray();
 
             MaxStackAmount = maxStackAmount;
             StackAmount = amount;
-        }
-
-        /// <summary>
-        /// Creates a basic Stack Slot based on a item array
-        /// </summary>
-        /// <param name="items">The items used to be added to</param>
-        /// <param name="maxStack">The maximum permited amount of <paramref name="items"/> to be added</param>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        protected BaseLazyStackSlot(T[] items, int maxStack) : base(items.FirstOrDefault())
-        {
-            MaxStackAmount = maxStack;
-            StackAmount = items?.Length ?? 0;
         }
     }
 }

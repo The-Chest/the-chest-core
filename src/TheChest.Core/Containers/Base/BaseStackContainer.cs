@@ -3,20 +3,22 @@ using TheChest.Core.Slots.Interfaces;
 
 namespace TheChest.Core.Containers.Base
 {
-    public abstract class BaseStackContainer<T> : BaseContainer<T>, IStackContainer<T>
+    public abstract class BaseStackContainer<T> : IStackContainer<T>
     {
-        protected virtual IStackSlot<T>[] slots => base.Slots as IStackSlot<T>[];
+        public IStackSlot<T>[] Slots { get; protected set; }
 
-        public override bool IsFull => slots?.All(x => x.IsFull) ?? false;
+        public IStackSlot<T> this[int index] => this.Slots[index];
 
-        public override bool IsEmpty => slots?.All(x => x.IsEmpty) ?? true;
+        public virtual bool IsFull => Slots?.All(x => x.IsFull) ?? false;
 
-        protected BaseStackContainer(IStackSlot<T>[] slots) : base(slots)
+        public virtual bool IsEmpty => Slots?.All(x => x.IsEmpty) ?? true;
+
+        public int Size => throw new NotImplementedException();
+
+
+        protected BaseStackContainer(IStackSlot<T>[] slots)
         {
-        }
-
-        protected BaseStackContainer(int size = DEFAULT_SLOT_COUNT) : base(size)
-        {
+            this.Slots = slots;
         }
     }
 }

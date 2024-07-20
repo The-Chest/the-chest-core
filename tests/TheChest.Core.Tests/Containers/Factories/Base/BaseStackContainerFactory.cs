@@ -118,7 +118,7 @@ namespace TheChest.Core.Tests.Containers.Factories.Base
             Array slots = Array.CreateInstance(slotType, size);
             for (int i = 0; i < size; i++)
             {
-                ISlot<Y> slot;
+                IStackSlot<Y> slot;
                 if (i < items.Length)
                 {
                     slot = this.slotFactory.FullSlot(items[i]);
