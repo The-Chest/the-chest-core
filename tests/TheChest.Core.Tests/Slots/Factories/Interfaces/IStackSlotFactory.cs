@@ -13,7 +13,13 @@ namespace TheChest.Core.Tests.Slots.Factories.Interfaces
         /// </summary>
         /// <returns>An empty <see cref="IStackSlot{T}"/></returns>
         IStackSlot<T> EmptySlot();
-
+        /// <summary>
+        /// Creates an <see cref="IStackSlot{T}"/> with an amount of itens and max amount set 
+        /// </summary>
+        /// <param name="item">item to be added to the created slot</param>
+        /// <param name="amount">amount of the item that will be added</param>
+        /// <param name="maxAmount">max amount of the </param>
+        /// <returns>An Slot with an array of</returns>
         IStackSlot<T> WithItem(T item, int amount = 1, int maxAmount = 10);
         /// <summary>
         /// Creates an <see cref="IStackSlot{T}"/> with the max supported amount of items inside it
