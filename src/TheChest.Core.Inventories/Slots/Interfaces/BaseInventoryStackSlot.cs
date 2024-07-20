@@ -1,5 +1,5 @@
 ﻿using TheChest.Core.Inventories.Slots.Base;
-using TheChest.Core.Slots.Base;
+using TheChest.Core.Slots;
 
 namespace TheChest.Core.Inventories.Slots.Interfaces
 {
@@ -7,7 +7,7 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
     /// Generic Slot with with <see cref="IInventoryStackSlot{T}"/> implementation
     /// </summary>
     /// <typeparam name="T">The item the slot accepts</typeparam>
-    public abstract class BaseInventoryStackSlot<T> : BaseLazyStackSlot<T>, IInventoryStackSlot<T>
+    public abstract class BaseInventoryStackSlot<T> : LazyStackSlot<T>, IInventoryStackSlot<T>
     {
         public virtual T GetOne()
         {

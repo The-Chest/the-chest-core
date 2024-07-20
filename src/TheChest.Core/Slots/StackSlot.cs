@@ -1,12 +1,12 @@
 ﻿using TheChest.Core.Slots.Interfaces;
 
-namespace TheChest.Core.Slots.Base
+namespace TheChest.Core.Slots
 {
     /// <summary>
     /// Slot with with <see cref="IStackSlot{T}"/> implementation with a collection of items
     /// </summary>
     /// <typeparam name="T">The item collection inside the slot accepts</typeparam>
-    public class BaseStackSlot<T> : IStackSlot<T>
+    public class StackSlot<T> : IStackSlot<T>
     {
         private const string ITEMAMOUNT_BIGGER_THAN_MAXAMOUNT = "The item amount property cannot bigger than maxAmount";
         private const string MAXAMOUNT_SMALLER_THAN_ZERO = "The max amount property cannot be smaller than zero";
@@ -17,21 +17,21 @@ namespace TheChest.Core.Slots.Base
         {
             get
             {
-                return this.content;
+                return content;
             }
             protected set
             {
-                if(value == null)
+                if (value == null)
                     throw new ArgumentNullException(nameof(value));
 
                 if (value.Count > maxStackAmount)
                     throw new ArgumentOutOfRangeException(nameof(value), ITEMAMOUNT_BIGGER_THAN_MAXAMOUNT);
 
-                this.content = value;
+                content = value;
             }
         }
 
-        public virtual int StackAmount => this.Content.Count;
+        public virtual int StackAmount => Content.Count;
 
         protected int maxStackAmount;
         public virtual int MaxStackAmount
@@ -52,22 +52,20 @@ namespace TheChest.Core.Slots.Base
             }
         }
 
-        public virtual bool IsFull => this.content.Count == this.maxStackAmount;
+        public virtual bool IsFull => content.Count == maxStackAmount;
 
-        public virtual bool IsEmpty => this.content.Count == 0;
+        public virtual bool IsEmpty => content.Count == 0;
 
-        public virtual int Count => this.content.Count;
-
-        protected BaseStackSlot(T[] items)
+        protected StackSlot(T[] items)
         {
             if (items == null)
                 throw new ArgumentNullException(nameof(items));
 
-            this.maxStackAmount = items.Length;
-            this.content = items;
+            maxStackAmount = items.Length;
+            content = items;
         }
 
-        protected BaseStackSlot(T[] items, int maxStackAmount)
+        protected StackSlot(T[] items, int maxStackAmount)
         {
             if (items == null)
                 throw new ArgumentNullException(nameof(items));
@@ -76,7 +74,7 @@ namespace TheChest.Core.Slots.Base
                 throw new ArgumentOutOfRangeException(nameof(items), ITEMAMOUNT_BIGGER_THAN_MAXAMOUNT);
 
             this.maxStackAmount = maxStackAmount;
-            this.content = items;
+            content = items;
         }
     }
 }

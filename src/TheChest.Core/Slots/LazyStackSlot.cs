@@ -1,12 +1,12 @@
 ﻿using TheChest.Core.Slots.Interfaces;
 
-namespace TheChest.Core.Slots.Base
+namespace TheChest.Core.Slots
 {
     /// <summary>
     /// Slot with with <see cref="IStackSlot{T}"/> implementation which have only one item repeatedly 
     /// </summary>
     /// <typeparam name="T">The item the slot accepts</typeparam>
-    public abstract class BaseLazyStackSlot<T> : IStackSlot<T>
+    public class LazyStackSlot<T> : IStackSlot<T>
     {
         private const string AMOUNT_SMALLER_THAN_ZERO = "The amount property cannot be smaller than zero";
         private const string MAXAMOUNT_SMALLER_THAN_ZERO = "The max amount property cannot be smaller than zero";
@@ -55,7 +55,7 @@ namespace TheChest.Core.Slots.Base
         public virtual bool IsEmpty => Content.Count == 0 || StackAmount == 0;
 
         protected readonly ICollection<T> content;
-        public virtual ICollection<T> Content => content;
+        public virtual ICollection<T> Content => content.ToArray();
 
         /// <summary>
         /// Creates a basic Stack Slot with an amount and max amount
@@ -64,12 +64,12 @@ namespace TheChest.Core.Slots.Base
         /// <param name="amount">The amount of <paramref name="currentItem"/> to be added</param>
         /// <param name="maxStackAmount">The maximum permited amount of <paramref name="currentItem"/> to be added</param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        protected BaseLazyStackSlot(T currentItem, int amount = 1, int maxStackAmount = 1)
+        public LazyStackSlot(T currentItem, int amount = 1, int maxStackAmount = 1)
         {
             if (currentItem == null)
                 amount = 0;
 
-            this.content = Enumerable.Repeat(currentItem, amount).ToArray();
+            content = Enumerable.Repeat(currentItem, amount).ToArray();
 
             MaxStackAmount = maxStackAmount;
             StackAmount = amount;

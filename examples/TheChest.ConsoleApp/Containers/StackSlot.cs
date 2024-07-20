@@ -1,8 +1,8 @@
-﻿using TheChest.Core.Slots.Base;
+﻿using TheChest.Core.Slots;
 
 namespace TheChest.ConsoleApp.Containers
 {
-    public class StackSlot : BaseStackSlot<Item>
+    public class StackSlot : StackSlot<Item>
     {
         public StackSlot(Item[] items, int maxStack) : base(items, maxStack) { }
     }

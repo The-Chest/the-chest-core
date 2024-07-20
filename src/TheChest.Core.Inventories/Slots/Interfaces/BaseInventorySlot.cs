@@ -1,6 +1,6 @@
 ﻿using TheChest.Core.Inventories.Slots.Base;
 using TheChest.Core.Inventories.Slots.Enums;
-using TheChest.Core.Slots.Base;
+using TheChest.Core.Slots;
 
 namespace TheChest.Core.Inventories.Slots.Interfaces
 {
@@ -8,7 +8,7 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
     /// Generic Slot with with <see cref="IInventorySlot{T}"/> implementation
     /// </summary>
     /// <typeparam name="T">The item the slot accepts</typeparam>
-    public abstract class BaseInventorySlot<T> : BaseSlot<T>, IInventorySlot<T>
+    public abstract class BaseInventorySlot<T> : Slot<T>, IInventorySlot<T>
     {
         public virtual bool Add(T item)
         {

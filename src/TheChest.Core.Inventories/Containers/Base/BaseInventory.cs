@@ -1,7 +1,7 @@
 ﻿using TheChest.Core.Containers;
 using TheChest.Core.Inventories.Containers.Interfaces;
 using TheChest.Core.Inventories.Slots.Base;
-using TheChest.Core.Slots.Base;
+using TheChest.Core.Slots;
 
 namespace TheChest.Core.Inventories.Containers.Base
 {
@@ -33,7 +33,7 @@ namespace TheChest.Core.Inventories.Containers.Base
                 count = DEFAULT_SLOT_COUNT;
             }
 
-            Slots = new BaseSlot<T>[count];
+            Slots = new Slot<T>[count];
         }
 
         public virtual bool MoveItem(int origin, int target)

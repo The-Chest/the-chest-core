@@ -1,9 +1,9 @@
-﻿using TheChest.Core.Slots.Base;
+﻿using TheChest.Core.Slots;
 using TheChest.Core.Slots.Interfaces;
 
 namespace TheChest.Core.Tests.Slots.Factories.Base
 {
-    public class BaseSlotFactory<T, Y> : ISlotFactory<Y> where T : BaseSlot<Y>
+    public class BaseSlotFactory<T, Y> : ISlotFactory<Y> where T : Slot<Y>
     {
         public ISlot<Y> EmptySlot()
         {

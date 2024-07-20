@@ -1,8 +1,8 @@
-﻿using TheChest.Core.Slots.Base;
+﻿using TheChest.Core.Slots;
 
 namespace TheChest.ConsoleApp.Containers
 {
-    public class Slot : BaseSlot<Item>
+    public class Slot : Slot<Item>
     {
         public Slot(Item? currentItem = null) : base(currentItem)
         {
