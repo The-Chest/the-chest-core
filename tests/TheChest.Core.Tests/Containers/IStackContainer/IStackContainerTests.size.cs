@@ -1,4 +1,4 @@
-﻿namespace TheChest.Core.Tests.Slots.Factories.Generics
+﻿namespace TheChest.Core.Tests.Containers
 {
     public abstract partial class IStackContainerTests<T>
     {

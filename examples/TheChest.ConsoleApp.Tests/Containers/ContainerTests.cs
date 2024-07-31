@@ -1,4 +1,4 @@
-﻿using TheChest.Core.Tests.Slots.Factories.Generics;
+﻿using TheChest.Core.Tests.Containers;
 
 namespace TheChest.ConsoleApp.Tests.Containers
 {
