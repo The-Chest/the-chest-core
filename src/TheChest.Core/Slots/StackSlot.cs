@@ -17,7 +17,7 @@ namespace TheChest.Core.Slots
         {
             get
             {
-                return content;
+                return content.ToArray();
             }
             protected set
             {
@@ -56,6 +56,11 @@ namespace TheChest.Core.Slots
 
         public virtual bool IsEmpty => content.Count == 0;
 
+        /// <summary>
+        /// Creates a basic <see cref="StackSlot{T}"/> with the max size defined by the array
+        /// </summary>
+        /// <param name="items">Items inside the Slot</param>
+        /// <exception cref="ArgumentNullException"></exception>
         protected StackSlot(T[] items)
         {
             if (items == null)
@@ -65,6 +70,13 @@ namespace TheChest.Core.Slots
             content = items;
         }
 
+        /// <summary>
+        /// Creates a basic <see cref="StackSlot{T}"/> with items and a max size defined by param the <paramref name="maxStackAmount"/>
+        /// </summary>
+        /// <param name="items">The amount of items that are inside the slot</param>
+        /// <param name="maxStackAmount">The max permited amount of items inside the slot</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         protected StackSlot(T[] items, int maxStackAmount)
         {
             if (items == null)
