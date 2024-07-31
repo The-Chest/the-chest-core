@@ -1,4 +1,4 @@
-﻿using TheChest.Tests.Slots.Generics;
+﻿using TheChest.Tests.Slots;
 
 namespace TheChest.ConsoleApp.Tests.Slots
 {
