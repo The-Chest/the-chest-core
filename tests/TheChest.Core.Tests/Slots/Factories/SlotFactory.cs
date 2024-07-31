@@ -1,9 +1,9 @@
 ﻿using TheChest.Core.Slots;
 using TheChest.Core.Slots.Interfaces;
 
-namespace TheChest.Core.Tests.Slots.Factories.Base
+namespace TheChest.Core.Tests.Slots.Factories
 {
-    public class BaseSlotFactory<T, Y> : ISlotFactory<Y> where T : Slot<Y>
+    public class SlotFactory<T, Y> : ISlotFactory<Y> where T : Slot<Y>
     {
         public ISlot<Y> EmptySlot()
         {
@@ -15,7 +15,7 @@ namespace TheChest.Core.Tests.Slots.Factories.Base
         public ISlot<Y> FullSlot(Y item)
         {
             var type = typeof(T);
-            var constructor = type.GetConstructor(new Type[1]{ typeof(Y?) });
+            var constructor = type.GetConstructor(new Type[1] { typeof(Y?) });
             var slot = constructor!.Invoke(new object[1] { item });
             return (ISlot<Y>)slot;
         }

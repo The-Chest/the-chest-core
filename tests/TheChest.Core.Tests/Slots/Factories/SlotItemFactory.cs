@@ -1,6 +1,6 @@
-﻿namespace TheChest.Core.Tests.Slots.Factories.Base
+﻿namespace TheChest.Core.Tests.Slots.Factories
 {
-    public class BaseSlotItemFactory<T> : ISlotItemFactory<T>
+    public class SlotItemFactory<T> : ISlotItemFactory<T>
     {
         public T CreateItem()
         {

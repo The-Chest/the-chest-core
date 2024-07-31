@@ -2,14 +2,14 @@
 using TheChest.Core.Containers.Interfaces;
 using TheChest.Core.Slots.Interfaces;
 
-namespace TheChest.Core.Tests.Containers.Factories.Base
+namespace TheChest.Core.Tests.Containers.Factories
 {
-    public class BaseStackContainerFactory<T, Y> : IStackContainerFactory<Y>
-        where T : StackContainer<Y>
+    public class ContainerFactory<T, Y> : IContainerFactory<Y>
+        where T : Container<Y>
     {
-        private readonly IStackSlotFactory<Y> slotFactory;
+        private readonly ISlotFactory<Y> slotFactory;
 
-        public BaseStackContainerFactory(IStackSlotFactory<Y> slotFactory)
+        public ContainerFactory(ISlotFactory<Y> slotFactory)
         {
             this.slotFactory = slotFactory;
         }
@@ -17,9 +17,9 @@ namespace TheChest.Core.Tests.Containers.Factories.Base
         private static Type GetContainerType()
         {
             var containerType = typeof(T);
-            if (!typeof(IStackContainer<Y>).IsAssignableFrom(containerType))
+            if (!typeof(IContainer<Y>).IsAssignableFrom(containerType))
             {
-                throw new ArgumentException($"Type '{containerType.FullName}' does not implement IStackContainer<{typeof(Y).Name}>.");
+                throw new ArgumentException($"Type '{containerType.FullName}' does not implement IContainer<{typeof(Y).Name}>.");
             }
 
             return containerType;
@@ -36,23 +36,23 @@ namespace TheChest.Core.Tests.Containers.Factories.Base
                         return
                             parameters.Length == 1 &&
                             parameters[0].ParameterType.IsArray &&
-                            typeof(IStackSlot<Y>).IsAssignableFrom(parameters[0].ParameterType.GetElementType());
+                            typeof(ISlot<Y>).IsAssignableFrom(parameters[0].ParameterType.GetElementType());
                     })
                     ?? throw new ArgumentException($"Container type '{containerType.FullName}' does not have a suitable constructor.");
 
             var slotParameter = constructor.GetParameters().FirstOrDefault(x => x.Name == "slots")
-                ?? throw new ArgumentException($"Container type '{containerType.FullName}' does not have a constructor with IStackSlot<{typeof(Y).Name}>[].");
+                ?? throw new ArgumentException($"Container type '{containerType.FullName}' does not have a constructor with ISlot<{typeof(Y).Name}>[].");
 
             var slotType = slotParameter.ParameterType.GetElementType();
-            if (!typeof(IStackSlot<Y>).IsAssignableFrom(slotType))
+            if (!typeof(ISlot<Y>).IsAssignableFrom(slotType))
             {
-                throw new ArgumentException($"Type '{slotType!.FullName}' does not implement IStackSlot<{typeof(Y).Name}>.");
+                throw new ArgumentException($"Type '{slotType!.FullName}' does not implement ISlot<{typeof(Y).Name}>.");
             }
 
             return slotType;
         }
 
-        public IStackContainer<Y> EmptyContainer(int size = 20)
+        public IContainer<Y> EmptyContainer(int size = 20)
         {
             var containerType = GetContainerType();
             var slotType = GetSlotTypeFromConstructor();
@@ -60,17 +60,17 @@ namespace TheChest.Core.Tests.Containers.Factories.Base
             Array slots = Array.CreateInstance(slotType, size);
             for (int i = 0; i < size; i++)
             {
-                slots.SetValue(this.slotFactory.EmptySlot(), i);
+                slots.SetValue(slotFactory.EmptySlot(), i);
             }
 
             var container = Activator.CreateInstance(
                 type: containerType,
                 args: new object[1] { slots }
             );
-            return (IStackContainer<Y>)container!;
+            return (IContainer<Y>)container!;
         }
 
-        public IStackContainer<Y> FullContainer(int size, int stackSize, Y item = default)
+        public IContainer<Y> FullContainer(int size, Y item)
         {
             var containerType = GetContainerType();
             var slotType = GetSlotTypeFromConstructor();
@@ -78,14 +78,45 @@ namespace TheChest.Core.Tests.Containers.Factories.Base
             Array slots = Array.CreateInstance(slotType, size);
             for (int i = 0; i < size; i++)
             {
-                slots.SetValue(this.slotFactory.WithItem(item, stackSize, stackSize), i);
+                slots.SetValue(slotFactory.FullSlot(item), i);
             }
 
-            var container = Activator.CreateInstance(
-                type: containerType,
-                args: new object[1] { slots }
-            );
-            return (IStackContainer<Y>)container!;
+            var container = Activator.CreateInstance(containerType, slots);
+
+            return (IContainer<Y>)container!;
+        }
+
+        public IContainer<Y> ShuffledItemContainer(int size, Y item)
+        {
+            if (item is null)
+            {
+                throw new ArgumentException("Item cannot be null");
+            }
+
+            var containerType = GetContainerType();
+
+            var slotType = GetSlotTypeFromConstructor();
+
+            Array slots = Array.CreateInstance(slotType, size);
+            var randomIndex = new Random().Next(0, size - 1);
+            for (int i = 0; i < size; i++)
+            {
+                ISlot<Y> slot;
+                if (i == randomIndex)
+                {
+                    slot = slotFactory.FullSlot(item);
+                }
+                else
+                {
+                    slot = slotFactory.EmptySlot();
+                }
+
+                slots.SetValue(slot, i);
+            }
+
+            var container = Activator.CreateInstance(containerType, slots);
+
+            return (IContainer<Y>)container!;
         }
 
         private static void ShuffleItems(Array items)
@@ -104,7 +135,7 @@ namespace TheChest.Core.Tests.Containers.Factories.Base
             }
         }
 
-        public IStackContainer<Y> ShuffledItemsContainer(int size, int stackSize, params Y[] items)
+        public IContainer<Y> ShuffledItemsContainer(int size, params Y[] items)
         {
             if (items.Length > size)
             {
@@ -118,14 +149,14 @@ namespace TheChest.Core.Tests.Containers.Factories.Base
             Array slots = Array.CreateInstance(slotType, size);
             for (int i = 0; i < size; i++)
             {
-                IStackSlot<Y> slot;
+                ISlot<Y> slot;
                 if (i < items.Length)
                 {
-                    slot = this.slotFactory.FullSlot(items[i]);
+                    slot = slotFactory.FullSlot(items[i]);
                 }
                 else
                 {
-                    slot = this.slotFactory.EmptySlot();
+                    slot = slotFactory.EmptySlot();
                 }
 
                 slots.SetValue(slot, i);
@@ -134,7 +165,7 @@ namespace TheChest.Core.Tests.Containers.Factories.Base
 
             var container = Activator.CreateInstance(containerType, slots);
 
-            return (IStackContainer<Y>)container!;
+            return (IContainer<Y>)container!;
         }
     }
 }

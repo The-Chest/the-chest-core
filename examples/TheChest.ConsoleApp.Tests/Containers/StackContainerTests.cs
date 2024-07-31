@@ -7,10 +7,10 @@ namespace TheChest.ConsoleApp.Tests.Containers
     {
         static readonly object[] FixtureArgs = {
             new object[] {
-                new BaseStackContainerFactory<StackContainer, Item>(
-                    new BaseStackSlotFactory<StackSlot, Item>()
+                new StackContainerFactory<StackContainer, Item>(
+                    new StackSlotFactory<StackSlot, Item>()
                 ),
-                new BaseSlotItemFactory<Item>(),
+                new SlotItemFactory<Item>(),
             }
         };
         public StackContainerTests(IStackContainerFactory<Item> containerFactory, ISlotItemFactory<Item> itemFactory)
