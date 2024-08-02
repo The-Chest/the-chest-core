@@ -9,12 +9,12 @@ namespace TheChest.Core.Containers.Interfaces
     public interface IContainer<out T>
     {
         /// <summary>
-        /// Slots in the Inventory
+        /// Slots in the Container
         /// </summary>
         ISlot<T>[] Slots { get; }
 
         /// <summary>
-        /// Size of the current Inventory
+        /// Size of the current Container
         /// </summary>
         int Size { get; }
 
