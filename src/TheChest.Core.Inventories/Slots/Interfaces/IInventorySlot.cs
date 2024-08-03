@@ -1,13 +1,12 @@
 ﻿using TheChest.Core.Inventories.Slots.Enums;
 using TheChest.Core.Slots.Interfaces;
 
-namespace TheChest.Core.Inventories.Slots.Base
+namespace TheChest.Core.Inventories.Slots.Interfaces
 {
     /// <summary>
     /// Interface with methods for a basic Inventory Slot
     /// </summary>
     /// <typeparam name="T">Item the Slot Accept</typeparam>
-    [Obsolete("Contract not fully defined")]
     public interface IInventorySlot<T> : ISlot<T>
     {
         /// <summary>
