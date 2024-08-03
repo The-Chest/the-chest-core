@@ -8,9 +8,9 @@ namespace TheChest.Core.Slots
     /// <typeparam name="T">The item collection inside the slot accepts</typeparam>
     public class StackSlot<T> : IStackSlot<T>
     {
-        private const string ITEMAMOUNT_BIGGER_THAN_MAXAMOUNT = "The item amount property cannot bigger than maxAmount";
+        private const string ITEMAMOUNT_BIGGER_THAN_MAXAMOUNT = "The item amount cannot be bigger than max amount";
         private const string MAXAMOUNT_SMALLER_THAN_ZERO = "The max amount property cannot be smaller than zero";
-        private const string AMOUNT_BIGGER_THAN_MAXAMOUNT = "The amount property cannot be bigger than maxAmount";
+        private const string AMOUNT_BIGGER_THAN_MAXAMOUNT = "The item amount cannot be bigger than max amount";
 
         protected ICollection<T> content;
         public virtual ICollection<T> Content
@@ -66,8 +66,8 @@ namespace TheChest.Core.Slots
             if (items == null)
                 throw new ArgumentNullException(nameof(items));
 
-            maxStackAmount = items.Length;
-            content = items;
+            this.maxStackAmount = items.Length;
+            this.content = items;
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace TheChest.Core.Slots
                 throw new ArgumentOutOfRangeException(nameof(items), ITEMAMOUNT_BIGGER_THAN_MAXAMOUNT);
 
             this.maxStackAmount = maxStackAmount;
-            content = items;
+            this.content = items;
         }
     }
 }

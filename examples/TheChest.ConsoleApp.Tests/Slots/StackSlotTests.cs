@@ -1,4 +1,4 @@
-﻿using TheChest.Tests.Slots;
+﻿using TheChest.Core.Tests.Slots;
 
 namespace TheChest.ConsoleApp.Tests.Slots
 {
@@ -8,6 +8,10 @@ namespace TheChest.ConsoleApp.Tests.Slots
         static readonly object[] SlotFixtureArgs = {
             new object[] {
                 new StackSlotFactory<StackSlot, Item>(),
+                new SlotItemFactory<Item>(),
+            },
+            new object[] {
+                new LazyStackSlotFactory<LazyStackSlot, Item>(),
                 new SlotItemFactory<Item>(),
             }
         };

@@ -10,7 +10,7 @@ namespace TheChest.Core.Slots
     {
         private const string AMOUNT_SMALLER_THAN_ZERO = "The amount property cannot be smaller than zero";
         private const string MAXAMOUNT_SMALLER_THAN_ZERO = "The max amount property cannot be smaller than zero";
-        private const string AMOUNT_BIGGER_THAN_MAXAMOUNT = "The amount property cannot be bigger than maxAmount";
+        private const string AMOUNT_BIGGER_THAN_MAXAMOUNT = "The item amount cannot be bigger than max amount";
 
         protected int stackAmount;
         public virtual int StackAmount
@@ -69,10 +69,15 @@ namespace TheChest.Core.Slots
             if (currentItem == null)
                 amount = 0;
 
-            content = Enumerable.Repeat(currentItem, amount).ToArray();
+            if (amount < 0)
+                throw new ArgumentOutOfRangeException(nameof(amount), AMOUNT_SMALLER_THAN_ZERO);
+            if (amount > maxStackAmount)
+                throw new ArgumentOutOfRangeException(nameof(amount), AMOUNT_BIGGER_THAN_MAXAMOUNT);
 
-            MaxStackAmount = maxStackAmount;
-            StackAmount = amount;
+            this.content = Enumerable.Repeat(currentItem, amount).ToArray();
+
+            this.maxStackAmount = maxStackAmount;
+            this.stackAmount = amount;
         }
     }
 }
