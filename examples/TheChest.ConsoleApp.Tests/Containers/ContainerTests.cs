@@ -1,4 +1,4 @@
-﻿using TheChest.Core.Tests.Slots.Factories.Generics;
+﻿using TheChest.Core.Tests.Containers;
 
 namespace TheChest.ConsoleApp.Tests.Containers
 {
@@ -7,10 +7,10 @@ namespace TheChest.ConsoleApp.Tests.Containers
     {
         static readonly object[] FixtureArgs = {
             new object[] {
-                new BaseContainerFactory<Container, Item>(
-                    new BaseSlotFactory<Slot, Item>()
+                new ContainerFactory<Container, Item>(
+                    new SlotFactory<Slot, Item>()
                 ),
-                new BaseSlotItemFactory<Item>(),
+                new SlotItemFactory<Item>(),
             }
         };
         public ContainerTests(IContainerFactory<Item> containerFactory, ISlotItemFactory<Item> itemFactory) 

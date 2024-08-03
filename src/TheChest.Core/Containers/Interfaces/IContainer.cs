@@ -9,12 +9,12 @@ namespace TheChest.Core.Containers.Interfaces
     public interface IContainer<out T>
     {
         /// <summary>
-        /// Slots in the Inventory
+        /// Slots in the Container
         /// </summary>
         ISlot<T>[] Slots { get; }
 
         /// <summary>
-        /// Size of the current Inventory
+        /// Size of the current Container
         /// </summary>
         int Size { get; }
 
@@ -29,10 +29,10 @@ namespace TheChest.Core.Containers.Interfaces
         bool IsEmpty { get; }
 
         /// <summary>
-        /// Gets an item from <see cref="Slots"/>
+        /// Gets an item from <see cref="ISlot{T}"/>
         /// </summary>
-        /// <param name="index">Index of a slot<para>It needs to be smaller than <see cref="Size"/></para></param>
-        /// <returns>An item from <see cref="Slots"/></returns>
+        /// <param name="index">Index of a slot<para>It needs to be smaller than <see cref="IContainer{T}.Size"/></para></param>
+        /// <returns>An item from <see cref="ISlot{T}"/></returns>
         ISlot<T> this[int index] { get; }
     }
 }

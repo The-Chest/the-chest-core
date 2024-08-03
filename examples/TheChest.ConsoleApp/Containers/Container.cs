@@ -1,8 +1,8 @@
-﻿using TheChest.Core.Containers.Base;
+﻿using TheChest.Core.Containers;
 
 namespace TheChest.ConsoleApp.Containers
 {
-    public class Container : BaseContainer<Item>
+    public class Container : Container<Item>
     {
         public Container(Slot[] slots) : base(slots) { }
     }

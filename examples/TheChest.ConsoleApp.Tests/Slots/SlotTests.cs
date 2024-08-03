@@ -1,4 +1,4 @@
-﻿using TheChest.Tests.Slots.Generics;
+﻿using TheChest.Tests.Slots;
 
 namespace TheChest.ConsoleApp.Tests.Slots
 {
@@ -7,8 +7,8 @@ namespace TheChest.ConsoleApp.Tests.Slots
     {
         static readonly object[] SlotFixtureArgs = {
             new object[] {
-                new BaseSlotFactory<Slot, Item>(),
-                new BaseSlotItemFactory<Item>(),
+                new SlotFactory<Slot, Item>(),
+                new SlotItemFactory<Item>(),
             }
         };
         public SlotTests(ISlotFactory<Item> slotFactory, ISlotItemFactory<Item> itemFactory) : base(slotFactory, itemFactory)

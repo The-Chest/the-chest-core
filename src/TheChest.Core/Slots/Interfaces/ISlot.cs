@@ -7,9 +7,9 @@
     public interface ISlot<out T>
     {
         /// <summary>
-        /// The current item inside the slot
+        /// The current content inside the slot
         /// </summary>
-        T CurrentItem { get; }
+        T Content { get; }
 
         /// <summary>
         /// Verify if the slot is full

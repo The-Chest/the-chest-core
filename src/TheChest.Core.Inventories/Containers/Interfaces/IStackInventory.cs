@@ -6,6 +6,7 @@ namespace TheChest.Core.Inventories.Containers.Interfaces
     /// Interface with methods for interaction with the Inventory using stacks
     /// </summary>
     /// <typeparam name="T">An item type</typeparam>
+    [Obsolete("Contract not fully defined")]
     public interface IStackInventory<T> : IInventory<T>, IStackContainer<T>
     {
         /// <summary>

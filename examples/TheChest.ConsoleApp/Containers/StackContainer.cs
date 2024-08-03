@@ -1,9 +1,11 @@
-﻿using TheChest.Core.Containers.Base;
+﻿using TheChest.Core.Containers;
 
 namespace TheChest.ConsoleApp.Containers
 {
-    public class StackContainer : BaseStackContainer<Item>
+    public class StackContainer : StackContainer<Item>
     {
-        public StackContainer(StackSlot[] slots) : base(slots) { }
+        public StackContainer(StackSlot[] slots) : base(slots)
+        {
+        }
     }
 }

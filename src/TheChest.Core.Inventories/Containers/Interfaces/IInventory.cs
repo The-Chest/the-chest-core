@@ -7,6 +7,7 @@
     /// </para>
     /// </summary>
     /// <typeparam name="T">An item type</typeparam>
+    [Obsolete("Contract not fully defined")]
     public interface IInventory<T> : IInteractiveContainer<T>
     {
         /// <summary>
