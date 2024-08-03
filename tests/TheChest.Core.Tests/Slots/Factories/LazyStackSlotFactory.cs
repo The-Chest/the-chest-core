@@ -1,7 +1,7 @@
 ﻿using TheChest.Core.Slots;
 using TheChest.Core.Slots.Interfaces;
 
-namespace TheChest.Core.Tests.Containers.Factories
+namespace TheChest.Core.Tests.Slots.Factories
 {
     public class LazyStackSlotFactory<T, Y> : IStackSlotFactory<Y> where T : LazyStackSlot<Y>
     {

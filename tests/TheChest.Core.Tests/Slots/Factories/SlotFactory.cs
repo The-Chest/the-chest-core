@@ -9,7 +9,7 @@ namespace TheChest.Core.Tests.Slots.Factories
         {
             var type = typeof(T);
             var slot = Activator.CreateInstance(type, default(Y));
-            return (ISlot<Y>)slot;
+            return (ISlot<Y>)slot!;
         }
 
         public ISlot<Y> FullSlot(Y item)
