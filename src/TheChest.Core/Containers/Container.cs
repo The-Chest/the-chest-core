@@ -24,9 +24,10 @@ namespace TheChest.Core.Containers
         public virtual bool IsEmpty => Slots.All(x => x.IsEmpty);
 
         /// <summary>
-        /// Creates a Container with slots
+        /// Creates a Container with <see cref="ISlot{T}"/> implementation
         /// </summary>
-        /// <param name="slots">An array of slots</param>
+        /// <param name="slots">An array of <see cref="ISlot{T}"/></param>
+        /// <exception cref="ArgumentNullException"></exception>
         public Container(ISlot<T>[] slots)
         {
             Slots = slots ?? throw new ArgumentNullException(nameof(slots));

@@ -61,7 +61,7 @@ namespace TheChest.Core.Slots
         /// </summary>
         /// <param name="items">Items inside the Slot</param>
         /// <exception cref="ArgumentNullException"></exception>
-        protected StackSlot(T[] items)
+        public StackSlot(T[] items)
         {
             if (items == null)
                 throw new ArgumentNullException(nameof(items));
@@ -77,7 +77,7 @@ namespace TheChest.Core.Slots
         /// <param name="maxStackAmount">The max permited amount of items inside the slot</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        protected StackSlot(T[] items, int maxStackAmount)
+        public StackSlot(T[] items, int maxStackAmount)
         {
             if (items == null)
                 throw new ArgumentNullException(nameof(items));
