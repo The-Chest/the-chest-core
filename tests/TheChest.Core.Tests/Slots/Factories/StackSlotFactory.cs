@@ -9,7 +9,7 @@ namespace TheChest.Core.Tests.Slots.Factories
         {
             var type = typeof(T);
             var slot = Activator.CreateInstance(type, Array.Empty<Y>(), 1);
-            return (IStackSlot<Y>)slot;
+            return (IStackSlot<Y>)slot!;
         }
 
         public IStackSlot<Y> FullSlot(Y item)
@@ -21,7 +21,7 @@ namespace TheChest.Core.Tests.Slots.Factories
             Array.Fill(items, item);
 
             var slot = Activator.CreateInstance(type, items, size);
-            return (IStackSlot<Y>)slot;
+            return (IStackSlot<Y>)slot!;
         }
 
         public IStackSlot<Y> WithItem(Y item, int amount = 1, int maxAmount = 10)
@@ -31,7 +31,7 @@ namespace TheChest.Core.Tests.Slots.Factories
             Array.Fill(items, item);
 
             var slot = Activator.CreateInstance(type, items, maxAmount);
-            return (IStackSlot<Y>)slot;
+            return (IStackSlot<Y>)slot!;
         }
     }
 }

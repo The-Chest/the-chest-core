@@ -1,13 +1,13 @@
-﻿namespace TheChest.Tests.Slots
+﻿namespace TheChest.Core.Tests.Slots
 {
-    public abstract partial class IStackSlotTests<T>
+    public partial class IStackSlotTests<T>
     {
         [Test]
         public void IsFull_CurentItemNull_ReturnsFalse()
         {
-            var container = this.slotFactory.WithItem(default, 1);
+            var slot = this.slotFactory.WithItem(default, 1);
 
-            Assert.That(container.IsFull, Is.False);
+            Assert.That(slot.IsFull, Is.False);
         }
 
         [Test]
@@ -15,18 +15,18 @@
         {
             var maxStack = random.Next(5,20);
 
-            var container = this.slotFactory.WithItem(this.itemFactory.CreateItem(), maxStack / 2, maxStack);
+            var slot = this.slotFactory.WithItem(this.itemFactory.CreateItem(), maxStack / 2, maxStack);
 
-            Assert.That(container.IsFull, Is.False);
+            Assert.That(slot.IsFull, Is.False);
         }
 
         [Test]
         public void IsFull_SlotIsEmpty_ReturnsFalse()
         {
-            var container = this.slotFactory.EmptySlot();
+            var slot = this.slotFactory.EmptySlot();
 
-            Assert.That(container.IsFull, Is.False);
-            Assert.That(container.IsFull, Is.Not.EqualTo(container.IsEmpty));
+            Assert.That(slot.IsFull, Is.False);
+            Assert.That(slot.IsFull, Is.Not.EqualTo(slot.IsEmpty));
         }
 
         [Test]
@@ -34,9 +34,9 @@
         {
             var maxStack = random.Next(5, 20);
 
-            var container = this.slotFactory.WithItem(this.itemFactory.CreateItem(), maxStack, maxStack);
+            var slot = this.slotFactory.WithItem(this.itemFactory.CreateItem(), maxStack, maxStack);
 
-            Assert.That(container.IsFull, Is.True);
+            Assert.That(slot.IsFull, Is.True);
         }
     }
 }
