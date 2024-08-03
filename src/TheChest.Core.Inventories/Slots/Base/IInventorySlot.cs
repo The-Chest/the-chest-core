@@ -7,6 +7,7 @@ namespace TheChest.Core.Inventories.Slots.Base
     /// Interface with methods for a basic Inventory Slot
     /// </summary>
     /// <typeparam name="T">Item the Slot Accept</typeparam>
+    [Obsolete("Contract not fully defined")]
     public interface IInventorySlot<T> : ISlot<T>
     {
         /// <summary>

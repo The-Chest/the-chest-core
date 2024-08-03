@@ -1,5 +1,4 @@
 ﻿using TheChest.Core.Inventories.Slots.Base;
-using TheChest.Core.Inventories.Slots.Enums;
 using TheChest.Core.Slots;
 
 namespace TheChest.Core.Inventories.Slots.Interfaces
@@ -10,32 +9,19 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
     /// <typeparam name="T">The item the slot accepts</typeparam>
     public abstract class BaseInventorySlot<T> : Slot<T>, IInventorySlot<T>
     {
-        public virtual bool Add(T item)
-        {
-            var eq = Content?.Equals(item) ?? false;
-            if (IsEmpty || eq && !IsFull)
-            {
-                Content = item;
-                return true;
-            }
-
-            return false;
-        }
-
-        public virtual T Replace(T item)
+        public bool Add(T item)
         {
             throw new NotImplementedException();
         }
 
-        public virtual T? GetOne()
+        public T GetOne()
         {
-            if (IsEmpty)
-                return default;
+            throw new NotImplementedException();
+        }
 
-            T item = Content;
-            Content = default;
-
-            return item;
+        public T Replace(T item)
+        {
+            throw new NotImplementedException();
         }
     }
 }
