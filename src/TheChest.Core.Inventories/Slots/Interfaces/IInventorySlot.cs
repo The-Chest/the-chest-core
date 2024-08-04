@@ -21,13 +21,13 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// <returns>True if the value is successful added</returns>
         bool Add(T item);
 
-        T Replace(T item);
+        T? Replace(T item);
 
         /// <summary>
         /// Returns an item from slot
         /// </summary>
         /// <returns>Returns an item of the slot, if <see cref="ISlot{T}.IsEmpty"/> is true, then returns null</returns>
-        T GetOne();
+        T? GetOne();
     }
 
     /// <summary>
