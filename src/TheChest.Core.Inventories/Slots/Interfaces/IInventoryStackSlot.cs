@@ -1,5 +1,4 @@
-﻿using TheChest.Core.Inventories.Slots.Enums;
-using TheChest.Core.Slots.Interfaces;
+﻿using TheChest.Core.Slots.Interfaces;
 
 namespace TheChest.Core.Inventories.Slots.Interfaces
 {
@@ -22,7 +21,7 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// Returns an array of item from slot
         /// </summary>
         /// <param name="amount">The amount of items to be returned</param>
-        /// <returns>Returns an array from slot or an empty array if <see cref="ISlot{T}.IsEmpty"/> </returns>
+        /// <returns>Returns an array from slot or an empty array if <see cref="ISlot{T}.IsEmpty"/></returns>
         T[] GetAmount(int amount);
 
         /// <summary>
@@ -31,6 +30,4 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// <returns>Returns all item from slot</returns>
         T[] GetAll();
     }
-
-    public delegate void StackInventorySlotChangeEvent<T>(IInventorySlot<T> slot, InventorySlotEventType eventType, T? item, int amount = 0);
 }
