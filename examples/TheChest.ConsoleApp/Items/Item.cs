@@ -1,4 +1,4 @@
-﻿namespace TheChest.ConsoleApp.Containers
+﻿namespace TheChest.ConsoleApp.Items
 {
     public class Item
     {
@@ -8,16 +8,16 @@
 
         public Item(string id, string name, string description)
         {
-            this.Id = id;
-            this.Name = name;
-            this.Description = description;
+            Id = id;
+            Name = name;
+            Description = description;
         }
 
         public Item()
         {
-            this.Id = "";
-            this.Name = "";
-            this.Description = "";
+            Id = "";
+            Name = "";
+            Description = "";
         }
     }
 }
