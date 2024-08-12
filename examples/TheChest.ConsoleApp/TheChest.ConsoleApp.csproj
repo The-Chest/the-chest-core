@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\TheChest.Core.Inventories\TheChest.Core.Inventories.csproj" />
     <ProjectReference Include="..\..\src\TheChest.Core\TheChest.Core.csproj" />
   </ItemGroup>
 

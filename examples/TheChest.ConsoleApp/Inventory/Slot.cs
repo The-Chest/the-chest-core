@@ -1,9 +1,9 @@
 ﻿using TheChest.ConsoleApp.Items;
-using TheChest.Core.Slots;
+using TheChest.Core.Inventories.Slots;
 
-namespace TheChest.ConsoleApp.Containers
+namespace TheChest.ConsoleApp.Inventory
 {
-    public class Slot : Slot<Item>
+    public class Slot : InventorySlot<Item>
     {
         public Slot(Item? currentItem = null) : base(currentItem) { }
     }
