@@ -29,7 +29,7 @@
         /// <param name="item">Item to be founded</param>
         /// <param name="amount">Amount to be returned</param>
         /// <returns>Returns the amount of items searched (or the max it can)</returns>
-        T[] GetItemAmount(T item, int amount = 1);
+        T[] GetItems(T item, int amount = 1);
 
         /// <summary>
         /// Get all Item of the selected type from all slots
@@ -50,7 +50,7 @@
         /// </summary>
         /// <param name="items">Array of items to be added to any avaliable <see cref="ISlot{T}"/> founded</param>
         /// <returns></returns>
-        T[] AddItem(T[] items);
+        T[] AddItems(T[] items);
 
         /// <summary>
         /// Adds an item in a avaliable <see cref="ISlot{T}"/> 
