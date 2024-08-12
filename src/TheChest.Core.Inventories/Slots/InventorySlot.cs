@@ -18,6 +18,15 @@ namespace TheChest.Core.Inventories.Slots
             return true;
         }
 
+        public bool Contains(T item)
+        {
+            if(this.IsEmpty) { 
+                return false;
+            }
+
+            return this.Content!.Equals(item);
+        }
+
         public T? GetOne()
         {
             var content = this.Content;

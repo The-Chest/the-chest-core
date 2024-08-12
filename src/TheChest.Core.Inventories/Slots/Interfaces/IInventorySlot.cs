@@ -22,5 +22,7 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// </summary>
         /// <returns>Returns an item of the slot, if <see cref="ISlot{T}.IsEmpty"/> is true, then returns null</returns>
         T? GetOne();
+
+        bool Contains(T item);
     }
 }
