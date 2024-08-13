@@ -3,7 +3,7 @@ using TheChest.Tests.Slots;
 
 namespace TheChest.Core.Inventories.Tests.Slots
 {
-    public partial class IInventorySlotTests<T> : ISlotTests<T>
+    public abstract partial class IInventorySlotTests<T> : ISlotTests<T>
     {
         public IInventorySlotTests(ISlotFactory<T> slotFactory, ISlotItemFactory<T> itemFactory) : base(slotFactory, itemFactory)
         {
