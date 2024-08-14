@@ -1,4 +1,5 @@
-﻿using TheChest.ConsoleApp.Items;
+﻿using TheChest.ConsoleApp.Containers;
+using TheChest.ConsoleApp.Items;
 using TheChest.Core.Tests.Containers;
 
 namespace TheChest.ConsoleApp.Tests.Containers
