@@ -1,6 +1,4 @@
-﻿using TheChest.Core.Inventories.Tests.Slots.Factories.Interfaces;
-using TheChest.Core.Tests.Slots.Factories.Interfaces;
-using TheChest.Tests.Slots;
+﻿using TheChest.Tests.Slots;
 
 namespace TheChest.Core.Inventories.Tests.Slots
 {
