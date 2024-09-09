@@ -1,8 +1,6 @@
 ﻿using TheChest.ConsoleApp.Items;
-using TheChest.ConsoleApp.Inventory;
+using TheChest.ConsoleApp.Inventories;
 using TheChest.Core.Inventories.Tests.Slots;
-using TheChest.Core.Inventories.Tests.Slots.Factories;
-using TheChest.Core.Inventories.Tests.Slots.Factories.Interfaces;
 
 namespace TheChest.ConsoleApp.Tests.Slots
 {
