@@ -1,4 +1,4 @@
-﻿using TheChest.ConsoleApp.Inventory;
+﻿using TheChest.ConsoleApp.Inventories;
 using TheChest.ConsoleApp.Items;
 
 var slots = new Slot[10];
