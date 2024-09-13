@@ -7,7 +7,7 @@ namespace TheChest.Core.Tests.Containers.Factories
     public class ContainerFactory<T, Y> : IContainerFactory<Y>
         where T : Container<Y>
     {
-        private readonly ISlotFactory<Y> slotFactory;
+        protected readonly ISlotFactory<Y> slotFactory;
 
         public ContainerFactory(ISlotFactory<Y> slotFactory)
         {
@@ -119,7 +119,7 @@ namespace TheChest.Core.Tests.Containers.Factories
             return (IContainer<Y>)container!;
         }
 
-        private static void ShuffleItems(Array items)
+        protected static void ShuffleItems(Array items)
         {
             var rng = new Random();
             int n = items.Length;
