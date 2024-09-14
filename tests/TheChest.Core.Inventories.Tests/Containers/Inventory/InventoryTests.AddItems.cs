@@ -9,7 +9,7 @@
             var inventory = this.containerFactory.EmptyContainer(size);
 
             var randomSize = this.random.Next(0, size);
-            var items = this.itemFactory.CreateItems(randomSize);
+            var items = this.itemFactory.CreateMany(randomSize);
             inventory.AddItems(items);
 
             Assert.That(inventory.Slots[0..randomSize].Select(x => x.Content), Is.EqualTo(items));
@@ -22,7 +22,7 @@
             var inventory = this.containerFactory.EmptyContainer(size);
 
             var randomSize = this.random.Next(0, size);
-            var items = this.itemFactory.CreateItems(randomSize);
+            var items = this.itemFactory.CreateMany(randomSize);
             var result = inventory.AddItems(items);
 
             Assert.That(result, Is.Empty);
@@ -33,7 +33,7 @@
         {
             var size = this.random.Next(10, 20);
             var itemSize = this.random.Next(1, size / 2);
-            var items = this.itemFactory.CreateItems(itemSize + 2);
+            var items = this.itemFactory.CreateMany(itemSize + 2);
             var inventory = this.containerFactory.ShuffledItemsContainer(size, items);
 
             inventory.AddItems(items);
@@ -46,7 +46,7 @@
         {
             var size = this.random.Next(10, 20);
             var itemSize = this.random.Next(1, size / 2);
-            var items = this.itemFactory.CreateItems(itemSize + 2);
+            var items = this.itemFactory.CreateMany(itemSize + 2);
             var inventory = this.containerFactory.ShuffledItemsContainer(size, items);
 
             var result = inventory.AddItems(items);
@@ -58,10 +58,10 @@
         public void AddItems_FullInventory_DoNotAddItems()
         {
             var size = this.random.Next(10, 20);
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             var inventory = this.containerFactory.FullContainer(size, item);
 
-            var items = this.itemFactory.CreateItems(size);
+            var items = this.itemFactory.CreateMany(size);
             inventory.AddItems(items);
 
             Assert.That(inventory.GetItemCount(items[0]), Is.EqualTo(0));
@@ -71,10 +71,10 @@
         public void AddItems_FullInventory_ReturnsAllNotAddedItems()
         {
             var size = this.random.Next(10, 20);
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             var inventory = this.containerFactory.FullContainer(size, item);
 
-            var items = this.itemFactory.CreateItems(size);
+            var items = this.itemFactory.CreateMany(size);
             var result = inventory.AddItems(items);
 
             Assert.That(result, Is.EqualTo(items));

@@ -6,10 +6,10 @@
         public void GetItem_NoItems_ReturnsNull()
         {
             var size = this.random.Next(10, 20);
-            var items = this.itemFactory.CreateItems(size / 2);
+            var items = this.itemFactory.CreateMany(size / 2);
             var inventory = this.containerFactory.ShuffledItemsContainer(size, items);
             
-            var searchItem = this.itemFactory.CreateItem();
+            var searchItem = this.itemFactory.CreateDefault();
             var result = inventory.GetItem(searchItem);
 
             Assert.That(result, Is.Null);
@@ -19,7 +19,7 @@
         public void GetItem_ExistingItems_ReturnsTheFirstFoundItem()
         {
             var size = this.random.Next(10, 20);
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             var inventory = this.containerFactory.FullContainer(size, item);
 
             var result = inventory.GetItem(item);
@@ -31,7 +31,7 @@
         public void GetItem_ExistingItems_RemovesTheFirstFoundItemFromSlot()
         {
             var size = this.random.Next(10, 20);
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             var inventory = this.containerFactory.FullContainer(size, item);
 
             inventory.GetItem(item);

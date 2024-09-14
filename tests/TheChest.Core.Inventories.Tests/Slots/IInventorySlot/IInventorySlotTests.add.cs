@@ -5,7 +5,7 @@
         [Test]
         public void Add_EmptySlot_ReturnsTrue()
         {
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             var slot = this.slotFactory.EmptySlot();
 
             var result = slot.Add(item);
@@ -15,7 +15,7 @@
         [Test]
         public void Add_EmptySlot_ChangesItem()
         {
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             var slot = this.slotFactory.EmptySlot();
 
             slot.Add(item);
@@ -25,7 +25,7 @@
         [Test]
         public void Add_FullSlot_ReturnsFalse()
         {
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             var slot = this.slotFactory.FullSlot(item);
 
             var result = slot.Add(item);
@@ -35,10 +35,10 @@
         [Test]
         public void Add_FullSlot_DoesNotChangeItem()
         {
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             var slot = this.slotFactory.FullSlot(item);
 
-            var newItem = this.itemFactory.CreateItem();
+            var newItem = this.itemFactory.CreateDefault();
             slot.Add(newItem);
 
             Assert.That(slot.Content, Is.Not.EqualTo(newItem));

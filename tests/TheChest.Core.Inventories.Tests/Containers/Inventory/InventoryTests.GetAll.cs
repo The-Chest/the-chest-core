@@ -6,8 +6,8 @@
         public void GetAll_WithItems_ReturnsSearchingItem()
         {
             var size = this.random.Next(10, 20);
-            var items = this.itemFactory.CreateItems(size / 2);
-            var sameItems = this.itemFactory.CreateItems(size / 2);
+            var items = this.itemFactory.CreateMany(size / 2);
+            var sameItems = this.itemFactory.CreateMany(size / 2);
             var inventory = this.containerFactory.ShuffledItemsContainer(size, items.Concat(sameItems).ToArray());
 
             var index = this.random.Next(0, size);
@@ -21,7 +21,7 @@
         public void GetAll_WithItems_RemovesFromFoundSlots()
         {
             var size = this.random.Next(10, 20);
-            var items = this.itemFactory.CreateItems(size);
+            var items = this.itemFactory.CreateMany(size);
             var inventory = this.containerFactory.ShuffledItemsContainer(size, items);
 
             var index = this.random.Next(0, size);
@@ -35,10 +35,10 @@
         public void GetAll_NonExistingItem_ReturnsEmptyArray()
         {
             var size = this.random.Next(10, 20);
-            var items = this.itemFactory.CreateItems(size);
+            var items = this.itemFactory.CreateMany(size);
             var inventory = this.containerFactory.ShuffledItemsContainer(size, items);
 
-            var randomItem = this.itemFactory.CreateItem();
+            var randomItem = this.itemFactory.CreateDefault();
             var result = inventory.GetAll(randomItem);
 
             Assert.That(result, Is.Empty);
@@ -48,11 +48,11 @@
         public void GetAll_NonExistingItem_DoNotRemovesFromAnySlots()
         {
             var size = this.random.Next(10, 20);
-            var items = this.itemFactory.CreateItems(size);
+            var items = this.itemFactory.CreateMany(size);
             var inventory = this.containerFactory.ShuffledItemsContainer(size, items);
             var slots = inventory.Slots.ToArray();
 
-            var randomItem = this.itemFactory.CreateItem();
+            var randomItem = this.itemFactory.CreateDefault();
             inventory.GetAll(randomItem);
 
             Assert.That(inventory.Slots, Is.EqualTo(slots));

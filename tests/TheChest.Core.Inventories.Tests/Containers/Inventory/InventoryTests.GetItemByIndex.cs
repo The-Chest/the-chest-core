@@ -7,7 +7,7 @@
         public void GetItem_InvalidIndex_ThrowsArgumentOutOfRangeException(int index)
         {
             var size = this.random.Next(10, 20);
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             var inventory = this.containerFactory.FullContainer(size, item);
 
             Assert.That(
@@ -20,7 +20,7 @@
         public void GetItem_ValidIndexFullSlot_ReturnsItem()
         {
             var size = this.random.Next(10, 20);
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             var inventory = this.containerFactory.FullContainer(size, item);
 
             var randomIndex = this.random.Next(0, size);

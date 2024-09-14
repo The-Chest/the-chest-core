@@ -9,7 +9,7 @@
             var inventory = this.containerFactory.EmptyContainer();
 
             Assert.That(
-                () => inventory.AddItemAt(this.itemFactory.CreateItem(), index),
+                () => inventory.AddItemAt(this.itemFactory.CreateDefault(), index),
                 Throws.Exception.TypeOf<ArgumentOutOfRangeException>()
             );
         }
@@ -21,7 +21,7 @@
             var inventory = this.containerFactory.EmptyContainer(size);
 
             var randomIndex = this.random.Next(0, size);
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             inventory.AddItemAt(item, randomIndex);
 
             Assert.That(inventory[randomIndex].Content, Is.EqualTo(item));
@@ -34,7 +34,7 @@
             var inventory = this.containerFactory.EmptyContainer(size);
 
             var randomIndex = this.random.Next(0, size);
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             var result = inventory.AddItemAt(item, randomIndex);
 
             Assert.That(result, Is.Null);
@@ -44,11 +44,11 @@
         public void AddItemAt_FullSlot_ReplacesTheItem()
         {
             var size = this.random.Next(10, 20);
-            var oldItem = this.itemFactory.CreateItem();
+            var oldItem = this.itemFactory.CreateDefault();
             var inventory = this.containerFactory.FullContainer(size, oldItem);
 
             var randomIndex = this.random.Next(0, size);
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             inventory.AddItemAt(item, randomIndex);
 
             Assert.Multiple(() =>
@@ -63,11 +63,11 @@
         public void AddItemAt_FullSlot_ReturnsOldItem()
         {
             var size = this.random.Next(10, 20);
-            var oldItem = this.itemFactory.CreateItem();
+            var oldItem = this.itemFactory.CreateDefault();
             var inventory = this.containerFactory.FullContainer(size, oldItem);
 
             var randomIndex = this.random.Next(0, size);
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             var result = inventory.AddItemAt(item, randomIndex);
 
             Assert.That(result, Is.EqualTo(oldItem));
@@ -77,11 +77,11 @@
         public void AddItemAt_FullSlotReplaceFalse_DoNotReplaceTheItem()
         {
             var size = this.random.Next(10, 20);
-            var oldItem = this.itemFactory.CreateItem();
+            var oldItem = this.itemFactory.CreateDefault();
             var inventory = this.containerFactory.FullContainer(size, oldItem);
 
             var randomIndex = this.random.Next(0, size);
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             inventory.AddItemAt(item, randomIndex, false);
 
             Assert.Multiple(() =>
@@ -96,11 +96,11 @@
         public void AddItemAt_FullSlotReplaceFalse_ReturnsSameItem()
         {
             var size = this.random.Next(10, 20);
-            var oldItem = this.itemFactory.CreateItem();
+            var oldItem = this.itemFactory.CreateDefault();
             var inventory = this.containerFactory.FullContainer(size, oldItem);
 
             var randomIndex = this.random.Next(0, size);
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             var result = inventory.AddItemAt(item, randomIndex, false);
 
             Assert.That(result, Is.EqualTo(item));

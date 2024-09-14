@@ -6,7 +6,7 @@
         public void GetItemCount_ReturnsItemCount()
         {
             var size = this.random.Next(10, 20);
-            var items = this.itemFactory.CreateItems(size);
+            var items = this.itemFactory.CreateMany(size);
             var inventory = this.containerFactory.ShuffledItemsContainer(size, items);
 
             var count = inventory.GetItemCount(items[0]);
@@ -18,7 +18,7 @@
         public void GetItemCount_DoNotRemoveItems()
         {
             var size = this.random.Next(10, 20);
-            var items = this.itemFactory.CreateItems(size);
+            var items = this.itemFactory.CreateMany(size);
             var inventory = this.containerFactory.ShuffledItemsContainer(size, items);
 
             inventory.GetItemCount(items[0]);
@@ -30,10 +30,10 @@
         public void GetItemCount_NoItems_ReturnsZero()
         {
             var size = this.random.Next(10, 20);
-            var items = this.itemFactory.CreateItems(size);
+            var items = this.itemFactory.CreateMany(size);
             var inventory = this.containerFactory.ShuffledItemsContainer(size, items);
             
-            var count = inventory.GetItemCount(this.itemFactory.CreateItem());
+            var count = inventory.GetItemCount(this.itemFactory.CreateDefault());
 
             Assert.That(count, Is.Zero);
         }

@@ -6,7 +6,7 @@
         public void GetItems_InvalidAmount_ThrowsArgumentOutOfRangeException(int amount)
         {
             var size = this.random.Next(10, 20);
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             var inventory = this.containerFactory.FullContainer(size, item);
 
             Assert.That(
@@ -19,11 +19,11 @@
         public void GetItems_ValidAmountNotFoundItem_ReturnsEmptyArray()
         {
             var size = this.random.Next(10, 20);
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             var inventory = this.containerFactory.FullContainer(size, item);
 
             var amount = this.random.Next(1, size);
-            var result = inventory.GetItems(this.itemFactory.CreateItem(), amount);
+            var result = inventory.GetItems(this.itemFactory.CreateDefault(), amount);
 
             Assert.That(result, Has.Length.EqualTo(0));
         }
@@ -32,7 +32,7 @@
         public void GetItems_ValidAmountFullInventory_ReturnsItemArrayWithAmountSize()
         {
             var size = this.random.Next(10, 20);
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             var inventory = this.containerFactory.FullContainer(size, item);
 
             var amount = this.random.Next(1, size);
@@ -46,7 +46,7 @@
         {
             var size = this.random.Next(10, 20);
             var expectedAmount = this.random.Next(1, size / 2);
-            var items = this.itemFactory.CreateItems(expectedAmount);
+            var items = this.itemFactory.CreateMany(expectedAmount);
             var inventory = this.containerFactory.ShuffledItemsContainer(size, items);
 
             var amount = this.random.Next(1, 10);

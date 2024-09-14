@@ -15,7 +15,7 @@
         [Test]
         public void GetOne_FullSlot_ReturnsItem()
         {
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             var slot = this.slotFactory.FullSlot(item);
 
             var result = slot.GetOne();
@@ -27,7 +27,7 @@
         [Test]
         public void GetOne_FullSlot_RemovesItemFromSlot()
         {
-            var item = this.itemFactory.CreateItem();
+            var item = this.itemFactory.CreateDefault();
             var slot = this.slotFactory.FullSlot(item);
 
             slot.GetOne();
