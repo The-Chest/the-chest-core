@@ -33,7 +33,7 @@
             var items = this.itemFactory.CreateMany(size);
             var inventory = this.containerFactory.ShuffledItemsContainer(size, items);
             
-            var count = inventory.GetItemCount(this.itemFactory.CreateDefault());
+            var count = inventory.GetItemCount(this.itemFactory.CreateRandom());
 
             Assert.That(count, Is.Zero);
         }

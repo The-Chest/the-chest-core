@@ -48,7 +48,7 @@
             var inventory = this.containerFactory.FullContainer(size, oldItem);
 
             var randomIndex = this.random.Next(0, size);
-            var item = this.itemFactory.CreateDefault();
+            var item = this.itemFactory.CreateRandom();
             inventory.AddItemAt(item, randomIndex);
 
             Assert.Multiple(() =>
@@ -67,7 +67,7 @@
             var inventory = this.containerFactory.FullContainer(size, oldItem);
 
             var randomIndex = this.random.Next(0, size);
-            var item = this.itemFactory.CreateDefault();
+            var item = this.itemFactory.CreateRandom();
             var result = inventory.AddItemAt(item, randomIndex);
 
             Assert.That(result, Is.EqualTo(oldItem));
@@ -81,7 +81,7 @@
             var inventory = this.containerFactory.FullContainer(size, oldItem);
 
             var randomIndex = this.random.Next(0, size);
-            var item = this.itemFactory.CreateDefault();
+            var item = this.itemFactory.CreateRandom();
             inventory.AddItemAt(item, randomIndex, false);
 
             Assert.Multiple(() =>

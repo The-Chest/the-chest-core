@@ -32,26 +32,31 @@
         public void AddItems_NotAvailabeSlotsForAllItems_AddsSomeItems()
         {
             var size = this.random.Next(10, 20);
-            var itemSize = this.random.Next(1, size / 2);
-            var items = this.itemFactory.CreateMany(itemSize + 2);
+            var itemSize = size / 2;
+            var items = this.itemFactory.CreateMany(itemSize);
             var inventory = this.containerFactory.ShuffledItemsContainer(size, items);
 
-            inventory.AddItems(items);
+            var addSize = itemSize + 2;
+            var manyAdded = this.itemFactory.CreateManyRandom(addSize);
+            inventory.AddItems(manyAdded);
 
-            Assert.That(inventory.GetItemCount(items[0]), Is.EqualTo(itemSize));
+            Assert.That(inventory.GetItemCount(manyAdded[0]), Is.EqualTo(itemSize));
         }
 
         [Test]
         public void AddItems_NotAvailabeSlotsForAllItems_ReturnsNotAddedItems()
         {
             var size = this.random.Next(10, 20);
-            var itemSize = this.random.Next(1, size / 2);
-            var items = this.itemFactory.CreateMany(itemSize + 2);
+            var itemSize = size / 2;
+            var items = this.itemFactory.CreateMany(itemSize);
             var inventory = this.containerFactory.ShuffledItemsContainer(size, items);
 
-            var result = inventory.AddItems(items);
+            var addSize = itemSize + 2;
+            var manyAdded = this.itemFactory.CreateManyRandom(addSize);
+            var result = inventory.AddItems(manyAdded);
 
-            Assert.That(result.Length, Is.EqualTo(2));
+            var expectNotAddedLength = Math.Abs(itemSize - addSize) - 1;
+            Assert.That(result.Length, Is.EqualTo(expectNotAddedLength));
         }
 
         [Test]
@@ -61,7 +66,7 @@
             var item = this.itemFactory.CreateDefault();
             var inventory = this.containerFactory.FullContainer(size, item);
 
-            var items = this.itemFactory.CreateMany(size);
+            var items = this.itemFactory.CreateManyRandom(size);
             inventory.AddItems(items);
 
             Assert.That(inventory.GetItemCount(items[0]), Is.EqualTo(0));

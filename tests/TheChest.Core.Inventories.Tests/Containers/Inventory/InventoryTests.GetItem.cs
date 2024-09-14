@@ -9,7 +9,7 @@
             var items = this.itemFactory.CreateMany(size / 2);
             var inventory = this.containerFactory.ShuffledItemsContainer(size, items);
             
-            var searchItem = this.itemFactory.CreateDefault();
+            var searchItem = this.itemFactory.CreateRandom();
             var result = inventory.GetItem(searchItem);
 
             Assert.That(result, Is.Null);

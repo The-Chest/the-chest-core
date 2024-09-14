@@ -23,7 +23,7 @@
             var inventory = this.containerFactory.FullContainer(size, item);
 
             var amount = this.random.Next(1, size);
-            var result = inventory.GetItems(this.itemFactory.CreateDefault(), amount);
+            var result = inventory.GetItems(this.itemFactory.CreateRandom(), amount);
 
             Assert.That(result, Has.Length.EqualTo(0));
         }

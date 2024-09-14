@@ -57,7 +57,7 @@ namespace TheChest.Core.Inventories.Tests.Containers
             var items = this.itemFactory.CreateDefault();
             var inventory = this.containerFactory.FullContainer(size, items);
 
-            var item = this.itemFactory.CreateDefault();
+            var item = this.itemFactory.CreateRandom();
             inventory.AddItem(item);
 
             Assert.That(inventory.Slots, Is.All.Matches<IInventorySlot<T>>(x => x.IsFull && !x.Content!.Equals(item)));
