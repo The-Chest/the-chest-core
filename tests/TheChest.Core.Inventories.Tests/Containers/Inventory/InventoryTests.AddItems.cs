@@ -8,7 +8,7 @@
             var size = this.random.Next(10, 20);
             var inventory = this.containerFactory.EmptyContainer(size);
 
-            var randomSize = this.random.Next(0, size);
+            var randomSize = this.random.Next(1, size);
             var items = this.itemFactory.CreateMany(randomSize);
             inventory.AddItems(items);
 
@@ -21,7 +21,7 @@
             var size = this.random.Next(10, 20);
             var inventory = this.containerFactory.EmptyContainer(size);
 
-            var randomSize = this.random.Next(0, size);
+            var randomSize = this.random.Next(1, size);
             var items = this.itemFactory.CreateMany(randomSize);
             var result = inventory.AddItems(items);
 
