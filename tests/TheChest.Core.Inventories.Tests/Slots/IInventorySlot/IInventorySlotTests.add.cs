@@ -38,7 +38,7 @@
             var item = this.itemFactory.CreateDefault();
             var slot = this.slotFactory.FullSlot(item);
 
-            var newItem = this.itemFactory.CreateDefault();
+            var newItem = this.itemFactory.CreateRandom();
             slot.Add(newItem);
 
             Assert.That(slot.Content, Is.Not.EqualTo(newItem));

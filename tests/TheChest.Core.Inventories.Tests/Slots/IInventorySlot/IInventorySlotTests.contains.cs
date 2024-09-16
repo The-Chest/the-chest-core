@@ -28,7 +28,7 @@
             var item = this.itemFactory.CreateDefault();
             var slot = this.slotFactory.FullSlot(item);
 
-            var secondItem = this.itemFactory.CreateDefault();
+            var secondItem = this.itemFactory.CreateRandom();
             var result = slot.Contains(secondItem);
 
             Assert.That(result, Is.False);
