@@ -3,6 +3,20 @@
     public partial class InventoryTests<T>
     {
         [Test]
+        public void AddItems_NoItems_ThrowsInvalidArgumentException()
+        {
+            var size = this.random.Next(10, 20);
+            var inventory = this.containerFactory.EmptyContainer(size);
+
+            var items = this.itemFactory.CreateMany(0);
+
+            Assert.That(
+                () => inventory.AddItems(items),
+                Throws.Exception.TypeOf<ArgumentException>()
+            );
+        }
+
+        [Test]
         public void AddItems_EmptySlots_AddsAllItems()
         {
             var size = this.random.Next(10, 20);

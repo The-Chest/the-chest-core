@@ -18,6 +18,11 @@ namespace TheChest.Core.Inventories.Containers
 
         public virtual T[] AddItems(params T[] items)
         {
+            if(items.Length == 0)
+            {
+                throw new ArgumentException("No items to add", nameof(items));
+            }
+
             var addedAmount = 0;
             for (int i = 0; i < this.Size; i++)
             {
