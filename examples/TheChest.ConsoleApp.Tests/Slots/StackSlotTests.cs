@@ -1,4 +1,6 @@
-﻿using TheChest.Core.Tests.Slots;
+﻿using TheChest.ConsoleApp.Containers.Stack.Lazy;
+using TheChest.ConsoleApp.Items;
+using TheChest.Core.Tests.Slots;
 
 namespace TheChest.ConsoleApp.Tests.Slots
 {

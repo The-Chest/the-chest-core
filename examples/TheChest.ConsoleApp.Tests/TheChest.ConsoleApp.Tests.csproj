@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\tests\TheChest.Core.Inventories.Tests\TheChest.Core.Inventories.Tests.csproj" />
     <ProjectReference Include="..\..\tests\TheChest.Core.Tests\TheChest.Core.Tests.csproj" />
     <ProjectReference Include="..\TheChest.ConsoleApp\TheChest.ConsoleApp.csproj" />
   </ItemGroup>

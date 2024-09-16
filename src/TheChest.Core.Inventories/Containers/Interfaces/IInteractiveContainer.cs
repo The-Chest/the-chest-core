@@ -6,7 +6,6 @@ namespace TheChest.Core.Inventories.Containers.Interfaces
     /// Interface with methods for interaction with the Container 
     /// </summary>
     /// <typeparam name="T">An item type</typeparam>
-    [Obsolete("Contract not fully defined")]
     public interface IInteractiveContainer<out T> : IContainer<T>
     {
         /// <summary>
@@ -14,8 +13,7 @@ namespace TheChest.Core.Inventories.Containers.Interfaces
         /// </summary>
         /// <param name="origin">Selected item</param>
         /// <param name="target">Where the item will be placed</param>
-        /// <returns>Returns true if the object can be changed</returns>
-        bool MoveItem(int origin, int target);
+        void MoveItem(int origin, int target);
 
         /// <summary>
         /// Returns every item from inventory

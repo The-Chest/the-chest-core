@@ -1,6 +1,7 @@
-﻿using TheChest.Core.Slots;
+﻿using TheChest.ConsoleApp.Items;
+using TheChest.Core.Slots;
 
-namespace TheChest.ConsoleApp.Containers
+namespace TheChest.ConsoleApp.Containers.Stack.Lazy
 {
     public class LazyStackSlot : LazyStackSlot<Item>
     {

@@ -1,4 +1,7 @@
-﻿using TheChest.Core.Tests.Containers;
+﻿using TheChest.ConsoleApp.Containers.Stack;
+using TheChest.ConsoleApp.Containers.Stack.Lazy;
+using TheChest.ConsoleApp.Items;
+using TheChest.Core.Tests.Containers;
 
 namespace TheChest.ConsoleApp.Tests.Containers
 {

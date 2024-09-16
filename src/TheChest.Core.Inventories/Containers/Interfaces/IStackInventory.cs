@@ -6,7 +6,6 @@ namespace TheChest.Core.Inventories.Containers.Interfaces
     /// Interface with methods for interaction with the Inventory using stacks
     /// </summary>
     /// <typeparam name="T">An item type</typeparam>
-    [Obsolete("Contract not fully defined")]
     public interface IStackInventory<T> : IInventory<T>, IStackContainer<T>
     {
         /// <summary>
@@ -23,16 +22,6 @@ namespace TheChest.Core.Inventories.Containers.Interfaces
         /// <param name="index">Index of the slot</param>
         /// <returns>An array with of items</returns>
         T[] GetAll(int index);
-
-        /// <summary>
-        /// Adds an amount of item in a specific slot
-        /// </summary>
-        /// <param name="item">item to be added</param>
-        /// <param name="index">slot where the item will be added</param>
-        /// <param name="amount">amount of the item</param>
-        /// <param name="replace"></param>
-        /// <returns>Returns the item that couldn't be added or the replaced items</returns>
-        T[] AddItemAt(T item, int index, int amount, bool replace = true);
 
         /// <summary>
         /// Adds an array of item inside the inventory
