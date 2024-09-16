@@ -32,31 +32,31 @@
         public void AddItems_NotAvailabeSlotsForAllItems_AddsSomeItems()
         {
             var size = this.random.Next(10, 20);
-            var itemSize = size / 2;
+            var emptySlotsSize = this.random.Next(1, size);
+            var itemSize = size - emptySlotsSize;
             var items = this.itemFactory.CreateMany(itemSize);
             var inventory = this.containerFactory.ShuffledItemsContainer(size, items);
 
-            var addSize = itemSize + 2;
+            var addSize = emptySlotsSize + 1;
             var manyAdded = this.itemFactory.CreateManyRandom(addSize);
             inventory.AddItems(manyAdded);
 
-            Assert.That(inventory.GetItemCount(manyAdded[0]), Is.EqualTo(itemSize));
+            Assert.That(inventory.GetItemCount(manyAdded[0]), Is.EqualTo(emptySlotsSize));
         }
 
         [Test]
         public void AddItems_NotAvailabeSlotsForAllItems_ReturnsNotAddedItems()
         {
             var size = this.random.Next(10, 20);
-            var itemSize = size / 2;
+            var emptySlotsSize = this.random.Next(1, size);
+            var itemSize = size - emptySlotsSize;
             var items = this.itemFactory.CreateMany(itemSize);
             var inventory = this.containerFactory.ShuffledItemsContainer(size, items);
 
-            var addSize = itemSize + 2;
-            var manyAdded = this.itemFactory.CreateManyRandom(addSize);
+            var manyAdded = this.itemFactory.CreateManyRandom(emptySlotsSize + 1);
             var result = inventory.AddItems(manyAdded);
 
-            var expectNotAddedLength = Math.Abs(itemSize - addSize) - 1;
-            Assert.That(result.Length, Is.EqualTo(expectNotAddedLength));
+            Assert.That(result.Length, Is.EqualTo(1));
         }
 
         [Test]

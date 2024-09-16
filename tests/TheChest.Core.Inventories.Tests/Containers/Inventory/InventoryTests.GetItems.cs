@@ -44,12 +44,12 @@
         [Test]
         public void GetItems_ValidAmountWithItems_ReturnsItemArrayWithMaxAvailable()
         {
-            var size = this.random.Next(10, 20);
-            var expectedAmount = this.random.Next(1, size / 2);
+            var inventorySize = this.random.Next(10, 20);
+            var expectedAmount = this.random.Next(1, inventorySize / 2);
             var items = this.itemFactory.CreateMany(expectedAmount);
-            var inventory = this.containerFactory.ShuffledItemsContainer(size, items);
+            var inventory = this.containerFactory.ShuffledItemsContainer(inventorySize, items);
 
-            var amount = this.random.Next(1, 10);
+            var amount = this.random.Next(expectedAmount, inventorySize);
             var result = inventory.GetItems(items[0], amount);
         
             Assert.That(result, Has.Length.EqualTo(expectedAmount));
