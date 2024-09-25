@@ -13,12 +13,12 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         [Obsolete("Experimental")]
         bool CanAdd(T[] items);
 
-        void Add(ref T[] items);
+        void Add(T[] items);
 
         [Obsolete("Experimental")]
-        bool TryAdd(ref T[] items);
+        bool TryAdd(T[] items);
 
-        T[] Replace(ref T[] items);
+        T[] Replace(T[] items);
 
         T[] GetAmount(int amount);
 

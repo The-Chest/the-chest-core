@@ -9,12 +9,35 @@ namespace TheChest.Core.Inventories.Slots
 
         public InventoryStackSlot(T[] items, int maxStackAmount) : base(items, maxStackAmount) { }
 
-        public bool TryAdd(ref T[] items)
+        public bool TryAdd(T[] items)
         {
-            throw new NotImplementedException();
+            if (items.Length == 0)
+            {
+                throw new ArgumentException("Cannot add empty list of items", nameof(items));
+            }
+
+            var notAddedItems = new List<T>();
+            for (int i = 1; i < items.Length; i++)
+            {
+                var item = items[i];
+                if (
+                    (!items[0]!.Equals(item)) || 
+                    (!this.IsEmpty && !this.Content.First()!.Equals(item)) ||
+                    (this.IsFull)
+                )
+                {
+                    notAddedItems.Add(item);
+                    continue;
+                }
+
+                this.Content.Add(item);
+            }
+
+            items = notAddedItems.ToArray();
+            return notAddedItems.Count == 0;
         }
 
-        public void Add(ref T[] items)
+        public void Add(T[] items)
         {
             //TODO: improve this method
             if (items.Length == 0)
@@ -94,7 +117,7 @@ namespace TheChest.Core.Inventories.Slots
             throw new NotImplementedException();
         }
 
-        public T[] Replace(ref T[] items)
+        public T[] Replace(T[] items)
         {
             throw new NotImplementedException();
         }
