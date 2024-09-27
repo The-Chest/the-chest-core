@@ -21,10 +21,6 @@ namespace TheChest.Core.Inventories.Slots
             {
                 var item = items[i];
                 if (!items[0]!.Equals(item))
-                    (!items[0]!.Equals(item)) || 
-                    (!this.IsEmpty && !this.Content.First()!.Equals(item)) ||
-                    (this.IsFull)
-                )
                 {
                     notAddedItems.Add(item);
                     continue;
