@@ -55,12 +55,12 @@ namespace TheChest.Core.Inventories.Slots
             {
                 if (!items[0]!.Equals(items[i]))
                 {
-                    throw new ArgumentException($"Item List have items that are not equal ({i})", nameof(items));
+                    throw new ArgumentException($"Param \"items\" have items that are not equal ({i})", nameof(items));
                 }
 
-                if (!this.IsEmpty && !this.Content.First()!.Equals(items[i]))
+                if (!this.IsEmpty && !this.Content.First()!.Equals(items[i]))//TODO: use Contains
                 {
-                    throw new ArgumentException($"Item List must have every item equal to the Current item on the Slot ({i})", nameof(items));
+                    throw new ArgumentException($"Param \"items\" must have every item equal to the Current item on the Slot ({i})", nameof(items));
                 }
             }           
 
