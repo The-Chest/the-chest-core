@@ -122,7 +122,23 @@ namespace TheChest.Core.Inventories.Slots
 
         public T[] GetAmount(int amount)
         {
-            throw new NotImplementedException();
+            if (amount <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(amount));
+            }
+
+            if (amount >= this.StackAmount)
+            {
+                return this.GetAll();
+            }
+
+            var result = this.Content.Take(amount).ToArray();
+
+            this.Content = this.Content
+                ?.Skip(amount)
+                ?.ToArray()
+                ?? Array.Empty<T>();
+            return result;
         }
 
         public T[] Replace(T[] items)
