@@ -85,8 +85,11 @@ namespace TheChest.Core.Inventories.Slots
             if (item == null)
                 return false;
 
+            if (this.IsFull)
+                return false;
+
             if (!this.IsEmpty)
-                return this.Content.First()!.Equals(item);
+                return this.Content.First()!.Equals(item);//TODO: Use Contains
 
             return true;
         }
@@ -94,6 +97,9 @@ namespace TheChest.Core.Inventories.Slots
         public bool CanAdd(T[] items)
         {
             if (items.Length == 0)
+                return false;
+
+            if (this.IsFull)
                 return false;
 
             var firstItem = items[0]!;
