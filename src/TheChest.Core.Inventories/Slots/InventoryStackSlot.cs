@@ -17,14 +17,20 @@ namespace TheChest.Core.Inventories.Slots
             }
 
             var notAddedItems = new List<T>();
-            for (int i = 1; i < items.Length; i++)
+            for (int i = 0; i < items.Length; i++)
             {
                 var item = items[i];
-                if (
+                if (!items[0]!.Equals(item))
                     (!items[0]!.Equals(item)) || 
                     (!this.IsEmpty && !this.Content.First()!.Equals(item)) ||
                     (this.IsFull)
                 )
+                {
+                    notAddedItems.Add(item);
+                    continue;
+                }
+
+                if (this.CanAdd(item))
                 {
                     notAddedItems.Add(item);
                     continue;
