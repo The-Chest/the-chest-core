@@ -117,7 +117,9 @@ namespace TheChest.Core.Inventories.Slots
 
         public T[] GetAll()
         {
-            throw new NotImplementedException();
+            var result = this.Content?.ToArray() ?? Array.Empty<T>();
+            this.Content?.Clear();
+            return result;
         }
 
         public T[] GetAmount(int amount)
