@@ -108,7 +108,7 @@ namespace TheChest.Core.Inventories.Slots
                 if (!this.CanAdd(items[i]))
                     return false;
 
-                if(!firstItem.Equals(items[i])) 
+                if(!firstItem.Equals(items[i]))
                     return false;
             }
 
@@ -145,7 +145,32 @@ namespace TheChest.Core.Inventories.Slots
 
         public T[] Replace(T[] items)
         {
-            throw new NotImplementedException();
+            if(items.Length == 0 || items.Length > this.MaxStackAmount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(items));
+            }
+
+            var firstItem = items[0]!;
+            for (int i = 1; i < items.Length; i++)
+            {
+                if (!firstItem.Equals(items[i]))//TODO: use Contains
+                {
+                    throw new ArgumentException($"Param \"items\" have items that are not equal ({i})", nameof(items));
+                }
+            }
+
+            var result = this.GetAll();
+            if (this.CanAdd(items))
+            {
+                this.Add(items);
+                items = Array.Empty<T>();
+            }
+            else
+            {
+                this.Add(result);
+            }
+
+            return result;
         }
     }
 }
