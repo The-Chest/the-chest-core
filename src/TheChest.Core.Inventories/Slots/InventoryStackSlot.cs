@@ -4,9 +4,25 @@ using TheChest.Core.Slots.Interfaces;
 
 namespace TheChest.Core.Inventories.Slots
 {
+    /// <summary>
+    /// Slot with with <see cref="IInventoryStackSlot{T}"/> implementation with a collection of items
+    /// <para>
+    /// This slot has behaviors of <seealso cref="StackSlot{T}"/>
+    /// </para>
+    /// </summary>
+    /// <typeparam name="T">The item collection inside the slot accepts</typeparam>
     public class InventoryStackSlot<T> : StackSlot<T>, IInventoryStackSlot<T>
     {
+        /// <summary>
+        /// Creates an Inventory Slot with default items stacked
+        /// </summary>
+        /// <param name="items">>The amount of items to be added to the created slot and also sets the <see cref="IStackSlot{T}.MaxStackAmount"/></param>
         public InventoryStackSlot(T[] items) : base(items) { }
+        /// <summary>
+        /// Creates an Inventory Slot with default items stacked
+        /// </summary>
+        /// <param name="items">The amount of items to be added to the created slot</param>
+        /// <param name="maxStackAmount">Sets the max amount permitted to the slot (cannot be smaller than <paramref name="items"/> size)</param>
         public InventoryStackSlot(T[] items, int maxStackAmount) : base(items, maxStackAmount) { }
 
         /// <summary>
