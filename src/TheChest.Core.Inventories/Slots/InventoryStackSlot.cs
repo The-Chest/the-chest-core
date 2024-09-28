@@ -1,15 +1,24 @@
 ﻿using TheChest.Core.Inventories.Slots.Interfaces;
 using TheChest.Core.Slots;
+using TheChest.Core.Slots.Interfaces;
 
 namespace TheChest.Core.Inventories.Slots
 {
     public class InventoryStackSlot<T> : StackSlot<T>, IInventoryStackSlot<T>
     {
         public InventoryStackSlot(T[] items) : base(items) { }
-
         public InventoryStackSlot(T[] items, int maxStackAmount) : base(items, maxStackAmount) { }
 
-        public bool TryAdd(T[] items)
+        /// <summary>
+        /// Tries to adds an array of items to the slot
+        /// </summary>
+        /// <para>
+        /// The items must be the same in it and in the slot or it'll not add and return false
+        /// </para>
+        /// <param name="items"></param>
+        /// <returns>false if has different items inside it or has any that is not equal to the items inside.</returns>
+        /// <exception cref="ArgumentException">When the item array is empty</exception>
+        public bool TryAdd(ref T[] items)
         {
             if (items.Length == 0)
             {
@@ -39,7 +48,18 @@ namespace TheChest.Core.Inventories.Slots
             return notAddedItems.Count == 0;
         }
 
-        public void Add(T[] items)
+        /// <summary>
+        /// Adds an array of items to the slot.
+        /// <para>
+        /// The items must be the same in it and in the slot (if is not empty) or it'll throw an <see cref="ArgumentException"/>. 
+        /// </para>
+        /// <para>
+        /// Use <see cref="IInventoryStackSlot{T}.TryAdd(ref T[])"/> if you don't want to handle these exceptions
+        /// </para>
+        /// </summary>
+        /// <param name="items">items to bem added to the slot ()</param>
+        /// <exception cref="ArgumentException">When the item array is empty or has different items inside it or has any that is not equal to the items inside <see cref="ISlot{T}.Content"/></exception>
+        public void Add(ref T[] items)
         {
             //TODO: improve this method
             if (items.Length == 0)
@@ -80,6 +100,11 @@ namespace TheChest.Core.Inventories.Slots
             }
         }
 
+        /// <summary>
+        /// Checks if the item can be added to the slot
+        /// </summary>
+        /// <param name="item">Item to check if is possible to add</param>
+        /// <returns>Returns false if is Full or Contains item of a different type than <paramref name="item"/></returns>
         public bool CanAdd(T item)
         {
             if (item == null)
@@ -94,6 +119,12 @@ namespace TheChest.Core.Inventories.Slots
             return true;
         }
 
+        /// <summary>
+        /// Checks if is possible to add an array of items to the slot. 
+        /// Uses <see cref="IInventoryStackSlot{T}.CanAdd(T)"/> validation for each one.
+        /// </summary>
+        /// <param name="items">items to be checked to add</param>
+        /// <returns>Returns true if is possible to add the item</returns>
         public bool CanAdd(T[] items)
         {
             if (items.Length == 0)
@@ -115,6 +146,10 @@ namespace TheChest.Core.Inventories.Slots
             return true;
         }
 
+        /// <summary>
+        /// Gets an removes all items from <see cref="ISlot{T}.Content"/>
+        /// </summary>
+        /// <returns>All items from <see cref="ISlot{T}.Content"/></returns>
         public T[] GetAll()
         {
             var result = this.Content?.ToArray() ?? Array.Empty<T>();
@@ -122,6 +157,13 @@ namespace TheChest.Core.Inventories.Slots
             return result;
         }
 
+        /// <summary>
+        /// Gets an removes amount of items from <see cref="ISlot{T}.Content"/>.
+        /// If is bigger than <see cref="IStackSlot{T}.StackAmount"/> it returns the maximum amount possible.
+        /// </summary>
+        /// <param name="amount">Amount of items to get from <see cref="ISlot{T}.Content"/></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException">When <paramref name="amount"/> is zero or smaller or is greater than <see cref="IStackSlot{T}.MaxStackAmount"/></exception>
         public T[] GetAmount(int amount)
         {
             if (amount <= 0)
@@ -143,7 +185,14 @@ namespace TheChest.Core.Inventories.Slots
             return result;
         }
 
-        public T[] Replace(T[] items)
+        /// <summary>
+        /// Replaces the current <see cref="ISlot{T}.Content"/> to <paramref name="items"/>
+        /// </summary>
+        /// <param name="items">Item array that will replace <see cref="ISlot{T}.Content"/></param>
+        /// <returns>The current items from <see cref="ISlot{T}.Content"/> or <paramref name="items"/> if is not possible to replace</returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        public T[] Replace(ref T[] items)
         {
             if(items.Length == 0 || items.Length > this.MaxStackAmount)
             {
@@ -160,17 +209,13 @@ namespace TheChest.Core.Inventories.Slots
             }
 
             var result = this.GetAll();
-            if (this.CanAdd(items))
+            if (this.TryAdd(ref items))
             {
-                this.Add(items);
-                items = Array.Empty<T>();
-            }
-            else
-            {
-                this.Add(result);
+                return result; 
             }
 
-            return result;
+            this.Add(ref result);
+            return items;
         }
     }
 }
