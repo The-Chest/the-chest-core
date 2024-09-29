@@ -26,7 +26,7 @@ namespace TheChest.Core.Inventories.Slots
         public InventoryStackSlot(T[] items, int maxStackAmount) : base(items, maxStackAmount) { }
 
         /// <summary>
-        /// Tries to adds an array of items to the slot
+        /// <inheritdoc/>
         /// </summary>
         /// <para>
         /// The items must be the same in it and in the slot or it'll not add and return false
@@ -65,15 +65,15 @@ namespace TheChest.Core.Inventories.Slots
         }
 
         /// <summary>
-        /// Adds an array of items to the slot.
+        /// <inheritdoc/>
         /// <para>
         /// The items must be the same in it and in the slot (if is not empty) or it'll throw an <see cref="ArgumentException"/>. 
         /// </para>
         /// <para>
-        /// Use <see cref="IInventoryStackSlot{T}.TryAdd(ref T[])"/> if you don't want to handle these exceptions
+        /// Use <see cref="IInventoryStackSlot{T}.TryAdd(ref T[])"/> if you don't want to handle these exceptions or after <see cref="IInventoryStackSlot{T}.CanAdd(T[])"/> 
         /// </para>
         /// </summary>
-        /// <param name="items">items to bem added to the slot ()</param>
+        /// <param name="items"><inheritdoc/></param>
         /// <exception cref="ArgumentException">When the item array is empty or has different items inside it or has any that is not equal to the items inside <see cref="ISlot{T}.Content"/></exception>
         public void Add(ref T[] items)
         {
@@ -117,9 +117,9 @@ namespace TheChest.Core.Inventories.Slots
         }
 
         /// <summary>
-        /// Checks if the item can be added to the slot
+        /// <inheritdoc/>
         /// </summary>
-        /// <param name="item">Item to check if is possible to add</param>
+        /// <param name="item"><inheritdoc/></param>
         /// <returns>Returns false if is Full or Contains item of a different type than <paramref name="item"/></returns>
         public bool CanAdd(T item)
         {
@@ -136,11 +136,11 @@ namespace TheChest.Core.Inventories.Slots
         }
 
         /// <summary>
-        /// Checks if is possible to add an array of items to the slot. 
+        /// <inheritdoc/>.
         /// Uses <see cref="IInventoryStackSlot{T}.CanAdd(T)"/> validation for each one.
         /// </summary>
-        /// <param name="items">items to be checked to add</param>
-        /// <returns>Returns true if is possible to add the item</returns>
+        /// <param name="items"><inheritdoc/></param>
+        /// <returns><inheritdoc/></returns>
         public bool CanAdd(T[] items)
         {
             if (items.Length == 0)
@@ -163,7 +163,7 @@ namespace TheChest.Core.Inventories.Slots
         }
 
         /// <summary>
-        /// Gets an removes all items from <see cref="ISlot{T}.Content"/>
+        /// Gets and removes all items from <see cref="ISlot{T}.Content"/>
         /// </summary>
         /// <returns>All items from <see cref="ISlot{T}.Content"/></returns>
         public T[] GetAll()
@@ -178,7 +178,7 @@ namespace TheChest.Core.Inventories.Slots
         /// If is bigger than <see cref="IStackSlot{T}.StackAmount"/> it returns the maximum amount possible.
         /// </summary>
         /// <param name="amount">Amount of items to get from <see cref="ISlot{T}.Content"/></param>
-        /// <returns></returns>
+        /// <returns>An array with the max amount possible from <see cref="ISlot{T}.Content"/></returns>
         /// <exception cref="ArgumentOutOfRangeException">When <paramref name="amount"/> is zero or smaller</exception>
         public T[] GetAmount(int amount)
         {
@@ -202,9 +202,9 @@ namespace TheChest.Core.Inventories.Slots
         }
 
         /// <summary>
-        /// Replaces the current <see cref="ISlot{T}.Content"/> to <paramref name="items"/>
+        /// <inheritdoc/>
         /// </summary>
-        /// <param name="items">Item array that will replace <see cref="ISlot{T}.Content"/></param>
+        /// <param name="items"><inheritdoc/></param>
         /// <returns>The current items from <see cref="ISlot{T}.Content"/> or <paramref name="items"/> if is not possible to replace</returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ArgumentException"></exception>

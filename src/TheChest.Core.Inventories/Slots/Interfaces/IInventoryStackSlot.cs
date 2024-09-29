@@ -32,10 +32,10 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// <returns>true if is possible to add</returns>
         bool TryAdd(ref T[] items);
         /// <summary>
-        /// Replaces the items from slot to <paramref name="items"/>
+        /// Replaces the items from <see cref="ISlot{T}.Content"/> to <paramref name="items"/>
         /// </summary>
         /// <param name="items">items that will replace items from slots</param>
-        /// <returns>old items from the current slot</returns>
+        /// <returns>old items from <see cref="ISlot{T}.Content"/> if the replacement is possible</returns>
         T[] Replace(ref T[] items);
         /// <summary>
         /// Gets an amount of items from the slot.
