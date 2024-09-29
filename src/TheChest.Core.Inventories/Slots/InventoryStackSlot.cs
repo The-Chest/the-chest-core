@@ -179,7 +179,7 @@ namespace TheChest.Core.Inventories.Slots
         /// </summary>
         /// <param name="amount">Amount of items to get from <see cref="ISlot{T}.Content"/></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException">When <paramref name="amount"/> is zero or smaller or is greater than <see cref="IStackSlot{T}.MaxStackAmount"/></exception>
+        /// <exception cref="ArgumentOutOfRangeException">When <paramref name="amount"/> is zero or smaller</exception>
         public T[] GetAmount(int amount)
         {
             if (amount <= 0)
