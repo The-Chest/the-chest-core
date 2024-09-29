@@ -3,7 +3,7 @@
     public partial class IInventoryStackSlotTests<T>
     {
         [Test]
-        public void CanAdd_NullItem_ReturnsFalse()
+        public void CanAddItem_NullItem_ReturnsFalse()
         {
             var slot = this.slotFactory.EmptySlot();
 
@@ -13,7 +13,7 @@
         }
 
         [Test]
-        public void CanAdd_FullSlot_ReturnsFalse()
+        public void CanAddItem_FullSlot_ReturnsFalse()
         {
             var randomSize = this.random.Next(1, 20);
             var items = this.itemFactory.CreateMany(randomSize);
@@ -25,7 +25,7 @@
         }
 
         [Test]
-        public void CanAdd_ItemDifferentFromSlot_ReturnsFalse()
+        public void CanAddItem_ItemDifferentFromSlot_ReturnsFalse()
         {
             var randomSize = this.random.Next(1, 20);
             var items = this.itemFactory.CreateManyRandom(randomSize);
@@ -37,7 +37,7 @@
         }
 
         [Test]
-        public void CanAdd_EmptySlot_ReturnsTrue()
+        public void CanAddItem_EmptySlot_ReturnsTrue()
         {
             var slot = this.slotFactory.EmptySlot();
 
@@ -47,7 +47,7 @@
         }
 
         [Test]
-        public void CanAdd_ItemEqualsToSlot_ReturnsTrue()
+        public void CanAddItem_ItemEqualsToSlot_ReturnsTrue()
         {
             var randomSize = this.random.Next(1, 10);
             var items = this.itemFactory.CreateMany(randomSize);
