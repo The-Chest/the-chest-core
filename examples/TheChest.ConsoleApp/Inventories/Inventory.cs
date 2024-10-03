@@ -5,6 +5,6 @@ namespace TheChest.ConsoleApp.Inventories
 {
     public class Inventory : Inventory<Item>
     {
-        public Inventory(Slot[] slots) : base(slots) { }
+        public Inventory(InventorySlot[] slots) : base(slots) { }
     }
 }

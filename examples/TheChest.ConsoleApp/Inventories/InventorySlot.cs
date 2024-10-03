@@ -3,8 +3,8 @@ using TheChest.Core.Inventories.Slots;
 
 namespace TheChest.ConsoleApp.Inventories
 {
-    public class Slot : InventorySlot<Item>
+    public class InventorySlot : InventorySlot<Item>
     {
-        public Slot(Item? currentItem = null) : base(currentItem) { }
+        public InventorySlot(Item? currentItem = null) : base(currentItem) { }
     }
 }
