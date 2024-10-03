@@ -206,11 +206,16 @@ namespace TheChest.Core.Inventories.Slots
         /// </summary>
         /// <param name="items"><inheritdoc/></param>
         /// <returns>The current items from <see cref="ISlot{T}.Content"/> or <paramref name="items"/> if is not possible to replace</returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException">When <paramref name="items"/> dize is zero or bigger than <see cref="IStackSlot{T}.MaxStackAmount"/></exception>
+        /// <exception cref="ArgumentException">When any of items in param are invalid</exception>
         public T[] Replace(ref T[] items)
         {
-            if(items.Length == 0 || items.Length > this.MaxStackAmount)
+            if (items.Length == 0)
+            {
+                throw new ArgumentException("Cannot replace the slot for empty item array", nameof(items));
+            }
+
+            if (items.Length > this.MaxStackAmount)
             {
                 throw new ArgumentOutOfRangeException(nameof(items));
             }
