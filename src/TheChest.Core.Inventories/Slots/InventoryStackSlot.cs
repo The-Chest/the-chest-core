@@ -16,14 +16,39 @@ namespace TheChest.Core.Inventories.Slots
         /// <summary>
         /// Creates an Inventory Slot with default items stacked
         /// </summary>
-        /// <param name="items">>The amount of items to be added to the created slot and also sets the <see cref="IStackSlot{T}.MaxStackAmount"/></param>
+        /// <param name="items"><inheritdoc/></param>
         public InventoryStackSlot(T[] items) : base(items) { }
         /// <summary>
         /// Creates an Inventory Slot with default items stacked
         /// </summary>
-        /// <param name="items">The amount of items to be added to the created slot</param>
-        /// <param name="maxStackAmount">Sets the max amount permitted to the slot (cannot be smaller than <paramref name="items"/> size)</param>
+        /// <param name="items"><inheritdoc cref="StackSlot{T}.StackSlot(T[], int)" path="/param[@name='items']" /></param>
+        /// <param name="maxStackAmount"><inheritdoc cref="StackSlot{T}.StackSlot(T[], int)" path="/param[@name='maxStackAmount']"/></param>
         public InventoryStackSlot(T[] items, int maxStackAmount) : base(items, maxStackAmount) { }
+
+        protected void AddItems(ref T[] items)
+        {
+            var availableAmount = this.MaxStackAmount - this.StackAmount;
+
+            var addAmount = items.Length > availableAmount ? 
+                availableAmount : 
+                items.Length;
+
+            var itemIndex = 0;
+            for (int i = 0; i < this.MaxStackAmount; i++)
+            {
+                if (this.content[i] is null)
+                {
+                    this.content[i] = items[itemIndex++];
+                }
+
+                if (itemIndex == addAmount)
+                {
+                    break;
+                }
+            }
+
+            items = items[addAmount..];
+        }
 
         /// <summary>
         /// <inheritdoc/>
@@ -31,14 +56,14 @@ namespace TheChest.Core.Inventories.Slots
         /// <para>
         /// The items must be the same in it and in the slot or it'll not add and return false
         /// </para>
-        /// <param name="items"></param>
+        /// <param name="items"><inheritdoc/></param>
         /// <returns>false if has different items inside it or has any that is not equal to the items inside.</returns>
         /// <exception cref="ArgumentException">When the item array is empty</exception>
         public bool TryAdd(ref T[] items)
         {
             if (items.Length == 0)
             {
-                throw new ArgumentException("Cannot add empty list of items", nameof(items));
+                return false;
             }
 
             var notAddedItems = new List<T>();
@@ -53,11 +78,19 @@ namespace TheChest.Core.Inventories.Slots
 
                 if (this.CanAdd(item))
                 {
-                    notAddedItems.Add(item);
+                    var addIndex = 0;
+                    for (; addIndex < this.content.Length; addIndex++)
+                    {
+                        if (this.content[i] is null)
+                        {
+                            this.content[addIndex++] = item;
+                            break;
+                        }
+                    }
                     continue;
                 }
 
-                this.Content.Add(item);
+                notAddedItems.Add(item);
             }
 
             items = notAddedItems.ToArray();
@@ -96,24 +129,7 @@ namespace TheChest.Core.Inventories.Slots
                 }
             }           
 
-            var availableAmount = this.MaxStackAmount - this.StackAmount;
-
-            T[] itemsToAdd;
-            if (items.Length > availableAmount)
-            {
-                itemsToAdd = items[0..(availableAmount-1)];
-                items = items[availableAmount..];
-            }
-            else
-            {
-                itemsToAdd = items;
-                items = Array.Empty<T>();
-            }
-
-            foreach (var item in itemsToAdd)
-            {
-                this.Content.Add(item);
-            }
+            this.AddItems(ref items);
         }
 
         /// <summary>
@@ -168,8 +184,8 @@ namespace TheChest.Core.Inventories.Slots
         /// <returns>All items from <see cref="ISlot{T}.Content"/></returns>
         public T[] GetAll()
         {
-            var result = this.Content?.ToArray() ?? Array.Empty<T>();
-            this.Content?.Clear();
+            var result = this.Content.Where(x => x is not null).ToArray();
+            Array.Clear(this.Content);
             return result;
         }
 
@@ -192,12 +208,11 @@ namespace TheChest.Core.Inventories.Slots
                 return this.GetAll();
             }
 
-            var result = this.Content.Take(amount).ToArray();
+            var result = this.content
+                .Where(x => x is not null)
+                .Take(amount)
+                .ToArray();
 
-            this.Content = this.Content
-                ?.Skip(amount)
-                ?.ToArray()
-                ?? Array.Empty<T>();
             return result;
         }
 
@@ -235,7 +250,7 @@ namespace TheChest.Core.Inventories.Slots
                 return result; 
             }
 
-            this.Add(ref result);
+            this.AddItems(ref result);
             return items;
         }
     }
