@@ -10,7 +10,7 @@ namespace TheChest.ConsoleApp.Tests.Containers
         static readonly object[] FixtureArgs = {
             new object[] {
                 new InventoryFactory<Inventory, Item>(
-                    new InventorySlotFactory<Slot, Item>()
+                    new InventorySlotFactory<InventorySlot, Item>()
                 ),
                 new SlotItemFactory<Item>(),
             }

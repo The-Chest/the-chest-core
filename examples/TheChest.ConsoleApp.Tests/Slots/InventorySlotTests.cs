@@ -9,7 +9,7 @@ namespace TheChest.ConsoleApp.Tests.Slots
     {
         static readonly object[] SlotFixtureArgs = {
             new object[] {
-                new InventorySlotFactory<Slot, Item>(),
+                new InventorySlotFactory<InventorySlot, Item>(),
                 new SlotItemFactory<Item>(),
             }
         };
