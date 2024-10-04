@@ -21,7 +21,7 @@
 
             var result = slot.GetAmount(10);
 
-            Assert.That(result, Is.EquivalentTo(items[0..9]));
+            Assert.That(result, Is.EquivalentTo(items[0..10]));
         }
 
         [Test]

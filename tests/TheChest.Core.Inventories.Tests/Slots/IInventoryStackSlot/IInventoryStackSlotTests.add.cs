@@ -56,10 +56,10 @@
         public void Add_FullSlot_WithAnyAmountOfItems_DoNotAdd()
         {
             var randomSize = this.random.Next(1, 20);
-            var items = this.itemFactory.CreateManyRandom(randomSize);
+            var items = this.itemFactory.CreateMany(randomSize);
             var slot = this.slotFactory.FullSlot(items);
 
-            var addingItems = this.itemFactory.CreateManyRandom(randomSize);
+            var addingItems = this.itemFactory.CreateMany(randomSize);
             slot.Add(ref addingItems);
 
             Assert.That(slot.Content, Is.EqualTo(items));
@@ -69,10 +69,10 @@
         public void Add_FullSlot_WithAnyAmountOfItems_ChangesItemsParam()
         {
             var randomSize = this.random.Next(1, 20);
-            var items = this.itemFactory.CreateManyRandom(randomSize);
+            var items = this.itemFactory.CreateMany(randomSize);
             var slot = this.slotFactory.FullSlot(items);
 
-            var addingItems = this.itemFactory.CreateManyRandom(randomSize);
+            var addingItems = this.itemFactory.CreateMany(randomSize);
             slot.Add(ref addingItems);
 
             Assert.That(addingItems, Has.Length.EqualTo(randomSize));
@@ -98,7 +98,7 @@
             var slot = this.slotFactory.WithItem(this.itemFactory.CreateDefault());
 
             var randomSize = this.random.Next(1, 10);
-            var addingItems = this.itemFactory.CreateMany(randomSize);
+            var addingItems = this.itemFactory.CreateManyRandom(randomSize);
 
             Assert.That(() => slot.Add(ref addingItems), Throws.ArgumentException);
         }
