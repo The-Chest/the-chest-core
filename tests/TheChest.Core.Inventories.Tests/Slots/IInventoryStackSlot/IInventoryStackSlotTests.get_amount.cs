@@ -9,9 +9,8 @@
             var items = this.itemFactory.CreateMany(20);
             var slot = this.slotFactory.FullSlot(items);
 
-            var result = slot.GetAmount(amount);
 
-            Assert.That(result, Is.EquivalentTo(items));
+            Assert.That(() => slot.GetAmount(amount), Throws.ArgumentException);
         }
 
         [Test]
