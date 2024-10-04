@@ -12,26 +12,16 @@ namespace TheChest.Core.Slots
         private const string MAXAMOUNT_SMALLER_THAN_ZERO = "The max amount property cannot be smaller than zero";
         private const string AMOUNT_BIGGER_THAN_MAXAMOUNT = "The item amount cannot be bigger than max amount";
 
-        protected ICollection<T> content;
+        protected readonly T[] content;
         public virtual T[] Content
         {
             get
             {
-                return content.ToArray();
-            }
-            protected set
-            {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-
-                if (value.Length > maxStackAmount)
-                    throw new ArgumentOutOfRangeException(nameof(value), ITEMAMOUNT_BIGGER_THAN_MAXAMOUNT);
-
-                content = value;
+                return this.content.Where(x => x is not null).ToArray();
             }
         }
 
-        public virtual int StackAmount => Content.Count(x => x is not null);
+        public virtual int StackAmount => this.content.Count(x => x is not null);
 
         protected int maxStackAmount;
         public virtual int MaxStackAmount
