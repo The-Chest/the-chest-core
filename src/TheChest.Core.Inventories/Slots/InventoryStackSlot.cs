@@ -25,7 +25,14 @@ namespace TheChest.Core.Inventories.Slots
         /// <param name="maxStackAmount"><inheritdoc cref="StackSlot{T}.StackSlot(T[], int)" path="/param[@name='maxStackAmount']"/></param>
         public InventoryStackSlot(T[] items, int maxStackAmount) : base(items, maxStackAmount) { }
 
-        protected void AddItems(ref T[] items)
+        /// <summary>
+        /// Adds an array of items inside the Content with no previous validation.
+        /// <para>
+        /// It's recommended to use <see cref="IInventoryStackSlot{T}.Add(ref T[])"/> or <see cref="IInventoryStackSlot{T}.TryAdd(ref T[])"/> to ensure no invalid items are added
+        /// </para>
+        /// </summary>
+        /// <param name="items"></param>
+        protected virtual void AddItems(ref T[] items)
         {
             var availableAmount = this.MaxStackAmount - this.StackAmount;
 
@@ -185,7 +192,7 @@ namespace TheChest.Core.Inventories.Slots
         public T[] GetAll()
         {
             var result = this.Content.Where(x => x is not null).ToArray();
-            Array.Clear(this.Content);
+            Array.Clear(this.content);
             return result;
         }
 

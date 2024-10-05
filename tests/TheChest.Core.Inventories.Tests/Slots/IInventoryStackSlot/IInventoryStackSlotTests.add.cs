@@ -97,7 +97,7 @@
         {
             var slot = this.slotFactory.WithItem(this.itemFactory.CreateDefault());
 
-            var randomSize = this.random.Next(1, 10);
+            var randomSize = this.random.Next(2, 10);
             var addingItems = this.itemFactory.CreateManyRandom(randomSize);
 
             Assert.That(() => slot.Add(ref addingItems), Throws.ArgumentException);

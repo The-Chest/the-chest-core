@@ -9,8 +9,7 @@
             var items = this.itemFactory.CreateMany(20);
             var slot = this.slotFactory.FullSlot(items);
 
-
-            Assert.That(() => slot.GetAmount(amount), Throws.ArgumentException);
+            Assert.That(() => slot.GetAmount(amount), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
 
         [Test]

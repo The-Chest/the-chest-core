@@ -3,6 +3,17 @@
     public partial class IInventoryStackSlotTests<T>
     {
         [Test]
+        public void GetAll_RemovesContentFromSlot()
+        {
+            var items = this.itemFactory.CreateMany(20);
+            var slot = this.slotFactory.FullSlot(items);
+
+            slot.GetAll();
+
+            Assert.That(slot.IsEmpty, Is.True);
+        }
+
+        [Test]
         public void GetAll_FullSlot_ReturnsAllItemFromFullSlot()
         {
             var items = this.itemFactory.CreateMany(20);

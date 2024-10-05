@@ -18,7 +18,7 @@ namespace TheChest.Core.Inventories.Tests.Slots.Factories
         {
             var type = typeof(Slot);
 
-            var slot = Activator.CreateInstance(type, items, items.Length);
+            var slot = Activator.CreateInstance(type, (Item[])items.Clone(), items.Length);
             return (IInventoryStackSlot<Item>)slot!;
         }
 
@@ -26,7 +26,7 @@ namespace TheChest.Core.Inventories.Tests.Slots.Factories
         {
             var type = typeof(Slot);
 
-            var slot = Activator.CreateInstance(type, items, maxAmount);
+            var slot = Activator.CreateInstance(type, (Item[])items.Clone(), maxAmount);
             return (IInventoryStackSlot<Item>)slot!;
         }
 
