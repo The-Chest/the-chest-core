@@ -219,6 +219,10 @@ namespace TheChest.Core.Inventories.Slots
                 .Where(x => x is not null)
                 .Take(amount)
                 .ToArray();
+            for (int i = 0; i < amount; i++)
+            {
+                this.content[i] = default!;
+            }
 
             return result;
         }

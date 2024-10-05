@@ -13,6 +13,17 @@
         }
 
         [Test]
+        public void GetAmount_SlotWithEnoughItems_RemovesFromContent()
+        {
+            var items = this.itemFactory.CreateMany(20);
+            var slot = this.slotFactory.FullSlot(items);
+
+            slot.GetAmount(10);
+
+            Assert.That(slot.Content, Is.EquivalentTo(items[10..20]));
+        }
+
+        [Test]
         public void GetAmount_SlotWithEnoughItems_ReturnsWithAmount()
         {
             var items = this.itemFactory.CreateMany(20);
@@ -21,6 +32,17 @@
             var result = slot.GetAmount(10);
 
             Assert.That(result, Is.EquivalentTo(items[0..10]));
+        }
+
+        [Test]
+        public void GetAmount_SlotWithNotEnoughItems_RemovesFromContent()
+        {
+            var items = this.itemFactory.CreateMany(5);
+            var slot = this.slotFactory.WithItems(items, 20);
+
+            slot.GetAmount(10);
+
+            Assert.That(slot.Content, Is.Empty);
         }
 
         [Test]
@@ -35,7 +57,18 @@
         }
 
         [Test]
-        public void GetAmount_AmoutBiggerThanSlotMaxAmount_ReturnsAllItemsFromSlot()
+        public void GetAmount_AmountBiggerThanSlotMaxAmount_RemovesFromContent()
+        {
+            var items = this.itemFactory.CreateMany(20);
+            var slot = this.slotFactory.FullSlot(items);
+
+            slot.GetAmount(30);
+
+            Assert.That(slot.Content, Is.Empty);
+        }
+
+        [Test]
+        public void GetAmount_AmountBiggerThanSlotMaxAmount_ReturnsAllItemsFromSlot()
         {
             var items = this.itemFactory.CreateMany(20);
             var slot = this.slotFactory.WithItems(items, 20);
