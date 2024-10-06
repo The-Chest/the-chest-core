@@ -65,7 +65,7 @@ namespace TheChest.Core.Inventories.Slots
         /// </para>
         /// <param name="items"><inheritdoc/></param>
         /// <returns>false if is not possible to add all of the items.</returns>
-        public bool TryAdd(ref T[] items)
+        public virtual bool TryAdd(ref T[] items)
         {
             if(this.CanAdd(items))
             {
@@ -73,6 +73,7 @@ namespace TheChest.Core.Inventories.Slots
             }
 
             this.AddItems(ref items);
+            
             return items.Length == 0;
         }
 
@@ -87,7 +88,7 @@ namespace TheChest.Core.Inventories.Slots
         /// </summary>
         /// <param name="items"><inheritdoc/></param>
         /// <exception cref="ArgumentException">When the item array is empty or has different items inside it or has any that is not equal to the items inside <see cref="ISlot{T}.Content"/></exception>
-        public void Add(ref T[] items)
+        public virtual void Add(ref T[] items)
         {
             //TODO: improve this method
             if (items.Length == 0)
@@ -116,7 +117,7 @@ namespace TheChest.Core.Inventories.Slots
         /// </summary>
         /// <param name="item"><inheritdoc/></param>
         /// <returns>Returns false if is Full or Contains item of a different type than <paramref name="item"/></returns>
-        public bool CanAdd(T item)
+        public virtual bool CanAdd(T item)
         {
             if (item == null)
                 return false;
@@ -136,7 +137,7 @@ namespace TheChest.Core.Inventories.Slots
         /// </summary>
         /// <param name="items"><inheritdoc/></param>
         /// <returns><inheritdoc/></returns>
-        public bool CanAdd(T[] items)
+        public virtual bool CanAdd(T[] items)
         {
             if (items.Length == 0)
                 return false;
@@ -161,7 +162,7 @@ namespace TheChest.Core.Inventories.Slots
         /// Gets and removes all items from <see cref="ISlot{T}.Content"/>
         /// </summary>
         /// <returns>All items from <see cref="ISlot{T}.Content"/></returns>
-        public T[] GetAll()
+        public virtual T[] GetAll()
         {
             var result = this.Content.Where(x => x is not null).ToArray();
             Array.Clear(this.content);
@@ -175,7 +176,7 @@ namespace TheChest.Core.Inventories.Slots
         /// <param name="amount">Amount of items to get from <see cref="ISlot{T}.Content"/></param>
         /// <returns>An array with the max amount possible from <see cref="ISlot{T}.Content"/></returns>
         /// <exception cref="ArgumentOutOfRangeException">When <paramref name="amount"/> is zero or smaller</exception>
-        public T[] GetAmount(int amount)
+        public virtual T[] GetAmount(int amount)
         {
             if (amount <= 0)
             {
@@ -206,7 +207,7 @@ namespace TheChest.Core.Inventories.Slots
         /// <returns>The current items from <see cref="ISlot{T}.Content"/> or <paramref name="items"/> if is not possible to replace</returns>
         /// <exception cref="ArgumentOutOfRangeException">When <paramref name="items"/> dize is zero or bigger than <see cref="IStackSlot{T}.MaxStackAmount"/></exception>
         /// <exception cref="ArgumentException">When any of items in param are invalid</exception>
-        public T[] Replace(ref T[] items)
+        public virtual T[] Replace(ref T[] items)
         {
             if (items.Length == 0)
             {
