@@ -64,44 +64,16 @@ namespace TheChest.Core.Inventories.Slots
         /// The items must be the same in it and in the slot or it'll not add and return false
         /// </para>
         /// <param name="items"><inheritdoc/></param>
-        /// <returns>false if has different items inside it or has any that is not equal to the items inside.</returns>
-        /// <exception cref="ArgumentException">When the item array is empty</exception>
+        /// <returns>false if is not possible to add all of the items.</returns>
         public bool TryAdd(ref T[] items)
         {
-            if (items.Length == 0)
+            if(this.CanAdd(items))
             {
                 return false;
             }
 
-            var notAddedItems = new List<T>();
-            for (int i = 0; i < items.Length; i++)
-            {
-                var item = items[i];
-                if (!items[0]!.Equals(item))
-                {
-                    notAddedItems.Add(item);
-                    continue;
-                }
-
-                if (this.CanAdd(item))
-                {
-                    var addIndex = 0;
-                    for (; addIndex < this.content.Length; addIndex++)
-                    {
-                        if (this.content[i] is null)
-                        {
-                            this.content[addIndex++] = item;
-                            break;
-                        }
-                    }
-                    continue;
-                }
-
-                notAddedItems.Add(item);
-            }
-
-            items = notAddedItems.ToArray();
-            return notAddedItems.Count == 0;
+            this.AddItems(ref items);
+            return items.Length == 0;
         }
 
         /// <summary>
