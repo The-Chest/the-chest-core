@@ -33,6 +33,7 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// </summary>
         /// <param name="item">The item to be checked</param>
         /// <returns>Returns true if the item is equal to the Content</returns>
+        [Obsolete("This method will be moved to ISlot<T>")]
         bool Contains(T item);
     }
 }

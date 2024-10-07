@@ -243,5 +243,13 @@ namespace TheChest.Core.Inventories.Slots
             this.AddItems(ref result);
             return items;
         }
+
+        public bool Contains(T item)
+        {
+            if (this.IsEmpty)
+                return false;
+
+            return this.Content.First()!.Equals(item);
+        }
     }
 }
