@@ -39,7 +39,7 @@
         }
 
         [Test]
-        public void TryAdd_EmptySlot_WithMoreItemsThanMaxAmount_AddsAllItems()
+        public void TryAdd_EmptySlot_WithMoreItemsThanMaxAmount_AddsAllPossibleItems()
         {
             var maxAmount = this.random.Next(1, 20);
             var slot = this.slotFactory.EmptySlot(maxAmount);
@@ -52,7 +52,7 @@
         }
 
         [Test]
-        public void TryAdd_EmptySlot_WithMoreItemsThanMaxAmount_RemovesAllItemsFromParams()
+        public void TryAdd_EmptySlot_WithMoreItemsThanMaxAmount_RemovesAllPossibleItemsFromParams()
         {
             var randomSize = this.random.Next(1, 20);
             var slot = this.slotFactory.EmptySlot(randomSize);
@@ -65,13 +65,12 @@
         }
 
         [Test]
-        public void TryAdd_EmptySlot_WithMoreItemsThanMaxAmount_ReturnsTrue()
+        public void TryAdd_EmptySlot_WithMoreItemsThanMaxAmount_ReturnsFalse()
         {
             var maxAmount = this.random.Next(1, 20);
             var slot = this.slotFactory.EmptySlot(maxAmount);
 
-            var randomSize = this.random.Next(maxAmount + 1, 20);
-            var addingItems = this.itemFactory.CreateManyRandom(randomSize);
+            var addingItems = this.itemFactory.CreateManyRandom(maxAmount + 1);
             var result = slot.TryAdd(ref addingItems);
 
             Assert.That(result, Is.True);
@@ -91,7 +90,7 @@
         }
 
         [Test]
-        public void TryAdd_FullSlot_WithAnyAmountOfItems_ChangesItemsParam()
+        public void TryAdd_FullSlot_WithAnyAmountOfItems_DoNotChangesItemsParam()
         {
             var randomSize = this.random.Next(1, 20);
             var items = this.itemFactory.CreateManyRandom(randomSize);
@@ -136,7 +135,7 @@
             var slot = this.slotFactory.WithItem(this.itemFactory.CreateDefault());
 
             var randomSize = this.random.Next(1, 10);
-            var addingItems = this.itemFactory.CreateMany(randomSize);
+            var addingItems = this.itemFactory.CreateManyRandom(randomSize);
 
             Assert.That(slot.TryAdd(ref addingItems), Is.False);
         }

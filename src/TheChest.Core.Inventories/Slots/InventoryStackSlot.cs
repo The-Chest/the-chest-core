@@ -67,7 +67,7 @@ namespace TheChest.Core.Inventories.Slots
         /// <returns>false if is not possible to add all of the items.</returns>
         public virtual bool TryAdd(ref T[] items)
         {
-            if(this.CanAdd(items))
+            if(!this.CanAdd(items))
             {
                 return false;
             }
@@ -226,6 +226,12 @@ namespace TheChest.Core.Inventories.Slots
                 {
                     throw new ArgumentException($"Param \"items\" have items that are not equal ({i})", nameof(items));
                 }
+            }
+
+            if(this.IsEmpty) 
+            {
+                this.Add(ref items);
+                return Array.Empty<T>();
             }
 
             var result = this.GetAll();

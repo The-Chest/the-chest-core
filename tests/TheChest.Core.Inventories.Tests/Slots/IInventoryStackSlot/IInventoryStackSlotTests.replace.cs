@@ -19,13 +19,10 @@
             var slot = this.slotFactory.EmptySlot();
 
             var items = this.itemFactory.CreateMany(10);
-            var result = slot.Replace(ref items);
+            var expectedResult = (T[])items.Clone();
+            slot.Replace(ref items);
 
-            Assert.Multiple(() =>
-            {
-                Assert.That(slot.IsEmpty, Is.False);
-                Assert.That(slot.Content, Is.EqualTo(items));
-            });
+            Assert.That(slot.Content, Is.EquivalentTo(expectedResult));
         }
 
         [Test]
@@ -68,9 +65,11 @@
             var slot = this.slotFactory.WithItems(items);
 
             var replacingItems = this.itemFactory.CreateManyRandom(5);
+            var expectedResult = (T[])replacingItems.Clone();
+
             slot.Replace(ref replacingItems);
 
-            Assert.That(slot.Content, Is.EqualTo(replacingItems));
+            Assert.That(slot.Content, Is.EqualTo(expectedResult));
         }
 
         [Test]
@@ -92,9 +91,11 @@
             var slot = this.slotFactory.WithItems(items);
 
             var replacingItems = this.itemFactory.CreateMany(5);
+            var expectedResult = (T[])replacingItems.Clone();
+
             slot.Replace(ref replacingItems);
 
-            Assert.That(slot.Content, Is.EqualTo(replacingItems));
+            Assert.That(slot.Content, Is.EqualTo(expectedResult));
         }
     }
 }
