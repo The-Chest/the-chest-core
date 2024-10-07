@@ -63,7 +63,7 @@ namespace TheChest.Core.Inventories.Containers
         {
             if (index < 0 || index >= this.Size)
             {
-                throw new ArgumentOutOfRangeException(nameof(index));
+                throw new IndexOutOfRangeException();
             }
 
             T? result = default;
@@ -114,7 +114,7 @@ namespace TheChest.Core.Inventories.Containers
         {
             if (index < 0 || index >= this.Size)
             {
-                throw new ArgumentOutOfRangeException(nameof(index));
+                throw new IndexOutOfRangeException();
             }
 
             return this.slots[index].GetOne();
