@@ -73,7 +73,7 @@
             var addingItems = this.itemFactory.CreateManyRandom(maxAmount + 1);
             var result = slot.TryAdd(ref addingItems);
 
-            Assert.That(result, Is.True);
+            Assert.That(result, Is.False);
         }
 
         [Test]
