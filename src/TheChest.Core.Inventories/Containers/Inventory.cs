@@ -88,7 +88,7 @@ namespace TheChest.Core.Inventories.Containers
             var items = new List<T>();
             for (int i = 0; i < this.Size; i++)
             {
-                var item = this.slots[i].GetOne();
+                var item = this.slots[i].Get();
                 if(item != null)
                 {
                     items.Add(item);
@@ -104,7 +104,7 @@ namespace TheChest.Core.Inventories.Containers
             {
                 if (this.slots[i].Contains(item))
                 {
-                    items.Add(this.slots[i].GetOne()!);
+                    items.Add(this.slots[i].Get()!);
                 }
             }
             return items.ToArray();
@@ -117,7 +117,7 @@ namespace TheChest.Core.Inventories.Containers
                 throw new IndexOutOfRangeException();
             }
 
-            return this.slots[index].GetOne();
+            return this.slots[index].Get();
         }
 
         public virtual T? GetItem(T item)
@@ -126,7 +126,7 @@ namespace TheChest.Core.Inventories.Containers
             {
                 if (this.slots[i].Contains(item))
                 {
-                    return this.slots[i].GetOne();
+                    return this.slots[i].Get();
                 }
             }
             
@@ -144,7 +144,7 @@ namespace TheChest.Core.Inventories.Containers
                 if (!this.slots[i].Contains(item))
                     continue;
 
-                var slotItem = this.slots[i].GetOne();
+                var slotItem = this.slots[i].Get();
                 if(slotItem == null)
                     continue;
 
@@ -180,7 +180,7 @@ namespace TheChest.Core.Inventories.Containers
                 throw new ArgumentOutOfRangeException(nameof(target));
             }
 
-            var item = this.slots[origin].GetOne();
+            var item = this.slots[origin].Get();
 
             var oldItem = this.slots[target].Replace(item);
             this.slots[origin].Replace(oldItem);
