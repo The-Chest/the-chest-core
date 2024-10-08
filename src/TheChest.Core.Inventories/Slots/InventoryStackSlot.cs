@@ -188,7 +188,7 @@ namespace TheChest.Core.Inventories.Slots
                 return this.GetAll();
             }
 
-            //TODO: improve it by getting it from the last items
+            //TODO: improve it by getting it from the last items (maybe using IEnumerable)
             var result = this.content
                 .Where(x => x is not null)
                 .Take(amount)
@@ -203,10 +203,11 @@ namespace TheChest.Core.Inventories.Slots
 
         public virtual T? Get()
         {
+            //TODO: add unit tests for it
             if (this.IsEmpty)
                 return default;
 
-            throw new NotImplementedException();
+            return this.Get(1).FirstOrDefault();
         }
 
         /// <summary>
