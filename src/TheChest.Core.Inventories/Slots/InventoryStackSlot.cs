@@ -176,7 +176,7 @@ namespace TheChest.Core.Inventories.Slots
         /// <param name="amount">Amount of items to get from <see cref="ISlot{T}.Content"/></param>
         /// <returns>An array with the max amount possible from <see cref="ISlot{T}.Content"/></returns>
         /// <exception cref="ArgumentOutOfRangeException">When <paramref name="amount"/> is zero or smaller</exception>
-        public virtual T[] GetAmount(int amount)
+        public virtual T[] Get(int amount)
         {
             if (amount <= 0)
             {
@@ -188,6 +188,7 @@ namespace TheChest.Core.Inventories.Slots
                 return this.GetAll();
             }
 
+            //TODO: improve it by getting it from the last items
             var result = this.content
                 .Where(x => x is not null)
                 .Take(amount)
@@ -198,6 +199,14 @@ namespace TheChest.Core.Inventories.Slots
             }
 
             return result;
+        }
+
+        public virtual T? Get()
+        {
+            if (this.IsEmpty)
+                return default;
+
+            throw new NotImplementedException();
         }
 
         /// <summary>

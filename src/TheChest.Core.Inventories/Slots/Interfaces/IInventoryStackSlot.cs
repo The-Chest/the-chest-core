@@ -37,12 +37,13 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// <param name="items">items that will replace items from slots</param>
         /// <returns>old items from <see cref="ISlot{T}.Content"/> if the replacement is possible</returns>
         T[] Replace(ref T[] items);
+        T Get();
         /// <summary>
         /// Gets an amount of items from the slot.
         /// </summary>
         /// <param name="amount">Amount of items to get</param>
         /// <returns>an array with the size of the param <paramref name="amount"/></returns>
-        T[] GetAmount(int amount);
+        T[] Get(int amount);
         /// <summary>
         /// Gets all items from inside the Slot. 
         /// </summary>

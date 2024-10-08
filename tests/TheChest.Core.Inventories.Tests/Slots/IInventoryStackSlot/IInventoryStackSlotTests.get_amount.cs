@@ -9,7 +9,7 @@
             var items = this.itemFactory.CreateMany(20);
             var slot = this.slotFactory.FullSlot(items);
 
-            Assert.That(() => slot.GetAmount(amount), Throws.TypeOf<ArgumentOutOfRangeException>());
+            Assert.That(() => slot.Get(amount), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
 
         [Test]
@@ -18,7 +18,7 @@
             var items = this.itemFactory.CreateMany(20);
             var slot = this.slotFactory.FullSlot(items);
 
-            slot.GetAmount(10);
+            slot.Get(10);
 
             Assert.That(slot.Content, Is.EquivalentTo(items[10..20]));
         }
@@ -29,7 +29,7 @@
             var items = this.itemFactory.CreateMany(20);
             var slot = this.slotFactory.FullSlot(items);
 
-            var result = slot.GetAmount(10);
+            var result = slot.Get(10);
 
             Assert.That(result, Is.EquivalentTo(items[0..10]));
         }
@@ -40,7 +40,7 @@
             var items = this.itemFactory.CreateMany(5);
             var slot = this.slotFactory.WithItems(items, 20);
 
-            slot.GetAmount(10);
+            slot.Get(10);
 
             Assert.That(slot.Content, Is.Empty);
         }
@@ -51,7 +51,7 @@
             var items = this.itemFactory.CreateMany(5);
             var slot = this.slotFactory.WithItems(items, 20);
 
-            var result = slot.GetAmount(10);
+            var result = slot.Get(10);
 
             Assert.That(result, Is.EquivalentTo(items));
         }
@@ -62,7 +62,7 @@
             var items = this.itemFactory.CreateMany(20);
             var slot = this.slotFactory.FullSlot(items);
 
-            slot.GetAmount(30);
+            slot.Get(30);
 
             Assert.That(slot.Content, Is.Empty);
         }
@@ -73,7 +73,7 @@
             var items = this.itemFactory.CreateMany(20);
             var slot = this.slotFactory.WithItems(items, 20);
 
-            var result = slot.GetAmount(30);
+            var result = slot.Get(30);
 
             Assert.That(result, Is.EquivalentTo(items));
         }
@@ -83,7 +83,7 @@
         {
             var slot = this.slotFactory.EmptySlot(20);
 
-            var result = slot.GetAmount(10);
+            var result = slot.Get(10);
 
             Assert.That(result, Is.EquivalentTo(Array.Empty<T>()));
         }
