@@ -112,7 +112,7 @@ namespace TheChest.Core.Inventories.Slots
             this.AddItems(ref items);
         }
 
-        public bool Add(ref T item)
+        public void Add(ref T item)
         {
             if(item == null)
             {
@@ -124,10 +124,7 @@ namespace TheChest.Core.Inventories.Slots
                 var items = new T[1] { item };
                 this.AddItems(ref items);
                 item = default;
-                return true;
             }
-
-            return false;
         }
 
         /// <summary>
@@ -278,6 +275,16 @@ namespace TheChest.Core.Inventories.Slots
                 return false;
 
             return this.Content.First()!.Equals(item);
+        }
+
+        public bool TryAdd(ref T item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T? Replace(ref T item)
+        {
+            throw new NotImplementedException();
         }
     }
 }

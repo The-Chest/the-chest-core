@@ -26,7 +26,7 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// <param name="item">The item to be added</param>
         /// <returns>True if the value is successful added</returns>
         [Obsolete("This method has not been tested yet (Use Add with the array param)")]
-        bool Add(ref T item);
+        void Add(ref T item);
         /// <summary>
         /// Adds an array of items to the slot.
         /// </summary>
@@ -38,12 +38,16 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// <param name="items">items to bem added to the slot</param>
         /// <returns>true if is possible to add</returns>
         bool TryAdd(ref T[] items);
+        [Obsolete("This method has not been tested yet (Use TryAdd with the array param)")]
+        bool TryAdd(ref T item);
         /// <summary>
         /// Replaces the items from <see cref="ISlot{T}.Content"/> to <paramref name="items"/>
         /// </summary>
         /// <param name="items">items that will replace items from slots</param>
         /// <returns>old items from <see cref="ISlot{T}.Content"/> if the replacement is possible</returns>
         T[] Replace(ref T[] items);
+        [Obsolete("This method has not been tested yet (Use Replace with the array param)")]
+        T? Replace(ref T item);
         /// <summary>
         /// Gets a single item from inside the <see cref="ISlot{T}.Content"/>
         /// </summary>
