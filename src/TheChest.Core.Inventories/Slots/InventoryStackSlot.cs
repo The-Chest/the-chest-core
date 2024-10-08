@@ -112,6 +112,24 @@ namespace TheChest.Core.Inventories.Slots
             this.AddItems(ref items);
         }
 
+        public bool Add(ref T item)
+        {
+            if(item == null)
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
+
+            if (this.CanAdd(item))
+            {
+                var items = new T[1] { item };
+                this.AddItems(ref items);
+                item = default;
+                return true;
+            }
+
+            return false;
+        }
+
         /// <summary>
         /// <inheritdoc/>
         /// </summary>

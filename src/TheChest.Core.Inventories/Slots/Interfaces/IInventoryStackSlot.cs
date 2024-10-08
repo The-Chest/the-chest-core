@@ -21,6 +21,13 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// <returns>true if is possible to add the item</returns>
         bool CanAdd(T[] items);
         /// <summary>
+        /// Adds an item in the current Slot if <see cref="ISlot{T}.IsFull"/> is false
+        /// </summary>
+        /// <param name="item">The item to be added</param>
+        /// <returns>True if the value is successful added</returns>
+        [Obsolete("This method has not been tested yet (Use Add with the array param)")]
+        bool Add(ref T item);
+        /// <summary>
         /// Adds an array of items to the slot.
         /// </summary>
         /// <param name="items">items to bem added to the slot</param>
@@ -41,6 +48,7 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// Gets a single item from inside the <see cref="ISlot{T}.Content"/>
         /// </summary>
         /// <returns>an item from <see cref="ISlot{T}.Content"/> or null if <see cref="ISlot{T}.IsEmpty"/> is true</returns>
+        [Obsolete("This method has not been tested yet (Use Add with the int param)")]
         T? Get();
         /// <summary>
         /// Gets an amount of items from the slot.
@@ -58,7 +66,7 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// </summary>
         /// <param name="item">The item to be checked</param>
         /// <returns>Returns true if the item is equal to the Content</returns>
-        [Obsolete("This method will be moved to ISlot<T>")]
+        [Obsolete("This method has not been tested yet")] 
         bool Contains(T item);
     }
 }
