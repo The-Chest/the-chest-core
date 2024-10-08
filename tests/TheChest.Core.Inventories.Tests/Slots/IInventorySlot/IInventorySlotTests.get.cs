@@ -7,7 +7,7 @@
         {
             var slot = this.slotFactory.EmptySlot();
 
-            var result = slot.GetOne();
+            var result = slot.Get();
 
             Assert.That(result, Is.Null);
         }
@@ -18,7 +18,7 @@
             var item = this.itemFactory.CreateDefault();
             var slot = this.slotFactory.FullSlot(item);
 
-            var result = slot.GetOne();
+            var result = slot.Get();
 
             Assert.That(result, Is.Not.Null);
             Assert.That(result, Is.EqualTo(item));
@@ -30,7 +30,7 @@
             var item = this.itemFactory.CreateDefault();
             var slot = this.slotFactory.FullSlot(item);
 
-            slot.GetOne();
+            slot.Get();
 
             Assert.That(slot.Content, Is.Null);
         }

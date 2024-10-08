@@ -35,7 +35,7 @@ namespace TheChest.Core.Inventories.Slots
             return this.Content!.Equals(item);
         }
 
-        public virtual T? GetOne()
+        public virtual T? Get()
         {
             var content = this.Content;
             this.Content = default;

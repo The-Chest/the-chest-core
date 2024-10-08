@@ -26,7 +26,7 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// Returns an item from slot
         /// </summary>
         /// <returns>Returns an item of the slot, if <see cref="ISlot{T}.IsEmpty"/> is true, then returns null</returns>
-        T? GetOne();
+        T? Get();
 
         /// <summary>
         /// Checks if <paramref name="item"/> is the same that <see cref="ISlot{T}.Content"/>
