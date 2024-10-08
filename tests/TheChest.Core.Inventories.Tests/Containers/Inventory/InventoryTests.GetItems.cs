@@ -10,7 +10,7 @@
             var inventory = this.containerFactory.FullContainer(size, item);
 
             Assert.That(
-                () => inventory.GetItems(item, amount),
+                () => inventory.Get(item, amount),
                 Throws.Exception.TypeOf<ArgumentOutOfRangeException>()
             );
         }
@@ -23,7 +23,7 @@
             var inventory = this.containerFactory.FullContainer(size, item);
 
             var amount = this.random.Next(1, size);
-            var result = inventory.GetItems(this.itemFactory.CreateRandom(), amount);
+            var result = inventory.Get(this.itemFactory.CreateRandom(), amount);
 
             Assert.That(result, Has.Length.EqualTo(0));
         }
@@ -36,7 +36,7 @@
             var inventory = this.containerFactory.FullContainer(size, item);
 
             var amount = this.random.Next(1, size);
-            var result = inventory.GetItems(item, amount);
+            var result = inventory.Get(item, amount);
 
             Assert.That(result, Has.Length.EqualTo(amount));
         }
@@ -50,7 +50,7 @@
             var inventory = this.containerFactory.ShuffledItemsContainer(inventorySize, items);
 
             var amount = this.random.Next(expectedAmount, inventorySize);
-            var result = inventory.GetItems(items[0], amount);
+            var result = inventory.Get(items[0], amount);
         
             Assert.That(result, Has.Length.EqualTo(expectedAmount));
         }

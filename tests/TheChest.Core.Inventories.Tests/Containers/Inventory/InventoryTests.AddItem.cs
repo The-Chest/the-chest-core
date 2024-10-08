@@ -10,7 +10,7 @@ namespace TheChest.Core.Inventories.Tests.Containers
             var inventory = this.containerFactory.EmptyContainer();
 
             var item = this.itemFactory.CreateDefault();
-            inventory.AddItem(item);
+            inventory.Add(item);
 
             Assert.Multiple(() =>
             {
@@ -27,7 +27,7 @@ namespace TheChest.Core.Inventories.Tests.Containers
             var inventory = this.containerFactory.EmptyContainer();
 
             var item = this.itemFactory.CreateDefault();
-            var result = inventory.AddItem(item);
+            var result = inventory.Add(item);
 
             Assert.That(result, Is.True);
         }
@@ -41,7 +41,7 @@ namespace TheChest.Core.Inventories.Tests.Containers
             var firstAvailableSlot = inventory.Slots.First(slot => slot.IsEmpty);
 
             var item = this.itemFactory.CreateDefault();
-            inventory.AddItem(item);
+            inventory.Add(item);
 
             Assert.Multiple(() =>
             {
@@ -58,7 +58,7 @@ namespace TheChest.Core.Inventories.Tests.Containers
             var inventory = this.containerFactory.FullContainer(size, items);
 
             var item = this.itemFactory.CreateRandom();
-            inventory.AddItem(item);
+            inventory.Add(item);
 
             Assert.That(inventory.Slots, Is.All.Matches<IInventorySlot<T>>(x => x.IsFull && !x.Content!.Equals(item)));
         }
@@ -72,7 +72,7 @@ namespace TheChest.Core.Inventories.Tests.Containers
 
             var item = this.itemFactory.CreateDefault();
 
-            var result = inventory.AddItem(item);
+            var result = inventory.Add(item);
         
             Assert.That(result, Is.False);
         }

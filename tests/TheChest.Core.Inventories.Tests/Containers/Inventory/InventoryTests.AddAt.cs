@@ -4,44 +4,44 @@
     {
         [TestCase(-1)]
         [TestCase(22)]
-        public void AddItemAt_InvalidSlotIndex_ThrowsArgumentOutOfRangeException(int index)
+        public void AddAt_InvalidSlotIndex_ThrowsArgumentOutOfRangeException(int index)
         {
             var inventory = this.containerFactory.EmptyContainer();
 
             Assert.That(
-                () => inventory.AddItemAt(this.itemFactory.CreateDefault(), index),
+                () => inventory.AddAt(this.itemFactory.CreateDefault(), index),
                 Throws.Exception.TypeOf<IndexOutOfRangeException>()
             );
         }
 
         [Test]
-        public void AddItemAt_EmptySlot_AddsTheItem()
+        public void AddAt_EmptySlot_AddsTheItem()
         {
             var size = this.random.Next(10,20);
             var inventory = this.containerFactory.EmptyContainer(size);
 
             var randomIndex = this.random.Next(0, size);
             var item = this.itemFactory.CreateDefault();
-            inventory.AddItemAt(item, randomIndex);
+            inventory.AddAt(item, randomIndex);
 
             Assert.That(inventory[randomIndex].Content, Is.EqualTo(item));
         }
 
         [Test]
-        public void AddItemAt_EmptySlot_ReturnsNull()
+        public void AddAt_EmptySlot_ReturnsNull()
         {
             var size = this.random.Next(10, 20);
             var inventory = this.containerFactory.EmptyContainer(size);
 
             var randomIndex = this.random.Next(0, size);
             var item = this.itemFactory.CreateDefault();
-            var result = inventory.AddItemAt(item, randomIndex);
+            var result = inventory.AddAt(item, randomIndex);
 
             Assert.That(result, Is.Null);
         }
 
         [Test]
-        public void AddItemAt_FullSlot_ReplacesTheItem()
+        public void AddAt_FullSlot_ReplacesTheItem()
         {
             var size = this.random.Next(10, 20);
             var oldItem = this.itemFactory.CreateDefault();
@@ -49,7 +49,7 @@
 
             var randomIndex = this.random.Next(0, size);
             var item = this.itemFactory.CreateRandom();
-            inventory.AddItemAt(item, randomIndex);
+            inventory.AddAt(item, randomIndex);
 
             Assert.Multiple(() =>
             {
@@ -60,7 +60,7 @@
         }
 
         [Test]
-        public void AddItemAt_FullSlot_ReturnsOldItem()
+        public void AddAt_FullSlot_ReturnsOldItem()
         {
             var size = this.random.Next(10, 20);
             var oldItem = this.itemFactory.CreateDefault();
@@ -68,13 +68,13 @@
 
             var randomIndex = this.random.Next(0, size);
             var item = this.itemFactory.CreateRandom();
-            var result = inventory.AddItemAt(item, randomIndex);
+            var result = inventory.AddAt(item, randomIndex);
 
             Assert.That(result, Is.EqualTo(oldItem));
         }
 
         [Test]
-        public void AddItemAt_FullSlotReplaceFalse_DoNotReplaceTheItem()
+        public void AddAt_FullSlotReplaceFalse_DoNotReplaceTheItem()
         {
             var size = this.random.Next(10, 20);
             var oldItem = this.itemFactory.CreateDefault();
@@ -82,7 +82,7 @@
 
             var randomIndex = this.random.Next(0, size);
             var item = this.itemFactory.CreateRandom();
-            inventory.AddItemAt(item, randomIndex, false);
+            inventory.AddAt(item, randomIndex, false);
 
             Assert.Multiple(() =>
             {
@@ -93,7 +93,7 @@
         }
 
         [Test]
-        public void AddItemAt_FullSlotReplaceFalse_ReturnsSameItem()
+        public void AddAt_FullSlotReplaceFalse_ReturnsSameItem()
         {
             var size = this.random.Next(10, 20);
             var oldItem = this.itemFactory.CreateDefault();
@@ -101,7 +101,7 @@
 
             var randomIndex = this.random.Next(0, size);
             var item = this.itemFactory.CreateDefault();
-            var result = inventory.AddItemAt(item, randomIndex, false);
+            var result = inventory.AddAt(item, randomIndex, false);
 
             Assert.That(result, Is.EqualTo(item));
         }

@@ -10,7 +10,7 @@
             var inventory = this.containerFactory.ShuffledItemsContainer(size, items);
             
             var searchItem = this.itemFactory.CreateRandom();
-            var result = inventory.GetItem(searchItem);
+            var result = inventory.Get(searchItem);
 
             Assert.That(result, Is.Null);
         }
@@ -22,7 +22,7 @@
             var item = this.itemFactory.CreateDefault();
             var inventory = this.containerFactory.FullContainer(size, item);
 
-            var result = inventory.GetItem(item);
+            var result = inventory.Get(item);
 
             Assert.That(result, Is.Not.Null.And.EqualTo(item));
         }
@@ -34,7 +34,7 @@
             var item = this.itemFactory.CreateDefault();
             var inventory = this.containerFactory.FullContainer(size, item);
 
-            inventory.GetItem(item);
+            inventory.Get(item);
 
             Assert.That(inventory.Slots[0].Content, Is.Null);
         }

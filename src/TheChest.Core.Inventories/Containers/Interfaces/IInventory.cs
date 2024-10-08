@@ -14,14 +14,14 @@
         /// </summary>
         /// <param name="index">Slot's inventory to be searched</param>
         /// <returns>Returns the item inside <paramref name="index"/> Slot</returns>
-        T? GetItem(int index);
+        T? Get(int index);
 
         /// <summary>
         /// Search an Item from inventory
         /// </summary>
         /// <param name="item">The item to be searched</param>
         /// <returns>Returns the first item founded</returns>
-        T? GetItem(T item);
+        T? Get(T item);
 
         /// <summary>
         /// Search an amount of items in the inventory
@@ -29,7 +29,7 @@
         /// <param name="item">Item to be founded</param>
         /// <param name="amount">Amount to be returned</param>
         /// <returns>Returns the amount of items searched (or the max it can)</returns>
-        T[] GetItems(T item, int amount = 1);
+        T[] Get(T item, int amount);
 
         /// <summary>
         /// Get all Item of the selected type from all slots
@@ -43,21 +43,21 @@
         /// </summary>
         /// <param name="item">The item to de counted</param>
         /// <returns>Returns the current amount of the item in the Inventory</returns>
-        int GetItemCount(T item);
+        int GetCount(T item);
 
         /// <summary>
         /// Adds and array of item in a avaliable <see cref="ISlot{T}"/> 
         /// </summary>
         /// <param name="items">Array of items to be added to any avaliable <see cref="ISlot{T}"/> founded</param>
         /// <returns></returns>
-        T[] AddItems(T[] items);
+        T[] Add(T[] items);
 
         /// <summary>
         /// Adds an item in a avaliable <see cref="ISlot{T}"/> 
         /// </summary>
         /// <param name="item">item to be added</param>
         /// <returns>returns true if the item could be added</returns>
-        bool AddItem(T item);
+        bool Add(T item);
 
         /// <summary>
         /// Adds an item in a specific slot
@@ -66,6 +66,6 @@
         /// <param name="index">slot where the item will be added</param>
         /// <param name="replace"></param>
         /// <returns>Returns the item that couldn't be added or the replaced item</returns>
-        T? AddItemAt(T item, int index, bool replace = true);
+        T? AddAt(T item, int index, bool replace = true);
     }
 }

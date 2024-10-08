@@ -13,7 +13,7 @@ namespace TheChest.Core.Inventories.Containers.Interfaces
         /// </summary>
         /// <param name="origin">Selected item</param>
         /// <param name="target">Where the item will be placed</param>
-        void MoveItem(int origin, int target);
+        void Move(int origin, int target);
 
         /// <summary>
         /// Returns every item from inventory

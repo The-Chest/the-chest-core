@@ -16,7 +16,7 @@ namespace TheChest.Core.Inventories.Containers
 
         public override IInventorySlot<T>[] Slots => this.slots.ToArray();
 
-        public virtual T[] AddItems(params T[] items)
+        public virtual T[] Add(params T[] items)
         {
             if(items.Length == 0)
             {
@@ -45,7 +45,7 @@ namespace TheChest.Core.Inventories.Containers
             return Array.Empty<T>();
         }
 
-        public virtual bool AddItem(T item)
+        public virtual bool Add(T item)
         {
             for (int i = 0; i < this.Size ; i ++)
             {
@@ -59,7 +59,7 @@ namespace TheChest.Core.Inventories.Containers
             return false;
         }
 
-        public virtual T? AddItemAt(T item, int index, bool replace = true)
+        public virtual T? AddAt(T item, int index, bool replace = true)
         {
             if (index < 0 || index >= this.Size)
             {
@@ -110,7 +110,7 @@ namespace TheChest.Core.Inventories.Containers
             return items.ToArray();
         }
 
-        public virtual T? GetItem(int index)
+        public virtual T? Get(int index)
         {
             if (index < 0 || index >= this.Size)
             {
@@ -120,7 +120,7 @@ namespace TheChest.Core.Inventories.Containers
             return this.slots[index].Get();
         }
 
-        public virtual T? GetItem(T item)
+        public virtual T? Get(T item)
         {
             for (int i = 0; i < this.Size; i++)
             {
@@ -133,7 +133,7 @@ namespace TheChest.Core.Inventories.Containers
             return default;
         }
 
-        public virtual T[] GetItems(T item, int amount = 1)
+        public virtual T[] Get(T item, int amount = 1)
         {
             if(amount <= 0)
                 throw new ArgumentOutOfRangeException(nameof(amount));
@@ -156,7 +156,7 @@ namespace TheChest.Core.Inventories.Containers
             return items.ToArray();
         }
 
-        public virtual int GetItemCount(T item)
+        public virtual int GetCount(T item)
         {
             var count = 0;
             for (int i = 0; i < this.Size; i++)
@@ -169,7 +169,7 @@ namespace TheChest.Core.Inventories.Containers
             return count;
         }
 
-        public virtual void MoveItem(int origin, int target)
+        public virtual void Move(int origin, int target)
         {
             if (origin < 0 || origin >= this.Size)
             {

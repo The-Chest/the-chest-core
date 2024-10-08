@@ -11,7 +11,7 @@
             var inventory = this.containerFactory.FullContainer(size, item);
 
             Assert.That(
-                () => inventory.GetItem(index), 
+                () => inventory.Get(index), 
                 Throws.Exception.TypeOf<IndexOutOfRangeException>()
             );
         }
@@ -24,7 +24,7 @@
             var inventory = this.containerFactory.FullContainer(size, item);
 
             var randomIndex = this.random.Next(0, size);
-            var result = inventory.GetItem(randomIndex);
+            var result = inventory.Get(randomIndex);
            
             Assert.Multiple(() =>
             {
@@ -40,7 +40,7 @@
             var inventory = this.containerFactory.EmptyContainer(size);
 
             var randomIndex = this.random.Next(0, size);
-            var result = inventory.GetItem(randomIndex);
+            var result = inventory.Get(randomIndex);
 
             Assert.That(result, Is.Null);
         }
