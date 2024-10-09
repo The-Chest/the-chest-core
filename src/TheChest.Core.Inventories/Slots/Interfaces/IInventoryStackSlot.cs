@@ -37,6 +37,7 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// </summary>
         /// <param name="items">items to bem added to the slot</param>
         /// <returns>true if is possible to add</returns>
+        [Obsolete("This method is only used in InventoryStackSlot<T>.Replace")]
         bool TryAdd(ref T[] items);
         [Obsolete("This method has not been tested yet (Use TryAdd with the array param)")]
         bool TryAdd(ref T item);
@@ -48,7 +49,7 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// <returns>old items from <see cref="ISlot{T}.Content"/> if the replacement is possible</returns>
         T[] Replace(ref T[] items);
         [Obsolete("This method has not been tested yet (Use Replace with the array param)")]
-        T? Replace(ref T item);
+        T[] Replace(ref T item);
         /// <summary>
         /// Gets a single item from inside the <see cref="ISlot{T}.Content"/>
         /// </summary>

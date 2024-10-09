@@ -57,6 +57,18 @@ namespace TheChest.Core.Inventories.Slots
             items = items[addAmount..];
         }
 
+        protected virtual void AddItem(ref T item)
+        {
+            for (int i = 0; i < this.MaxStackAmount; i++)
+            {
+                if (this.content[i] is null)
+                {
+                    this.content[i] = item;
+                    break;
+                } 
+            }
+        }
+
         /// <summary>
         /// <inheritdoc/>
         /// </summary>
@@ -112,7 +124,7 @@ namespace TheChest.Core.Inventories.Slots
             this.AddItems(ref items);
         }
 
-        public void Add(ref T item)
+        public virtual void Add(ref T item)
         {
             if(item == null)
             {
@@ -121,8 +133,7 @@ namespace TheChest.Core.Inventories.Slots
 
             if (this.CanAdd(item))
             {
-                var items = new T[1] { item };
-                this.AddItems(ref items);
+                this.AddItem(ref item);
                 item = default;
             }
         }
@@ -244,14 +255,10 @@ namespace TheChest.Core.Inventories.Slots
         public virtual T[] Replace(ref T[] items)
         {
             if (items.Length == 0)
-            {
                 throw new ArgumentException("Cannot replace the slot for empty item array", nameof(items));
-            }
 
             if (items.Length > this.MaxStackAmount)
-            {
                 throw new ArgumentOutOfRangeException(nameof(items));
-            }
 
             var firstItem = items[0]!;
             for (int i = 1; i < items.Length; i++)
@@ -278,22 +285,45 @@ namespace TheChest.Core.Inventories.Slots
             return items;
         }
 
+        public T[] Replace(ref T item)
+        {
+            if(item == null)
+                throw new ArgumentNullException(nameof(item));
+
+            if (this.IsEmpty)
+            {
+                this.AddItem(ref item);
+                return default;
+            }
+
+            if (this.CanAdd(item))
+            {
+                var result = this.GetAll();
+                this.AddItem(ref item);
+                return result;
+            }
+
+            return new T[1]{ item };
+        }
+
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        /// <param name="item"><inheritdoc/></param>
+        /// <returns><inheritdoc/></returns>
+        /// <exception cref="NotImplementedException">Always throws it</exception>
+        [Obsolete("This method is not implemented")]
+        public bool TryAdd(ref T item)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Contains(T item)
         {
             if (this.IsEmpty)
                 return false;
 
             return this.Content.First()!.Equals(item);
-        }
-
-        public bool TryAdd(ref T item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public T? Replace(ref T item)
-        {
-            throw new NotImplementedException();
         }
     }
 }
