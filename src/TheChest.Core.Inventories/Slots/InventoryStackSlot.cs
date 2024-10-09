@@ -236,7 +236,7 @@ namespace TheChest.Core.Inventories.Slots
             return this.Get(1).FirstOrDefault();
         }
 
-        public bool CanReplace(T[] items)
+        public virtual bool CanReplace(T[] items)
         {
             if (items.Length == 0)
                 return false;
@@ -285,7 +285,7 @@ namespace TheChest.Core.Inventories.Slots
             return items;
         }
 
-        public T[] Replace(ref T item)
+        public virtual T[] Replace(ref T item)
         {
             if(item == null)
                 throw new ArgumentNullException(nameof(item));
@@ -313,12 +313,12 @@ namespace TheChest.Core.Inventories.Slots
         /// <returns><inheritdoc/></returns>
         /// <exception cref="NotImplementedException">Always throws it</exception>
         [Obsolete("This method is not implemented")]
-        public bool TryAdd(ref T item)
+        public virtual bool TryAdd(ref T item)
         {
             throw new NotImplementedException();
         }
 
-        public bool Contains(T item)
+        public virtual bool Contains(T item)
         {
             if (this.IsEmpty)
                 return false;
