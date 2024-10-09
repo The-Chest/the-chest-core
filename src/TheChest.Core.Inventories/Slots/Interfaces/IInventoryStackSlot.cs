@@ -33,15 +33,6 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// <param name="items">items to bem added to the slot</param>
         void Add(ref T[] items);
         /// <summary>
-        /// Tries to add an array of items to the slot. 
-        /// </summary>
-        /// <param name="items">items to bem added to the slot</param>
-        /// <returns>true if is possible to add</returns>
-        [Obsolete("This method is only used in InventoryStackSlot<T>.Replace and will be removed")]
-        bool TryAdd(ref T[] items);
-        [Obsolete("This method has not been tested yet (Use TryAdd with the array param)")]
-        bool TryAdd(ref T item);
-        /// <summary>
         /// Checks if is possible to replace the items
         /// </summary>
         /// <param name="items">array of items to be checked if is possible to replace</param>
@@ -78,7 +69,7 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// <returns>an array with all items from slot</returns>
         T[] GetAll();
         /// <summary>
-        /// Checks if the slot contains the same <paramref name="item"/>
+        /// Checks if the slot contains the <paramref name="item"/>
         /// </summary>
         /// <param name="item">The item to be checked</param>
         /// <returns>Returns true if the item is equal to the Slot</returns>

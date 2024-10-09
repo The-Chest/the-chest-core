@@ -74,38 +74,6 @@ namespace TheChest.Core.Inventories.Slots
 
         /// <summary>
         /// <inheritdoc/>
-        /// </summary>
-        /// <param name="item"><inheritdoc/></param>
-        /// <returns><inheritdoc/></returns>
-        /// <exception cref="NotImplementedException">Always throws it</exception>
-        [Obsolete("This method is not implemented")]
-        public virtual bool TryAdd(ref T item)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// <inheritdoc/>
-        /// </summary>
-        /// <para>
-        /// The items must be the same in it and in the slot or it'll not add and return false
-        /// </para>
-        /// <param name="items"><inheritdoc/></param>
-        /// <returns>false if is not possible to add all of the items.</returns>
-        public virtual bool TryAdd(ref T[] items)
-        {
-            if(!this.CanAdd(items))
-            {
-                return false;
-            }
-
-            this.AddItems(ref items);
-            
-            return items.Length == 0;
-        }
-
-        /// <summary>
-        /// <inheritdoc/>
         /// <para>
         /// The items must be the same in it and in the slot (if is not empty) or it'll throw an <see cref="ArgumentException"/>. 
         /// </para>
@@ -298,8 +266,9 @@ namespace TheChest.Core.Inventories.Slots
             }
 
             var result = this.GetAll();
-            if (this.TryAdd(ref items))
+            if (this.CanAdd(items))
             {
+                this.Add(ref items);
                 return result; 
             }
 
@@ -307,6 +276,12 @@ namespace TheChest.Core.Inventories.Slots
             return items;
         }
 
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        /// <param name="item">the item that will be attempt to replace</param>
+        /// <returns>null if the slot is empty. The items from inside the slot if is not empty and possible to replace. An array with <paramref name="item"/> if is not possible to replace</returns>
+        /// <exception cref="ArgumentNullException">when <paramref name="item"/> is null</exception>
         public virtual T[] Replace(ref T item)
         {
             if(item == null)
@@ -328,6 +303,11 @@ namespace TheChest.Core.Inventories.Slots
             return new T[1]{ item };
         }
 
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        /// <param name="item"><inheritdoc/></param>
+        /// <returns>Returns true if the item is equal to the first item inside the Slot</returns>
         public virtual bool Contains(T item)
         {
             if (this.IsEmpty)
