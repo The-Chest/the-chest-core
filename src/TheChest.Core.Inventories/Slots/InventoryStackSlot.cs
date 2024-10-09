@@ -28,10 +28,10 @@ namespace TheChest.Core.Inventories.Slots
         /// <summary>
         /// Adds an array of items inside the Content with no previous validation.
         /// <para>
-        /// It's recommended to use <see cref="IInventoryStackSlot{T}.Add(ref T[])"/> or <see cref="IInventoryStackSlot{T}.TryAdd(ref T[])"/> to ensure no invalid items are added
+        /// It's recommended to use <see cref="IInventoryStackSlot{T}.Add(ref T[])"/> or <see cref="IInventoryStackSlot{T}.CanAdd(T[])"/> to ensure no invalid items are added
         /// </para>
         /// </summary>
-        /// <param name="items"></param>
+        /// <param name="items">items to be added to <see cref="ISlot{T}.Content"/></param>
         protected virtual void AddItems(ref T[] items)
         {
             var availableAmount = this.MaxStackAmount - this.StackAmount;
@@ -56,7 +56,10 @@ namespace TheChest.Core.Inventories.Slots
 
             items = items[addAmount..];
         }
-
+        /// <summary>
+        /// Adds an item inside the Content with no previous validation.
+        /// </summary>
+        /// <param name="item">item to be added to <see cref="ISlot{T}.Content"/></param>
         protected virtual void AddItem(ref T item)
         {
             for (int i = 0; i < this.MaxStackAmount; i++)
@@ -67,6 +70,18 @@ namespace TheChest.Core.Inventories.Slots
                     break;
                 } 
             }
+        }
+
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        /// <param name="item"><inheritdoc/></param>
+        /// <returns><inheritdoc/></returns>
+        /// <exception cref="NotImplementedException">Always throws it</exception>
+        [Obsolete("This method is not implemented")]
+        public virtual bool TryAdd(ref T item)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -124,12 +139,15 @@ namespace TheChest.Core.Inventories.Slots
             this.AddItems(ref items);
         }
 
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        /// <param name="item"><inheritdoc/></param>
+        /// <exception cref="ArgumentNullException">when <see cref="item"/> is null</exception>
         public virtual void Add(ref T item)
         {
             if(item == null)
-            {
                 throw new ArgumentNullException(nameof(item));
-            }
 
             if (this.CanAdd(item))
             {
@@ -205,14 +223,10 @@ namespace TheChest.Core.Inventories.Slots
         public virtual T[] Get(int amount)
         {
             if (amount <= 0)
-            {
                 throw new ArgumentOutOfRangeException(nameof(amount));
-            }
 
             if (amount >= this.StackAmount)
-            {
                 return this.GetAll();
-            }
 
             //TODO: improve it by getting it from the last items (maybe using IEnumerable)
             var result = this.content
@@ -227,15 +241,23 @@ namespace TheChest.Core.Inventories.Slots
             return result;
         }
 
+        /// <summary>
+        /// Gets a single item from inside the <see cref="ISlot{T}.Content"/>
+        /// </summary>
+        /// <returns>an item from <see cref="ISlot{T}.Content"/> or null if <see cref="ISlot{T}.IsEmpty"/> is true</returns>
         public virtual T? Get()
         {
-            //TODO: add unit tests for it
             if (this.IsEmpty)
                 return default;
 
             return this.Get(1).FirstOrDefault();
         }
 
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        /// <param name="items"><inheritdoc/></param>
+        /// <returns>false if the array is bigger than <see cref="IStackSlot{T}.MaxStackAmount"/> or is empty</returns>
         public virtual bool CanReplace(T[] items)
         {
             if (items.Length == 0)
@@ -304,18 +326,6 @@ namespace TheChest.Core.Inventories.Slots
             }
 
             return new T[1]{ item };
-        }
-
-        /// <summary>
-        /// <inheritdoc/>
-        /// </summary>
-        /// <param name="item"><inheritdoc/></param>
-        /// <returns><inheritdoc/></returns>
-        /// <exception cref="NotImplementedException">Always throws it</exception>
-        [Obsolete("This method is not implemented")]
-        public virtual bool TryAdd(ref T item)
-        {
-            throw new NotImplementedException();
         }
 
         public virtual bool Contains(T item)

@@ -3,7 +3,7 @@
     public partial class IInventoryStackSlotTests<T>
     {
         [Test]
-        public void Add_EmptySlot_WithLessItemsThanMaxAmount_AddsAllItems()
+        public void AddItems_EmptySlot_WithLessItemsThanMaxAmount_AddsAllItems()
         {
             var randomSize = this.random.Next(1,20);
             var slot = this.slotFactory.EmptySlot(randomSize);
@@ -15,7 +15,7 @@
         }
 
         [Test]
-        public void Add_EmptySlot_WithLessItemsThanMaxAmount_RemovesAllItemsFromParams()
+        public void AddItems_EmptySlot_WithLessItemsThanMaxAmount_RemovesAllItemsFromParams()
         {
             var randomSize = this.random.Next(1,20);
             var slot = this.slotFactory.EmptySlot(randomSize);
@@ -27,7 +27,7 @@
         }
 
         [Test]
-        public void Add_EmptySlot_WithMoreItemsThanMaxAmount_AddsAllItems()
+        public void AddItems_EmptySlot_WithMoreItemsThanMaxAmount_AddsAllItems()
         {
             var maxAmount = this.random.Next(1, 20);
             var slot = this.slotFactory.EmptySlot(maxAmount);
@@ -40,7 +40,7 @@
         }
 
         [Test]
-        public void Add_EmptySlot_WithMoreItemsThanMaxAmount_RemovesAllItemsFromParams()
+        public void AddItems_EmptySlot_WithMoreItemsThanMaxAmount_RemovesAllItemsFromParams()
         {
             var randomSize = this.random.Next(1, 20);
             var slot = this.slotFactory.EmptySlot(randomSize);
@@ -53,7 +53,7 @@
         }
 
         [Test]
-        public void Add_FullSlot_WithAnyAmountOfItems_DoNotAdd()
+        public void AddItems_FullSlot_WithAnyAmountOfItems_DoNotAdd()
         {
             var randomSize = this.random.Next(1, 20);
             var items = this.itemFactory.CreateMany(randomSize);
@@ -66,7 +66,7 @@
         }
 
         [Test]
-        public void Add_FullSlot_WithAnyAmountOfItems_ChangesItemsParam()
+        public void AddItems_FullSlot_WithAnyAmountOfItems_ChangesItemsParam()
         {
             var randomSize = this.random.Next(1, 20);
             var items = this.itemFactory.CreateMany(randomSize);
@@ -79,7 +79,7 @@
         }
 
         [Test]
-        public void Add_AddingDifferentItems_ThrowsArgumentException()
+        public void AddItems_AddingDifferentItems_ThrowsArgumentException()
         {
             var slot = this.slotFactory.EmptySlot(20);
 
@@ -93,7 +93,7 @@
         }
 
         [Test]
-        public void Add_DifferentItemsFromSlot_ThrowsArgumentException()
+        public void AddItems_DifferentItemsFromSlot_ThrowsArgumentException()
         {
             var slot = this.slotFactory.WithItem(this.itemFactory.CreateDefault());
 
@@ -104,7 +104,7 @@
         }
 
         [Test]
-        public void Add_OneItemDifferentFromSlot_ThrowsArgumentException()
+        public void AddItems_OneItemDifferentFromSlot_ThrowsArgumentException()
         {
             var slot = this.slotFactory.WithItem(this.itemFactory.CreateDefault());
 
@@ -117,7 +117,7 @@
         }
 
         [Test]
-        public void Add_AddingNoItems_ThrowsArgumentException()
+        public void AddItems_AddingNoItems_ThrowsArgumentException()
         {
             var slot = this.slotFactory.EmptySlot();
 
