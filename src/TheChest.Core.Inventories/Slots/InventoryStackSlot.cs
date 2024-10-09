@@ -225,6 +225,15 @@ namespace TheChest.Core.Inventories.Slots
             return this.Get(1).FirstOrDefault();
         }
 
+        public bool CanReplace(T[] items)
+        {
+            if (items.Length == 0)
+                return false;
+            if (items.Length > this.MaxStackAmount)
+                return false;
+           return true;
+        }
+
         /// <summary>
         /// <inheritdoc/>
         /// </summary>

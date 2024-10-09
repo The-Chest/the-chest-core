@@ -40,6 +40,7 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         bool TryAdd(ref T[] items);
         [Obsolete("This method has not been tested yet (Use TryAdd with the array param)")]
         bool TryAdd(ref T item);
+        bool CanReplace(T[] items);
         /// <summary>
         /// Replaces the items from <see cref="ISlot{T}.Content"/> to <paramref name="items"/>
         /// </summary>
