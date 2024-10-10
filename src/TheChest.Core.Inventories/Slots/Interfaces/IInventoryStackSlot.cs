@@ -54,7 +54,6 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// Gets a single item from the slot
         /// </summary>
         /// <returns>an item from the slot</returns>
-        [Obsolete("This method has not been tested yet (Use Add with the int param)")]
         T? Get();
         /// <summary>
         /// Gets an amount of items from the slot.

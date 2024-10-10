@@ -44,7 +44,7 @@ namespace TheChest.Core.Inventories.Containers
 
             slot.Add(ref item);
 
-            return default;
+            return Array.Empty<T>();
         }
 
         public virtual T[] Add(T[] items)
