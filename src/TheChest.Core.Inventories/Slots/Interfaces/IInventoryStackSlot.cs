@@ -25,7 +25,6 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// </summary>
         /// <param name="item">The item to be added</param>
         /// <returns>True if the value is successful added</returns>
-        [Obsolete("This method has not been tested yet (Use Add with the array param)")]
         void Add(ref T item);
         /// <summary>
         /// Adds an array of items to the slot.
