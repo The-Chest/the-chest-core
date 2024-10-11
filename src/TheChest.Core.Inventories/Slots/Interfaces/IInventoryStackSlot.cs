@@ -71,7 +71,6 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// </summary>
         /// <param name="item">The item to be checked</param>
         /// <returns>Returns true if the item is equal to the Slot</returns>
-        [Obsolete("This method has not been tested yet")] 
         bool Contains(T item);
     }
 }
