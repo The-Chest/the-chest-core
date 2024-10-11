@@ -39,10 +39,11 @@ namespace TheChest.Core.Inventories.Containers
             
             var slot = this.Slots[index];
 
-            if (!slot.CanAdd(item) && replace)
-                return slot.Replace(ref item);
+            if (slot.CanAdd(item))
+                slot.Add(ref item);
 
-            slot.Add(ref item);
+            if (slot.CanReplace(item) && replace)
+                return slot.Replace(ref item);
 
             return Array.Empty<T>();
         }
@@ -73,7 +74,7 @@ namespace TheChest.Core.Inventories.Containers
             if (slot.CanAdd(items))
                 slot.Add(ref items);
 
-            if (slot.CanReplace(items))
+            if (slot.CanReplace(items) && replace)
                 return slot.Replace(ref items);
 
             return items;

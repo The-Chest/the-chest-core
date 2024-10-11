@@ -232,7 +232,31 @@ namespace TheChest.Core.Inventories.Slots
                 return false;
             if (items.Length > this.MaxStackAmount)
                 return false;
-           return true;
+
+            var firstItem = items[0]!;
+            for (int i = 0; i < items.Length; i++)
+            {
+                if (!this.CanReplace(items[i]))
+                    return false;
+
+                if (!firstItem.Equals(items[i]))
+                    return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        /// <param name="item"><inheritdoc/></param>
+        /// <returns>false if the param <paramref name="item"/> is null</returns>
+        public virtual bool CanReplace(T item)
+        {
+            if (item is null)
+                return false;
+
+            return true;
         }
 
         /// <summary>

@@ -32,7 +32,13 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// <param name="items">items to bem added to the slot</param>
         void Add(ref T[] items);
         /// <summary>
-        /// Checks if is possible to replace the items
+        /// Checks if is possible to replace an item
+        /// </summary>
+        /// <param name="item">item to be checked if is possible to replace</param>
+        /// <returns>returns true if is possible to replace</returns>
+        bool CanReplace(T item);
+        /// <summary>
+        /// Checks if is possible to replace an array of items
         /// </summary>
         /// <param name="items">array of items to be checked if is possible to replace</param>
         /// <returns>returns true if is possible to replace</returns>
