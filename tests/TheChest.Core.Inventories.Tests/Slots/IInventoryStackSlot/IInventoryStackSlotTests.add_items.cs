@@ -34,9 +34,10 @@
 
             var randomSize = this.random.Next(maxAmount + 1, 20);
             var addingItems = this.itemFactory.CreateManyRandom(randomSize);
+            var expectedItems = (T[])addingItems[0..maxAmount].Clone();
             slot.Add(ref addingItems);
 
-            Assert.That(slot.StackAmount, Is.EqualTo(maxAmount));
+            Assert.That(slot.Content, Is.EqualTo(expectedItems));
         }
 
         [Test]

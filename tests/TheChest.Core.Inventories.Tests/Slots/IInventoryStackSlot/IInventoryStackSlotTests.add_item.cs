@@ -18,7 +18,7 @@
             var item = this.itemFactory.CreateDefault();
             slot.Add(ref item);
 
-            Assert.That(slot.Content, Is.Not.Contains(item));
+            Assert.That(slot.Content, Has.No.AnyOf(item));
         }
         [Test]
         public void Add_FullSlot_DoNotRemoveItem()
@@ -38,12 +38,13 @@
             var slot = this.slotFactory.EmptySlot();
 
             var item = this.itemFactory.CreateDefault();
+            var expecteditem = new T[1] { item };
             slot.Add(ref item);
         
-            Assert.That(slot.Content, Contains.Value(item));
+            Assert.That(slot.Content, Has.One.EqualTo(expecteditem[0]));
         }
         [Test]
-        public void Add_EmptySlot_RemovesItem()
+        public void Add_EmptySlot_RemovesItemReference()
         {
             var slot = this.slotFactory.EmptySlot();
 
@@ -60,9 +61,10 @@
             var slot = this.slotFactory.WithItems(items, 10);
         
             var item = this.itemFactory.CreateDefault();
+            var expecteditem = items.Append(item).ToArray();
             slot.Add(ref item);
-        
-            Assert.That(slot.Content, Contains.Value(item));
+
+            Assert.That(slot.Content, Is.EqualTo(expecteditem));
         }
         [Test]
         public void Add_SlotWithSameItem_RemovesItem()
