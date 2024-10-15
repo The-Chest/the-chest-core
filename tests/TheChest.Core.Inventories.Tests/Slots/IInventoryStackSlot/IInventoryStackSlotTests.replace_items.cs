@@ -3,7 +3,7 @@
     public partial class IInventoryStackSlotTests<T>
     {
         [Test]
-        public void Replace_EmptyItemReplace_ThrowsArgumentException()
+        public void ReplaceItems_EmptyItemReplace_ThrowsArgumentException()
         {
             var slotItems = this.itemFactory.CreateMany(10);
             var slot = this.slotFactory.FullSlot(slotItems);
@@ -14,7 +14,7 @@
         }
 
         [Test]
-        public void Replace_EmptySlot_AddsItem()
+        public void ReplaceItems_EmptySlot_AddsItem()
         {
             var slot = this.slotFactory.EmptySlot();
 
@@ -26,7 +26,7 @@
         }
 
         [Test]
-        public void Replace_EmptySlot_ReturnsEmptyArray()
+        public void ReplaceItems_EmptySlot_ReturnsEmptyArray()
         {
             var slot = this.slotFactory.EmptySlot();
 
@@ -37,7 +37,7 @@
         }
 
         [Test]
-        public void Replace_ItemsBiggerThanMaxAmount_ThrowsArgumentOutOfRangeException()
+        public void ReplaceItems_ItemsBiggerThanMaxAmount_ThrowsArgumentOutOfRangeException()
         {
             var slot = this.slotFactory.EmptySlot(10);
 
@@ -47,7 +47,7 @@
         }
 
         [Test]
-        public void Replace_ItemsDifferentFromSlot_ReturnsItemsFromSlot()
+        public void ReplaceItems_ItemsDifferentFromSlot_ReturnsItemsFromSlot()
         {
             var items = this.itemFactory.CreateMany(5);
             var slot = this.slotFactory.WithItems(items);
@@ -59,7 +59,7 @@
         }
 
         [Test]
-        public void Replace_ItemsDifferentFromSlot_AddsItemsToSlot()
+        public void ReplaceItems_ItemsDifferentFromSlot_AddsItemsToSlot()
         {
             var items = this.itemFactory.CreateMany(5);
             var slot = this.slotFactory.WithItems(items);
@@ -73,7 +73,7 @@
         }
 
         [Test]
-        public void Replace_ItemsEqualToSlot_ReturnsItemsFromSlot()
+        public void ReplaceItems_ItemsEqualToSlot_ReturnsItemsFromSlot()
         {
             var items = this.itemFactory.CreateMany(5);
             var slot = this.slotFactory.WithItems(items);
@@ -85,7 +85,7 @@
         }
 
         [Test]
-        public void Replace_ItemsEqualToSlot_AddsItemsToSlot()
+        public void ReplaceItems_ItemsEqualToSlot_AddsItemsToSlot()
         {
             var items = this.itemFactory.CreateMany(5);
             var slot = this.slotFactory.WithItems(items);

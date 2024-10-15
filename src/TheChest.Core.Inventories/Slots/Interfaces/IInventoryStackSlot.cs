@@ -54,7 +54,6 @@ namespace TheChest.Core.Inventories.Slots.Interfaces
         /// </summary>
         /// <param name="item">the item that will replace items from slots</param>
         /// <returns>returns the old items from the slot</returns>
-        [Obsolete("This method has not been tested yet (Use Replace with the array param)")]
         T[] Replace(ref T item);
         /// <summary>
         /// Gets a single item from the slot

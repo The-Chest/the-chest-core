@@ -85,7 +85,6 @@ namespace TheChest.Core.Inventories.Slots
         /// <exception cref="ArgumentException">When the item array is empty or has different items inside it or has any that is not equal to the items inside <see cref="ISlot{T}.Content"/></exception>
         public virtual void Add(ref T[] items)
         {
-            //TODO: improve this method
             if (items.Length == 0)
             {
                 throw new ArgumentException("Cannot add empty list of items", nameof(items));
@@ -98,7 +97,7 @@ namespace TheChest.Core.Inventories.Slots
                     throw new ArgumentException($"Param \"items\" have items that are not equal ({i})", nameof(items));
                 }
 
-                if (!this.IsEmpty && !this.Content.First()!.Equals(items[i]))//TODO: use Contains
+                if (!this.IsEmpty && !this.Content.First()!.Equals(items[i]))
                 {
                     throw new ArgumentException($"Param \"items\" must have every item equal to the Current item on the Slot ({i})", nameof(items));
                 }
@@ -314,16 +313,17 @@ namespace TheChest.Core.Inventories.Slots
             if (this.IsEmpty)
             {
                 this.AddItem(ref item);
-                return default;
+                return Array.Empty<T>();
             }
 
+            var result = this.GetAll();
             if (this.CanAdd(item))
             {
-                var result = this.GetAll();
                 this.AddItem(ref item);
                 return result;
             }
 
+            this.AddItems(ref result);
             return new T[1]{ item };
         }
 
